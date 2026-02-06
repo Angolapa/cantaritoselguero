@@ -1,1 +1,1 @@
-// Business logic services
+export { authService } from "./auth.service";

@@ -1,1 +1,1 @@
-// Shared TypeScript types
+export * from "./api-error.types";

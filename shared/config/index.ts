@@ -1,1 +1,1 @@
-// Configuration files
+export { createQueryClient } from "./react-query";
