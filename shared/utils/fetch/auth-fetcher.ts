@@ -27,9 +27,36 @@ async function parseErrorResponse(
   }
 }
 
+function mergeHeaders(
+  base: Record<string, string>,
+  incoming: HeadersInit | undefined
+): void {
+  if (!incoming) return;
+
+  if (incoming instanceof Headers) {
+    incoming.forEach((value, key) => {
+      base[key] = value;
+    });
+  } else if (Array.isArray(incoming)) {
+    for (const [key, value] of incoming) {
+      base[key] = value;
+    }
+  } else {
+    Object.assign(base, incoming);
+  }
+}
+
+const REFRESH_TIMEOUT_MS = 10_000;
+
 async function refreshAccessToken(): Promise<boolean> {
   const refreshToken = tokenManager.getRefreshToken();
   if (!refreshToken) return false;
+
+  const controller = new AbortController();
+  const timeoutId = setTimeout(
+    () => controller.abort(),
+    REFRESH_TIMEOUT_MS
+  );
 
   try {
     const response = await fetch(
@@ -38,6 +65,7 @@ async function refreshAccessToken(): Promise<boolean> {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ refreshToken }),
+        signal: controller.signal,
       }
     );
 
@@ -55,6 +83,8 @@ async function refreshAccessToken(): Promise<boolean> {
   } catch {
     tokenManager.clearTokens();
     return false;
+  } finally {
+    clearTimeout(timeoutId);
   }
 }
 
@@ -74,16 +104,7 @@ export async function authFetcher<T>(
     ...(isFormData ? {} : { "Content-Type": "application/json" }),
   };
 
-  if (
-    fetchOptions.headers &&
-    typeof fetchOptions.headers === "object" &&
-    !(fetchOptions.headers instanceof Headers)
-  ) {
-    Object.assign(
-      headers,
-      fetchOptions.headers as Record<string, string>
-    );
-  }
+  mergeHeaders(headers, fetchOptions.headers);
 
   const accessToken = tokenManager.getAccessToken();
   if (accessToken) {
@@ -104,17 +125,27 @@ export async function authFetcher<T>(
     });
 
     if (response.status === 401) {
+      clearTimeout(timeoutId);
       const refreshed = await refreshAccessToken();
       if (refreshed) {
         const newToken = tokenManager.getAccessToken();
         if (newToken) {
           headers["Authorization"] = `Bearer ${newToken}`;
         }
-        response = await fetch(url, {
-          ...fetchOptions,
-          headers,
-          signal: controller.signal,
-        });
+        const retryController = new AbortController();
+        const retryTimeoutId = setTimeout(
+          () => retryController.abort(),
+          timeout
+        );
+        try {
+          response = await fetch(url, {
+            ...fetchOptions,
+            headers,
+            signal: retryController.signal,
+          });
+        } finally {
+          clearTimeout(retryTimeoutId);
+        }
       } else {
         const error: ApiError = {
           statusCode: 401,
@@ -166,16 +197,7 @@ export async function fetcher<T>(
     ...(isFormData ? {} : { "Content-Type": "application/json" }),
   };
 
-  if (
-    fetchOptions.headers &&
-    typeof fetchOptions.headers === "object" &&
-    !(fetchOptions.headers instanceof Headers)
-  ) {
-    Object.assign(
-      headers,
-      fetchOptions.headers as Record<string, string>
-    );
-  }
+  mergeHeaders(headers, fetchOptions.headers);
 
   const controller = new AbortController();
   const timeoutId = setTimeout(

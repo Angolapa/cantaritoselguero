@@ -1,6 +1,37 @@
 const ACCESS_TOKEN_KEY = "access_token";
 const REFRESH_TOKEN_KEY = "refresh_token";
 
+function safeGetItem(key: string): string | null {
+  try {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem(key);
+    }
+  } catch {
+    // Safari private mode, storage quota exceeded, etc.
+  }
+  return null;
+}
+
+function safeSetItem(key: string, value: string): void {
+  try {
+    if (typeof window !== "undefined") {
+      localStorage.setItem(key, value);
+    }
+  } catch {
+    // Safari private mode, storage quota exceeded, etc.
+  }
+}
+
+function safeRemoveItem(key: string): void {
+  try {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem(key);
+    }
+  } catch {
+    // Safari private mode, storage quota exceeded, etc.
+  }
+}
+
 class TokenManager {
   private static instance: TokenManager;
 
@@ -8,12 +39,8 @@ class TokenManager {
   private refreshToken: string | null = null;
 
   private constructor() {
-    if (typeof window !== "undefined") {
-      this.accessToken =
-        localStorage.getItem(ACCESS_TOKEN_KEY);
-      this.refreshToken =
-        localStorage.getItem(REFRESH_TOKEN_KEY);
-    }
+    this.accessToken = safeGetItem(ACCESS_TOKEN_KEY);
+    this.refreshToken = safeGetItem(REFRESH_TOKEN_KEY);
   }
 
   static getInstance(): TokenManager {
@@ -37,19 +64,15 @@ class TokenManager {
   ): void {
     this.accessToken = accessToken;
     this.refreshToken = refreshToken;
-    if (typeof window !== "undefined") {
-      localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
-      localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
-    }
+    safeSetItem(ACCESS_TOKEN_KEY, accessToken);
+    safeSetItem(REFRESH_TOKEN_KEY, refreshToken);
   }
 
   clearTokens(): void {
     this.accessToken = null;
     this.refreshToken = null;
-    if (typeof window !== "undefined") {
-      localStorage.removeItem(ACCESS_TOKEN_KEY);
-      localStorage.removeItem(REFRESH_TOKEN_KEY);
-    }
+    safeRemoveItem(ACCESS_TOKEN_KEY);
+    safeRemoveItem(REFRESH_TOKEN_KEY);
   }
 }
 
