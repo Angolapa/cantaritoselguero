@@ -9,12 +9,14 @@ export interface RegisterRequest {
   password: string;
 }
 
+export interface User {
+  id: string;
+  email: string;
+  name: string;
+}
+
 export interface AuthResponse {
-  user: {
-    id: string;
-    email: string;
-    name: string;
-  };
+  user: User;
   accessToken: string;
   refreshToken: string;
 }

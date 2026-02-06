@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { createJSONStorage, persist, type StateStorage } from "zustand/middleware";
 
+import { User } from "@/domain/types";
 import { tokenManager } from "@/shared/utils/storage";
 
 const noopStorage: StateStorage = {
@@ -8,12 +9,6 @@ const noopStorage: StateStorage = {
   setItem: () => {},
   removeItem: () => {},
 };
-
-export interface User {
-  id: string;
-  email: string;
-  name: string;
-}
 
 interface AuthState {
   user: User | null;
