@@ -1,0 +1,68 @@
+import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
+
+import { tokenManager } from "@/shared/utils/storage";
+
+export interface User {
+  id: string;
+  email: string;
+  name: string;
+}
+
+interface AuthState {
+  user: User | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+}
+
+interface AuthActions {
+  setAuth: (
+    user: User,
+    accessToken: string,
+    refreshToken: string
+  ) => void;
+  logout: () => void;
+  setLoading: (isLoading: boolean) => void;
+}
+
+type AuthStore = AuthState & AuthActions;
+
+export const useAuthStore = create<AuthStore>()(
+  persist(
+    (set) => ({
+      user: null,
+      isAuthenticated: false,
+      isLoading: false,
+
+      setAuth: (user, accessToken, refreshToken) => {
+        tokenManager.setTokens(accessToken, refreshToken);
+        set({
+          user,
+          isAuthenticated: true,
+          isLoading: false,
+        });
+      },
+
+      logout: () => {
+        tokenManager.clearTokens();
+        set({
+          user: null,
+          isAuthenticated: false,
+          isLoading: false,
+        });
+      },
+
+      setLoading: (isLoading) => {
+        set({ isLoading });
+      },
+    }),
+    {
+      name: "auth-storage",
+      storage: createJSONStorage(() => localStorage),
+      partialize: (state) => ({
+        user: state.user,
+        isAuthenticated: state.isAuthenticated,
+      }),
+    }
+  )
+);
