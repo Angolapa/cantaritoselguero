@@ -542,7 +542,7 @@
     "@react-stately/menu" "3.9.9"
     "@react-types/menu" "3.10.5"
 
-"@heroui/form@2.1.30":
+"@heroui/form@2.1.30", "@heroui/form@^2.1.30":
   version "2.1.30"
   resolved "https://registry.yarnpkg.com/@heroui/form/-/form-2.1.30.tgz#9ebe593111d7df9f11e3b603c70e291b19af703c"
   integrity sha512-ztvnWjSXClz57jQo5NNhWtNr2WNvPRz2qaFtnRiWyXjbgDhDk3S3hPGnDsFFqcDwrJHpYoSyj/rUsu+ypEyheQ==
@@ -587,7 +587,7 @@
     "@react-types/textfield" "3.12.6"
     input-otp "1.4.1"
 
-"@heroui/input@2.4.31":
+"@heroui/input@2.4.31", "@heroui/input@^2.4.31":
   version "2.4.31"
   resolved "https://registry.yarnpkg.com/@heroui/input/-/input-2.4.31.tgz#aaf4e8b1f28d38ea62ae8eba4ac7e3bccd64045f"
   integrity sha512-O8zNtcmMI3LCIhZPZRwRO2l/FADnwVgleJxD6fbV7qxWvKdlHuzOBnssO8zAJej7yebbXO47+wF5h9Da7eMIWA==
