@@ -1,3 +1,5 @@
+"use client";
+
 import { Input } from "@heroui/input";
 
 import { AtInputProps } from "./at-input.types";

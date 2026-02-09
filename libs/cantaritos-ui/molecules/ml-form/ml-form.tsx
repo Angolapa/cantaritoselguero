@@ -1,3 +1,5 @@
+"use client";
+
 import { Form } from "@heroui/form";
 
 import { MlFormProps } from "./ml-form.types";
