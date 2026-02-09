@@ -1,8 +1,6 @@
 "use client";
 
-import { Button } from "@heroui/react";
-
-import { AtInput, MlForm } from "@/libs/cantaritos-ui";
+import { AtButton, AtInput, MlForm } from "@/libs/cantaritos-ui";
 
 export default function Home() {
   return (
@@ -25,9 +23,9 @@ export default function Home() {
             isRequired
           />
 
-          <Button color="primary" className="mt-4" type="submit" fullWidth>
+          <AtButton className="mt-4" type="submit" fullWidth>
             Entrar
-          </Button>
+          </AtButton>
         </MlForm>
 
         <p className="mt-4 text-center text-sm text-gray-500">
