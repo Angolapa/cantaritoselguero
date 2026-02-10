@@ -14,8 +14,8 @@ export const authService = {
 
   register: (
     data: RegisterRequest
-  ): Promise<AuthResponse> =>
-    fetcher<AuthResponse>("/auth/register", {
+  ): Promise<AuthResponse["user"]> =>
+    fetcher<AuthResponse["user"]>("/users", {
       method: "POST",
       body: JSON.stringify(data),
     }),
