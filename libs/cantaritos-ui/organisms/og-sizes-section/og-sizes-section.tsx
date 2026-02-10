@@ -1,0 +1,84 @@
+"use client";
+
+import { useState } from "react";
+
+import { Card, CardBody } from "@heroui/react";
+import { Plus,Ruler } from "lucide-react";
+
+import { AtButton } from "@/libs/cantaritos-ui/atoms";
+import { MlSizeRow } from "@/libs/cantaritos-ui/molecules";
+import { useCreateSize, useUpdateSize } from "@/domain/hooks/products";
+import { ProductSize } from "@/domain/types";
+
+import { OgSizesSectionProps } from "./og-sizes-section.types";
+
+export function OgSizesSection({ productId, sizes }: OgSizesSectionProps) {
+  const createSize = useCreateSize();
+  const updateSize = useUpdateSize();
+  const [showNewRow, setShowNewRow] = useState(false);
+
+  const handleCreateSize = (values: { name: string; price: number }) => {
+    createSize.mutate(
+      { productId, data: { name: values.name, price: values.price } },
+      { onSuccess: () => setShowNewRow(false) },
+    );
+  };
+
+  const handleUpdateSize = (
+    sizeId: string,
+    values: { name: string; price: number },
+  ) => {
+    updateSize.mutate({
+      productId,
+      id: sizeId,
+      data: { name: values.name, price: values.price },
+    });
+  };
+
+  return (
+    <Card shadow="sm">
+      <CardBody className="p-6">
+        <div className="mb-6 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Ruler className="h-5 w-5 text-primary" />
+            <h2 className="text-lg font-semibold">Tamanos y Variaciones</h2>
+          </div>
+          <AtButton
+            variant="light"
+            size="sm"
+            color="primary"
+            startContent={<Plus className="h-4 w-4" />}
+            onPress={() => setShowNewRow(true)}
+          >
+            Agregar Tamano
+          </AtButton>
+        </div>
+
+        <div className="space-y-3">
+          {sizes.map((size: ProductSize) => (
+            <MlSizeRow
+              key={size.id}
+              size={size}
+              onSave={(values) => handleUpdateSize(size.id, values)}
+              isLoading={updateSize.isPending}
+            />
+          ))}
+
+          {showNewRow && (
+            <MlSizeRow
+              onSave={handleCreateSize}
+              onDelete={() => setShowNewRow(false)}
+              isLoading={createSize.isPending}
+            />
+          )}
+
+          {sizes.length === 0 && !showNewRow && (
+            <p className="py-4 text-center text-sm text-gray-500">
+              No hay tamanos configurados. Agrega uno para ofrecer variaciones.
+            </p>
+          )}
+        </div>
+      </CardBody>
+    </Card>
+  );
+}
