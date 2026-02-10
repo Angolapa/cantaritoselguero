@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { AtButton, AtInput, MlForm } from "@/libs/cantaritos-ui";
 import { useLogin } from "@/domain/hooks/auth";
 
+
 export default function LoginPage() {
   const router = useRouter();
   const { mutate: login, isPending, error } = useLogin();
@@ -18,11 +19,11 @@ export default function LoginPage() {
         <MlForm onSubmit={(e) => {
           e.preventDefault();
           const formData = new FormData(e.currentTarget);
+          const email = (formData.get("email") ?? "").toString().trim();
+          const password = (formData.get("password") ?? "").toString();
+          if (!email || !password) return;
           login(
-            {
-              email: formData.get("email") as string,
-              password: formData.get("password") as string,
-            },
+            { email, password },
             { onSuccess: () => router.push("/") },
           );
         }}>

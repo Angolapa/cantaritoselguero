@@ -8,9 +8,9 @@ export default function Home() {
       <div className="text-center">
         <h1 className="mb-6 text-3xl font-bold">Página en construcción</h1>
 
-        <Link href="/login">
-          <AtButton>Ir a iniciar sesión</AtButton>
-        </Link>
+        <AtButton as={Link} href="/login">
+          Ir a iniciar sesión
+        </AtButton>
       </div>
     </main>
   );

@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import { useRegister } from "@/domain/hooks/auth";
 import { AtButton, AtInput, MlForm } from "@/libs/cantaritos-ui";
+import { useRegister } from "@/domain/hooks/auth";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -18,14 +18,13 @@ export default function RegisterPage() {
         <MlForm onSubmit={(e) => {
           e.preventDefault();
           const formData = new FormData(e.currentTarget);
-          const phone = formData.get("phone") as string;
+          const name = (formData.get("name") ?? "").toString().trim();
+          const email = (formData.get("email") ?? "").toString().trim();
+          const password = (formData.get("password") ?? "").toString();
+          const phone = (formData.get("phone") ?? "").toString().trim();
+          if (!name || !email || !password) return;
           register(
-            {
-              name: formData.get("name") as string,
-              email: formData.get("email") as string,
-              password: formData.get("password") as string,
-              ...(phone && { phone }),
-            },
+            { name, email, password, ...(phone && { phone }) },
             { onSuccess: () => router.push("/login") },
           );
         }}>
