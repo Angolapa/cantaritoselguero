@@ -26,12 +26,20 @@ export default function NewProductPage() {
   const isLoading = createProduct.isPending || uploadImage.isPending;
 
   const handleSubmit = (values: ProductFormValues) => {
+    if (!values.name.trim()) return;
+
+    const basePrice = Number(values.basePrice);
+    if (!Number.isFinite(basePrice) || basePrice < 0) return;
+
+    const stock = values.stock ? Number(values.stock) : undefined;
+    if (stock !== undefined && (!Number.isFinite(stock) || stock < 0)) return;
+
     createProduct.mutate(
       {
-        name: values.name,
+        name: values.name.trim(),
         description: values.description || undefined,
-        basePrice: parseFloat(values.basePrice),
-        stock: values.stock ? parseInt(values.stock, 10) : undefined,
+        basePrice,
+        stock,
         isActive,
       },
       {

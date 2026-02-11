@@ -30,7 +30,7 @@ export function MlSizeRow({
       <div className="flex-1">
         <AtInput
           size="sm"
-          placeholder="Nombre del tamano"
+          placeholder="Nombre del tamaño"
           value={name}
           onValueChange={setName}
           isDisabled={isLoading}
@@ -56,7 +56,7 @@ export function MlSizeRow({
         color="primary"
         onPress={handleSave}
         isLoading={isLoading}
-        aria-label="Guardar tamano"
+        aria-label="Guardar tamaño"
       >
         <Check className="h-4 w-4" />
       </AtButton>
@@ -68,7 +68,7 @@ export function MlSizeRow({
           color="danger"
           onPress={onDelete}
           isDisabled={isLoading}
-          aria-label="Eliminar tamano"
+          aria-label="Eliminar tamaño"
         >
           <Trash2 className="h-4 w-4" />
         </AtButton>

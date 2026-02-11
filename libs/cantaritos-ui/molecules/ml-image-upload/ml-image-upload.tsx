@@ -16,12 +16,13 @@ export function MlImageUpload({
   const [isDragging, setIsDragging] = useState(false);
 
   const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+  const maxSizeBytes = 5 * 1024 * 1024; // 5MB
 
   const handleFile = useCallback(
     (file: File) => {
-      if (allowedTypes.includes(file.type)) {
-        onFileSelect(file);
-      }
+      if (!allowedTypes.includes(file.type)) return;
+      if (file.size > maxSizeBytes) return;
+      onFileSelect(file);
     },
     [onFileSelect],
   );

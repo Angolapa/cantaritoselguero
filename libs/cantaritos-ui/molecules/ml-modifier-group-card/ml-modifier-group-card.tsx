@@ -12,7 +12,7 @@ export function MlModifierGroupCard({
   onEdit,
   onRemove,
 }: MlModifierGroupCardProps) {
-  const selectType = group.maxSelect === 1 ? "Seleccion unica" : "Multi-seleccion";
+  const selectType = group.maxSelect === 1 ? "Selección única" : "Multi-selección";
   const requiredLabel = group.isRequired ? "Requerido" : "Opcional";
 
   return (
