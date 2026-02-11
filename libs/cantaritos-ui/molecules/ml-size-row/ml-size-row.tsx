@@ -19,7 +19,9 @@ export function MlSizeRow({
 
   const handleSave = () => {
     if (!name.trim() || !price.trim()) return;
-    onSave({ name: name.trim(), price: parseFloat(price) });
+    const parsedPrice = Number(price);
+    if (!Number.isFinite(parsedPrice) || parsedPrice < 0) return;
+    onSave({ name: name.trim(), price: parsedPrice });
   };
 
   return (

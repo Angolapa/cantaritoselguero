@@ -69,10 +69,16 @@ export function OgModifierGroupsSection({
   const handleSaveGroup = () => {
     if (!groupName.trim()) return;
 
+    const parsedMin = Number(minSelect);
+    const parsedMax = Number(maxSelect);
+    if (!Number.isFinite(parsedMin) || parsedMin < 0) return;
+    if (!Number.isFinite(parsedMax) || parsedMax < 1) return;
+    if (parsedMin > parsedMax) return;
+
     const data = {
       name: groupName.trim(),
-      minSelect: parseInt(minSelect, 10),
-      maxSelect: parseInt(maxSelect, 10),
+      minSelect: parsedMin,
+      maxSelect: parsedMax,
     };
 
     if (editingGroup) {

@@ -59,7 +59,7 @@ export function OgAdminSidebar() {
           onPress={() => logout()}
           isLoading={isLoggingOut}
         >
-          Cerrar sesion
+          Cerrar sesión
         </AtButton>
       </div>
     </aside>

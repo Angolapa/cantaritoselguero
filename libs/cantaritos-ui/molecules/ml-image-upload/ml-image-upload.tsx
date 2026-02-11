@@ -15,9 +15,11 @@ export function MlImageUpload({
   const inputRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
 
+  const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+
   const handleFile = useCallback(
     (file: File) => {
-      if (file.type.startsWith("image/")) {
+      if (allowedTypes.includes(file.type)) {
         onFileSelect(file);
       }
     },

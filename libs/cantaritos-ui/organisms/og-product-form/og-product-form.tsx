@@ -19,7 +19,7 @@ export function OgProductForm({
       <CardBody className="p-6">
         <div className="mb-6 flex items-center gap-2">
           <Info className="h-5 w-5 text-primary" />
-          <h2 className="text-lg font-semibold">Informacion General</h2>
+          <h2 className="text-lg font-semibold">Información General</h2>
         </div>
 
         <MlForm
@@ -58,9 +58,9 @@ export function OgProductForm({
           </div>
 
           <AtTextarea
-            label="Descripcion"
+            label="Descripción"
             name="description"
-            placeholder="Descripcion del producto..."
+            placeholder="Descripción del producto..."
             defaultValue={defaultValues?.description}
             minRows={3}
             isDisabled={isLoading}

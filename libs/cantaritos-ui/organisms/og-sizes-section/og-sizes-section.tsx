@@ -16,6 +16,7 @@ export function OgSizesSection({ productId, sizes }: OgSizesSectionProps) {
   const createSize = useCreateSize();
   const updateSize = useUpdateSize();
   const [showNewRow, setShowNewRow] = useState(false);
+  const [updatingSizeId, setUpdatingSizeId] = useState<string | null>(null);
 
   const handleCreateSize = (values: { name: string; price: number }) => {
     createSize.mutate(
@@ -28,11 +29,15 @@ export function OgSizesSection({ productId, sizes }: OgSizesSectionProps) {
     sizeId: string,
     values: { name: string; price: number },
   ) => {
-    updateSize.mutate({
-      productId,
-      id: sizeId,
-      data: { name: values.name, price: values.price },
-    });
+    setUpdatingSizeId(sizeId);
+    updateSize.mutate(
+      {
+        productId,
+        id: sizeId,
+        data: { name: values.name, price: values.price },
+      },
+      { onSettled: () => setUpdatingSizeId(null) },
+    );
   };
 
   return (
@@ -41,7 +46,7 @@ export function OgSizesSection({ productId, sizes }: OgSizesSectionProps) {
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Ruler className="h-5 w-5 text-primary" />
-            <h2 className="text-lg font-semibold">Tamanos y Variaciones</h2>
+            <h2 className="text-lg font-semibold">Tamaños y Variaciones</h2>
           </div>
           <AtButton
             variant="light"
@@ -50,7 +55,7 @@ export function OgSizesSection({ productId, sizes }: OgSizesSectionProps) {
             startContent={<Plus className="h-4 w-4" />}
             onPress={() => setShowNewRow(true)}
           >
-            Agregar Tamano
+            Agregar Tamaño
           </AtButton>
         </div>
 
@@ -60,7 +65,7 @@ export function OgSizesSection({ productId, sizes }: OgSizesSectionProps) {
               key={size.id}
               size={size}
               onSave={(values) => handleUpdateSize(size.id, values)}
-              isLoading={updateSize.isPending}
+              isLoading={updatingSizeId === size.id}
             />
           ))}
 
@@ -74,7 +79,7 @@ export function OgSizesSection({ productId, sizes }: OgSizesSectionProps) {
 
           {sizes.length === 0 && !showNewRow && (
             <p className="py-4 text-center text-sm text-gray-500">
-              No hay tamanos configurados. Agrega uno para ofrecer variaciones.
+              No hay tamaños configurados. Agrega uno para ofrecer variaciones.
             </p>
           )}
         </div>

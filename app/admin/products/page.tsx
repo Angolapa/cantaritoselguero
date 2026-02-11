@@ -38,7 +38,7 @@ export default function ProductsPage() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Catalogo de Productos</h1>
+        <h1 className="text-2xl font-bold">Catálogo de Productos</h1>
         <AtButton
           color="primary"
           startContent={<Plus className="h-4 w-4" />}

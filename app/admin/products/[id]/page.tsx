@@ -153,9 +153,11 @@ export default function EditProductPage({
       </div>
 
       {/* Error */}
-      {updateProduct.error && (
+      {(updateProduct.error || uploadImage.error) && (
         <p className="text-sm text-red-500">
-          {updateProduct.error.message || "Error al actualizar producto"}
+          {updateProduct.error?.message ||
+            uploadImage.error?.message ||
+            "Error al actualizar producto"}
         </p>
       )}
     </div>

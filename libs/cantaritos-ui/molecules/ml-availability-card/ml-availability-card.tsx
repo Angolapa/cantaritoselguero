@@ -19,7 +19,7 @@ export function MlAvailabilityCard({
 
         <div className="flex items-center justify-between">
           <div className="flex flex-col">
-            <span className="text-sm font-medium">Visible en catalogo</span>
+            <span className="text-sm font-medium">Visible en catálogo</span>
             <span className="text-xs text-gray-500">
               Los clientes pueden ver este producto
             </span>
@@ -27,7 +27,7 @@ export function MlAvailabilityCard({
           <AtSwitch
             isSelected={isActive}
             onValueChange={onActiveChange}
-            aria-label="Visible en catalogo"
+            aria-label="Visible en catálogo"
           />
         </div>
       </CardBody>

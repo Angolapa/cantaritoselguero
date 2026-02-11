@@ -39,7 +39,7 @@ export default function NewProductPage() {
           if (selectedFile) {
             uploadImage.mutate(
               { id: product.id, file: selectedFile },
-              { onSettled: () => router.push("/admin/products") },
+              { onSuccess: () => router.push("/admin/products") },
             );
           } else {
             router.push("/admin/products");
@@ -102,9 +102,11 @@ export default function NewProductPage() {
       </div>
 
       {/* Error */}
-      {createProduct.error && (
+      {(createProduct.error || uploadImage.error) && (
         <p className="text-sm text-red-500">
-          {createProduct.error.message || "Error al crear producto"}
+          {createProduct.error?.message ||
+            uploadImage.error?.message ||
+            "Error al crear producto"}
         </p>
       )}
     </div>
