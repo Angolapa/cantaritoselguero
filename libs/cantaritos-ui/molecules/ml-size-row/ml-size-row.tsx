@@ -16,12 +16,21 @@ export function MlSizeRow({
 }: MlSizeRowProps) {
   const [name, setName] = useState(size?.name ?? "");
   const [price, setPrice] = useState(size?.price?.toString() ?? "");
+  const [stock, setStock] = useState(size?.stock?.toString() ?? "");
 
   const handleSave = () => {
     if (!name.trim() || !price.trim()) return;
     const parsedPrice = Number(price);
     if (!Number.isFinite(parsedPrice) || parsedPrice < 0) return;
-    onSave({ name: name.trim(), price: parsedPrice });
+
+    let parsedStock: number | null = null;
+    if (stock.trim() !== "") {
+      const stockNum = Number(stock);
+      if (!Number.isInteger(stockNum) || stockNum < 0) return;
+      parsedStock = stockNum;
+    }
+
+    onSave({ name: name.trim(), price: parsedPrice, stock: parsedStock });
   };
 
   return (
@@ -46,6 +55,18 @@ export function MlSizeRow({
           startContent={<span className="text-sm text-gray-400">$</span>}
           value={price}
           onValueChange={setPrice}
+          isDisabled={isLoading}
+        />
+      </div>
+      <div className="w-28">
+        <AtInput
+          size="sm"
+          type="number"
+          placeholder="Stock"
+          step="1"
+          min="0"
+          value={stock}
+          onValueChange={setStock}
           isDisabled={isLoading}
         />
       </div>

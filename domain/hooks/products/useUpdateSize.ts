@@ -22,6 +22,11 @@ export function useUpdateSize() {
       });
       queryClient.invalidateQueries({
         queryKey: ["products", variables.productId],
+        exact: true,
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["products"],
+        exact: true,
       });
     },
   });
