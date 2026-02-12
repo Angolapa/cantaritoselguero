@@ -3,33 +3,43 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { AlertTriangle, CheckCircle, Package, Plus,XCircle } from "lucide-react";
+import { AlertTriangle, CheckCircle, Package, Plus, XCircle } from "lucide-react";
 
 import { AtButton, MlSearchBar, MlStatCard, OgProductTable } from "@/libs/cantaritos-ui";
-import { useProducts } from "@/domain/hooks/products";
+import { useDeleteProduct, useProducts } from "@/domain/hooks/products";
 import { Product } from "@/domain/types";
 
 export default function ProductsPage() {
   const router = useRouter();
   const { data: products = [], isLoading } = useProducts();
+  const deleteProduct = useDeleteProduct();
   const [search, setSearch] = useState("");
+
+  const handleDelete = (product: Product) => {
+    const confirmed = window.confirm(
+      `¿Eliminar "${product.name}"? Se eliminarán también sus tamaños, modificadores y grupos. Esta acción no es reversible.`,
+    );
+    if (confirmed) {
+      deleteProduct.mutate(product.id);
+    }
+  };
 
   const filteredProducts = useMemo(() => {
     if (!search.trim()) return products;
     const term = search.toLowerCase();
-    return products.filter((p: Product) =>
-      p.name.toLowerCase().includes(term),
+    return products.filter((product: Product) =>
+      product.name.toLowerCase().includes(term),
     );
   }, [products, search]);
 
   const stats = useMemo(() => {
     const total = products.length;
-    const active = products.filter((p: Product) => p.isActive).length;
+    const active = products.filter((product: Product) => product.isActive).length;
     const lowStock = products.filter(
-      (p: Product) => p.stock !== undefined && p.stock > 0 && p.stock <= 10,
+      (product: Product) => product.stock !== undefined && product.stock > 0 && product.stock <= 10,
     ).length;
     const noStock = products.filter(
-      (p: Product) => p.stock === 0,
+      (product: Product) => product.stock === 0,
     ).length;
     return { total, active, lowStock, noStock };
   }, [products]);
@@ -90,6 +100,7 @@ export default function ProductsPage() {
         products={filteredProducts}
         isLoading={isLoading}
         onEdit={(product) => router.push(`/admin/products/${product.id}`)}
+        onDelete={handleDelete}
       />
     </div>
   );

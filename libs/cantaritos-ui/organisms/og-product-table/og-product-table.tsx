@@ -17,14 +17,6 @@ import { Product } from "@/domain/types";
 
 import { OgProductTableProps } from "./og-product-table.types";
 
-function getComputedStock(product: Product): number | undefined {
-  const sizesWithStock = product.sizes?.filter((size) => size.isActive && size.stock != null);
-  if (sizesWithStock && sizesWithStock.length > 0) {
-    return sizesWithStock.reduce((sum, size) => sum + (size.stock ?? 0), 0);
-  }
-  return product.stock;
-}
-
 function StockCell({ stock }: { stock?: number }) {
   if (stock === undefined || stock === null) {
     return <span className="text-gray-400">—</span>;
@@ -95,10 +87,10 @@ export function OgProductTable({
             </TableCell>
             <TableCell>${product.basePrice.toFixed(2)}</TableCell>
             <TableCell>
-              <StockCell stock={getComputedStock(product)} />
+              <StockCell stock={product.stock} />
             </TableCell>
             <TableCell>
-              <StatusChip isActive={product.isActive} stock={getComputedStock(product)} />
+              <StatusChip isActive={product.isActive} stock={product.stock} />
             </TableCell>
             <TableCell>
               <div className="flex items-center gap-1">

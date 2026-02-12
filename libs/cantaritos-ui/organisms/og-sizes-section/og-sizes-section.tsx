@@ -7,7 +7,7 @@ import { Plus,Ruler } from "lucide-react";
 
 import { AtButton } from "@/libs/cantaritos-ui/atoms";
 import { MlSizeRow } from "@/libs/cantaritos-ui/molecules";
-import { useCreateSize, useUpdateSize } from "@/domain/hooks/products";
+import { useCreateSize, useDeleteSize, useUpdateSize } from "@/domain/hooks/products";
 import { ProductSize } from "@/domain/types";
 
 import { OgSizesSectionProps } from "./og-sizes-section.types";
@@ -15,6 +15,7 @@ import { OgSizesSectionProps } from "./og-sizes-section.types";
 export function OgSizesSection({ productId, sizes }: OgSizesSectionProps) {
   const createSize = useCreateSize();
   const updateSize = useUpdateSize();
+  const deleteSize = useDeleteSize();
   const [showNewRow, setShowNewRow] = useState(false);
   const [updatingSizeId, setUpdatingSizeId] = useState<string | null>(null);
 
@@ -65,6 +66,7 @@ export function OgSizesSection({ productId, sizes }: OgSizesSectionProps) {
               key={size.id}
               size={size}
               onSave={(values) => handleUpdateSize(size.id, values)}
+              onDelete={() => deleteSize.mutate({ productId, id: size.id })}
               isLoading={updatingSizeId === size.id}
             />
           ))}

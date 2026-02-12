@@ -2,6 +2,8 @@ export { useCreateModifier } from "./useCreateModifier";
 export { useCreateModifierGroup } from "./useCreateModifierGroup";
 export { useCreateProduct } from "./useCreateProduct";
 export { useCreateSize } from "./useCreateSize";
+export { useDeleteProduct } from "./useDeleteProduct";
+export { useDeleteSize } from "./useDeleteSize";
 export { useModifierGroups } from "./useModifierGroups";
 export { useModifiers } from "./useModifiers";
 export { useProduct } from "./useProduct";
