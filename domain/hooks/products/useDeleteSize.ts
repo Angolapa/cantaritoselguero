@@ -1,21 +1,18 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { productService } from "@/domain/services";
-import { UpdateSizeRequest } from "@/domain/types";
 
-export function useUpdateSize() {
+export function useDeleteSize() {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: ({
       productId,
       id,
-      data,
     }: {
       productId: string;
       id: string;
-      data: UpdateSizeRequest;
-    }) => productService.updateSize(productId, id, data),
+    }) => productService.deleteSize(productId, id),
     onSuccess: (_result, variables) => {
       queryClient.invalidateQueries({
         queryKey: ["products", variables.productId, "sizes"],

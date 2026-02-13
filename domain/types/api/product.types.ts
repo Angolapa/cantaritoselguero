@@ -42,6 +42,7 @@ export interface ProductSize {
   productId: string;
   name: string;
   price: number;
+  stock?: number | null;
   sortOrder: number;
   isDefault: boolean;
   isActive: boolean;
@@ -50,6 +51,7 @@ export interface ProductSize {
 export interface CreateSizeRequest {
   name: string;
   price: number;
+  stock?: number | null;
   sortOrder?: number;
   isDefault?: boolean;
   isActive?: boolean;
@@ -58,6 +60,7 @@ export interface CreateSizeRequest {
 export interface UpdateSizeRequest {
   name?: string;
   price?: number;
+  stock?: number | null;
   sortOrder?: number;
   isDefault?: boolean;
   isActive?: boolean;

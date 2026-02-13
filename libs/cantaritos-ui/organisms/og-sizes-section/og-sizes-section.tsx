@@ -7,7 +7,7 @@ import { Plus,Ruler } from "lucide-react";
 
 import { AtButton } from "@/libs/cantaritos-ui/atoms";
 import { MlSizeRow } from "@/libs/cantaritos-ui/molecules";
-import { useCreateSize, useUpdateSize } from "@/domain/hooks/products";
+import { useCreateSize, useDeleteSize, useUpdateSize } from "@/domain/hooks/products";
 import { ProductSize } from "@/domain/types";
 
 import { OgSizesSectionProps } from "./og-sizes-section.types";
@@ -15,26 +15,27 @@ import { OgSizesSectionProps } from "./og-sizes-section.types";
 export function OgSizesSection({ productId, sizes }: OgSizesSectionProps) {
   const createSize = useCreateSize();
   const updateSize = useUpdateSize();
+  const deleteSize = useDeleteSize();
   const [showNewRow, setShowNewRow] = useState(false);
   const [updatingSizeId, setUpdatingSizeId] = useState<string | null>(null);
 
-  const handleCreateSize = (values: { name: string; price: number }) => {
+  const handleCreateSize = (values: { name: string; price: number; stock?: number | null }) => {
     createSize.mutate(
-      { productId, data: { name: values.name, price: values.price } },
+      { productId, data: { name: values.name, price: values.price, stock: values.stock } },
       { onSuccess: () => setShowNewRow(false) },
     );
   };
 
   const handleUpdateSize = (
     sizeId: string,
-    values: { name: string; price: number },
+    values: { name: string; price: number; stock?: number | null },
   ) => {
     setUpdatingSizeId(sizeId);
     updateSize.mutate(
       {
         productId,
         id: sizeId,
-        data: { name: values.name, price: values.price },
+        data: { name: values.name, price: values.price, stock: values.stock },
       },
       { onSettled: () => setUpdatingSizeId(null) },
     );
@@ -65,6 +66,7 @@ export function OgSizesSection({ productId, sizes }: OgSizesSectionProps) {
               key={size.id}
               size={size}
               onSave={(values) => handleUpdateSize(size.id, values)}
+              onDelete={() => deleteSize.mutate({ productId, id: size.id })}
               isLoading={updatingSizeId === size.id}
             />
           ))}

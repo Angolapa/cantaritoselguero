@@ -35,6 +35,11 @@ export const productService = {
       body: JSON.stringify(data),
     }),
 
+  delete: (id: string): Promise<void> =>
+    authFetcher<void>(`/products/${id}`, {
+      method: "DELETE",
+    }),
+
   uploadImage: (id: string, file: File): Promise<Product> => {
     const formData = new FormData();
     formData.append("file", file);
@@ -63,6 +68,11 @@ export const productService = {
     authFetcher<ProductSize>(`/products/${productId}/sizes/${id}`, {
       method: "PATCH",
       body: JSON.stringify(data),
+    }),
+
+  deleteSize: (productId: string, id: string): Promise<void> =>
+    authFetcher<void>(`/products/${productId}/sizes/${id}`, {
+      method: "DELETE",
     }),
 
   // --- Modifier Groups ---
