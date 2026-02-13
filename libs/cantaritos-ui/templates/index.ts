@@ -1,1 +1,1 @@
-export {};
+export * from "./tp-admin-layout";

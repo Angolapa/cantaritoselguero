@@ -10,12 +10,18 @@ export interface RegisterRequest {
   phone?: string;
 }
 
+export type UserRole =
+  | "USER"
+  | "ADMIN"
+  | "STAND_OPERATOR"
+  | "CATALOG_MANAGER";
+
 export interface User {
   id: string;
   email: string;
   name: string;
   phone?: string;
-  role?: string;
+  role: UserRole;
 }
 
 export interface AuthResponse {
