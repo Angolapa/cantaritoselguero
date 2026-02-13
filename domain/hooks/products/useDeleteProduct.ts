@@ -7,10 +7,17 @@ export function useDeleteProduct() {
 
   return useMutation({
     mutationFn: (id: string) => productService.delete(id),
-    onSuccess: () => {
+    onSuccess: (_result, id) => {
       queryClient.invalidateQueries({
         queryKey: ["products"],
         exact: true,
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["products", id],
+        exact: true,
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["products", id, "sizes"],
       });
     },
   });
