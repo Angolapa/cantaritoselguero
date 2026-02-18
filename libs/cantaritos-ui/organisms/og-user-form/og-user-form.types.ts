@@ -3,7 +3,7 @@ import { UserRole } from "@/domain/types";
 export interface UserFormValues {
   name: string;
   email: string;
-  password: string;
+  password?: string;
   phone: string;
   role: UserRole;
 }

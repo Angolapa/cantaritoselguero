@@ -7,7 +7,7 @@ import { AtInput } from "@/libs/cantaritos-ui/atoms";
 import { MlForm } from "@/libs/cantaritos-ui/molecules";
 import { UserRole } from "@/domain/types";
 
-import { OgUserFormProps, UserFormValues } from "./og-user-form.types";
+import { OgUserFormProps } from "./og-user-form.types";
 
 const ROLE_OPTIONS: { key: UserRole; label: string }[] = [
   { key: "USER", label: "Usuario" },
@@ -35,13 +35,14 @@ export function OgUserForm({
           onSubmit={(formEvent) => {
             formEvent.preventDefault();
             const formData = new FormData(formEvent.currentTarget);
+            const password = (formData.get("password") ?? "").toString();
             onSubmit({
               name: (formData.get("name") ?? "").toString().trim(),
               email: (formData.get("email") ?? "").toString().trim(),
-              password: (formData.get("password") ?? "").toString(),
+              ...((!isEditing && password) ? { password } : {}),
               phone: (formData.get("phone") ?? "").toString().trim(),
               role: (formData.get("role") ?? "USER").toString() as UserRole,
-            } as UserFormValues);
+            });
           }}
         >
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -70,6 +71,7 @@ export function OgUserForm({
               name="password"
               type="password"
               placeholder="Mínimo 6 caracteres"
+              minLength={6}
               isRequired
               isDisabled={isLoading}
             />
