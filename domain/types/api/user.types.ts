@@ -12,8 +12,6 @@ export interface CreateUserRequest {
   email: string;
   password: string;
   phone?: string;
-  role?: UserRole;
-  isActive?: boolean;
 }
 
 export interface UpdateUserRequest {
@@ -21,5 +19,4 @@ export interface UpdateUserRequest {
   email?: string;
   phone?: string;
   role?: UserRole;
-  isActive?: boolean;
 }

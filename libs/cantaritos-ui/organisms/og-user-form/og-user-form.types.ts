@@ -5,7 +5,7 @@ export interface UserFormValues {
   email: string;
   password?: string;
   phone: string;
-  role: UserRole;
+  role?: UserRole;
 }
 
 export interface OgUserFormProps {

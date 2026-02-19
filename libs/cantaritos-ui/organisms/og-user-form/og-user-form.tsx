@@ -41,7 +41,7 @@ export function OgUserForm({
               email: (formData.get("email") ?? "").toString().trim(),
               ...((!isEditing && password) ? { password } : {}),
               phone: (formData.get("phone") ?? "").toString().trim(),
-              role: (formData.get("role") ?? "USER").toString() as UserRole,
+              ...(isEditing ? { role: (formData.get("role") ?? "USER").toString() as UserRole } : {}),
             });
           }}
         >
@@ -86,17 +86,19 @@ export function OgUserForm({
               defaultValue={defaultValues?.phone}
               isDisabled={isLoading}
             />
-            <Select
-              label="Rol"
-              name="role"
-              placeholder="Selecciona un rol"
-              defaultSelectedKeys={defaultValues?.role ? [defaultValues.role] : ["USER"]}
-              isDisabled={isLoading}
-            >
-              {ROLE_OPTIONS.map((option) => (
-                <SelectItem key={option.key}>{option.label}</SelectItem>
-              ))}
-            </Select>
+            {isEditing && (
+              <Select
+                label="Rol"
+                name="role"
+                placeholder="Selecciona un rol"
+                defaultSelectedKeys={defaultValues?.role ? [defaultValues.role] : ["USER"]}
+                isDisabled={isLoading}
+              >
+                {ROLE_OPTIONS.map((option) => (
+                  <SelectItem key={option.key}>{option.label}</SelectItem>
+                ))}
+              </Select>
+            )}
           </div>
         </MlForm>
       </CardBody>
