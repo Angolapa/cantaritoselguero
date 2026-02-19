@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 
-import { LogOut, Package, ShoppingBag } from "lucide-react";
+import { LogOut, Package, ShoppingBag, Users } from "lucide-react";
 
 import { AtButton } from "@/libs/cantaritos-ui/atoms";
 import { MlSidebarItem } from "@/libs/cantaritos-ui/molecules";
@@ -14,6 +14,11 @@ const NAV_ITEMS = [
     href: "/admin/products",
     label: "Productos",
     icon: <Package className="h-5 w-5" />,
+  },
+  {
+    href: "/admin/users",
+    label: "Usuarios",
+    icon: <Users className="h-5 w-5" />,
   },
 ];
 
