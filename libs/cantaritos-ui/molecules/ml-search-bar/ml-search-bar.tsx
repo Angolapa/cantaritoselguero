@@ -1,7 +1,5 @@
 "use client";
 
-import { Search } from "lucide-react";
-
 import { AtInput } from "@/libs/cantaritos-ui/atoms";
 
 import { MlSearchBarProps } from "./ml-search-bar.types";
@@ -16,9 +14,13 @@ export function MlSearchBar({
       placeholder={placeholder}
       value={value}
       onValueChange={onValueChange}
-      startContent={<Search className="h-4 w-4 text-gray-400" />}
-      isClearable
       className="max-w-sm"
+      classNames={{
+        inputWrapper:
+          "bg-white h-10 focus-within:ring-0 focus-within:outline-none",
+        innerWrapper: "h-full flex items-center",
+        input: "text-center leading-none outline-none",
+      }}
     />
   );
 }

@@ -1,15 +1,14 @@
 "use client";
 
-import { use, useState } from "react";
+import { use } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import { Card, CardBody, Spinner } from "@heroui/react";
+import { Spinner } from "@heroui/react";
 import { ArrowLeft } from "lucide-react";
 
 import {
   AtButton,
-  AtSwitch,
   OgUserForm,
 } from "@/libs/cantaritos-ui";
 import { UserFormValues } from "@/libs/cantaritos-ui/organisms/og-user-form";
@@ -25,9 +24,6 @@ export default function EditUserPage({
   const { data: user, isLoading: isLoadingUser } = useUser(id);
   const updateUser = useUpdateUser();
 
-  const [isActiveOverride, setIsActiveOverride] = useState<boolean | null>(null);
-  const isActive = isActiveOverride ?? user?.isActive ?? true;
-
   const isSaving = updateUser.isPending;
 
   const handleSubmit = (values: UserFormValues) => {
@@ -42,7 +38,6 @@ export default function EditUserPage({
           email: values.email.trim(),
           phone: values.phone || undefined,
           role: values.role,
-          isActive,
         },
       },
       {
@@ -111,42 +106,18 @@ export default function EditUserPage({
       </div>
 
       {/* Content */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        <div className="lg:col-span-2">
-          <OgUserForm
-            defaultValues={{
-              name: user.name,
-              email: user.email,
-              phone: user.phone ?? "",
-              role: user.role,
-            }}
-            onSubmit={handleSubmit}
-            isLoading={isSaving}
-            isEditing
-          />
-        </div>
-        <div className="space-y-6">
-          <Card shadow="sm">
-            <CardBody className="p-6">
-              <h2 className="mb-4 text-sm font-bold uppercase tracking-wider text-gray-500">
-                Estado de la cuenta
-              </h2>
-              <div className="flex items-center justify-between">
-                <div className="flex flex-col">
-                  <span className="text-sm font-medium">Cuenta activa</span>
-                  <span className="text-xs text-gray-500">
-                    El usuario puede iniciar sesión
-                  </span>
-                </div>
-                <AtSwitch
-                  isSelected={isActive}
-                  onValueChange={setIsActiveOverride}
-                  aria-label="Cuenta activa"
-                />
-              </div>
-            </CardBody>
-          </Card>
-        </div>
+      <div className="max-w-2xl">
+        <OgUserForm
+          defaultValues={{
+            name: user.name,
+            email: user.email,
+            phone: user.phone ?? "",
+            role: user.role,
+          }}
+          onSubmit={handleSubmit}
+          isLoading={isSaving}
+          isEditing
+        />
       </div>
 
       {/* Error */}
