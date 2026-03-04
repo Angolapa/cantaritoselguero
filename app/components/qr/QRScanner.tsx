@@ -145,14 +145,17 @@ export function QRScanner({ onScanSuccess }: QRScannerProps) {
                   state: "valid",
                   message: validation.message ?? "Orden válida.",
                 });
+
+                onScanSuccess?.({
+                  orderId: validation.orderId ?? payload.orderId,
+                  shortCode: payload.shortCode,
+                });
               } else {
                 setResult({
                   state: "invalid",
                   message: validation.message ?? "La orden no es válida.",
                 });
               }
-
-              onScanSuccess?.(payload);
             } catch (error) {
               const message = getValidationErrorMessage(error);
 

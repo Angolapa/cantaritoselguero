@@ -43,15 +43,24 @@ export async function GET(request: NextRequest) {
     `${API_BASE_URL}/orders/code/${encoded}`,
   ];
 
+  const UPSTREAM_TIMEOUT_MS = 5_000;
+
   let unauthorizedStatus: 401 | 403 | null = null;
+  let upstreamErrorStatus: number | null = null;
 
   for (const url of upstreamUrls) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), UPSTREAM_TIMEOUT_MS);
+
     try {
       const response = await fetch(url, {
         method: "GET",
         headers,
         cache: "no-store",
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
 
       if (response.ok) {
         const body = (await response.json()) as BackendValidationResponse;
@@ -81,12 +90,24 @@ export async function GET(request: NextRequest) {
 
       if (response.status === 401 || response.status === 403) {
         unauthorizedStatus = response.status;
+      } else if (response.status === 404) {
+        continue;
+      } else {
+        upstreamErrorStatus = response.status;
+      }
+    } catch (error) {
+      clearTimeout(timeoutId);
+
+      if (error instanceof DOMException && error.name === "AbortError") {
+        return NextResponse.json(
+          {
+            valid: false,
+            message: "El backend de órdenes no respondió a tiempo.",
+          },
+          { status: 504 },
+        );
       }
 
-      if (response.status === 404) {
-        continue;
-      }
-    } catch {
       return NextResponse.json(
         {
           valid: false,
@@ -104,6 +125,16 @@ export async function GET(request: NextRequest) {
         message: "No autorizado para validar órdenes.",
       },
       { status: unauthorizedStatus },
+    );
+  }
+
+  if (upstreamErrorStatus) {
+    return NextResponse.json(
+      {
+        valid: false,
+        message: "Error inesperado del backend de órdenes.",
+      },
+      { status: 502 },
     );
   }
 
