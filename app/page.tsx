@@ -1,10 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 
-import { Award, Home, User,UtensilsCrossed } from "lucide-react";
+import { UtensilsCrossed } from "lucide-react";
 
-import { OgNavbar } from "@/libs/cantaritos-ui";
+import { OgFooter, OgNavbar } from "@/libs/cantaritos-ui";
 
 export default function HomePage() {
   return (
@@ -26,12 +27,13 @@ export default function HomePage() {
         <section className="px-6 py-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="aspect-square bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden relative group">
-              <img
+              <Image
                 alt="Playera Oficial"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 src="/images/product.png"
+                fill
               />
-              <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent">
+              <div className="absolute bottom-0 left-0 right-0 p-3 bg-linear-to-t from-black/80 to-transparent">
                 <p className="text-white font-body font-bold text-sm">
                   Playera Oficial
                 </p>
@@ -42,12 +44,13 @@ export default function HomePage() {
             </div>
 
             <div className="aspect-square bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden relative group">
-              <img
+              <Image
                 alt="Playera Oficial"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 src="/images/product.png"
+                fill
               />
-              <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent">
+              <div className="absolute bottom-0 left-0 right-0 p-3 bg-linear-to-t from-black/80 to-transparent">
                 <p className="text-white font-body font-bold text-sm">
                   Playera Oficial
                 </p>
@@ -87,43 +90,9 @@ export default function HomePage() {
           </Link>
         </section>
 
-        {/* Spacer for mobile bottom nav */}
-        <div className="h-20 md:hidden" />
       </main>
 
-      {/* Mobile bottom nav */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white/80 dark:bg-black/80 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 pb-6 pt-2 flex justify-around items-center z-40">
-        <Link href="/" className="flex flex-col items-center text-primary">
-          <Home className="h-5 w-5" />
-          <span className="text-[10px] font-body font-semibold mt-1">
-            Home
-          </span>
-        </Link>
-        <Link
-          href="/products"
-          className="flex flex-col items-center text-gray-400 dark:text-gray-600"
-        >
-          <UtensilsCrossed className="h-5 w-5" />
-          <span className="text-[10px] font-body font-semibold mt-1">
-            Menu
-          </span>
-        </Link>
-        <div className="flex flex-col items-center text-gray-400 dark:text-gray-600">
-          <Award className="h-5 w-5" />
-          <span className="text-[10px] font-body font-semibold mt-1">
-            Rewards
-          </span>
-        </div>
-        <Link
-          href="/login"
-          className="flex flex-col items-center text-gray-400 dark:text-gray-600"
-        >
-          <User className="h-5 w-5" />
-          <span className="text-[10px] font-body font-semibold mt-1">
-            Profile
-          </span>
-        </Link>
-      </nav>
+      <OgFooter />
     </div>
   );
 }
