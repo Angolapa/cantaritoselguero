@@ -1,3 +1,5 @@
-import { FormProps } from "@heroui/form";
+import { FormHTMLAttributes } from "react";
 
-export type MlFormProps = FormProps;
+export interface MlFormProps extends FormHTMLAttributes<HTMLFormElement> {
+  validationBehavior?: "native" | "aria";
+}
