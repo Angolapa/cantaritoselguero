@@ -2,3 +2,12 @@
 @plugin '../hero.ts';
 @source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
 @custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-primary: #e84e26;
+  --color-brand-yellow: #fccb05;
+  --color-background-light: #f8f9fa;
+  --color-background-dark: #121212;
+  --font-heading: "barrio", system-ui;
+  --font-body: "Roboto", sans-serif;
+}

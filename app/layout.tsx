@@ -1,23 +1,27 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Roboto } from "next/font/google";
+import localFont from "next/font/local";
 
 import { Providers } from "./providers";
 
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const barrio = localFont({
+  src: "../public/fuente/Barrio-Regular.ttf",
+  variable: "--font-barrio",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const roboto = Roboto({
+  variable: "--font-roboto",
+  weight: ["400", "500", "700"],
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Hola Mundo",
-  description: "Hola Mundo",
+  title: "Cantaritos El Güero",
+  description: "Tradición de Jalisco — Authentic Mexican experience",
 };
 
 export default function RootLayout({
@@ -26,10 +30,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="es" className={`${barrio.variable} ${roboto.variable}`}>
+      <body className="antialiased">
         <Providers>{children}</Providers>
       </body>
     </html>

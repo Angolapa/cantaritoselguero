@@ -9,7 +9,7 @@ const getApiBaseUrl = (): string => {
     throw new Error("NEXT_PUBLIC_API_URL environment variable is not set");
   }
 
-  return "http://localhost:3000";
+  return "http://localhost:3000/api";
 };
 
 export const API_BASE_URL = getApiBaseUrl();
