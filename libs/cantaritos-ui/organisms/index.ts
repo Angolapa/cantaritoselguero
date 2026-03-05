@@ -1,5 +1,6 @@
 export * from "./og-admin-sidebar";
 export * from "./og-cart-sheet";
+export * from "./og-footer";
 export * from "./og-modifier-groups-section";
 export * from "./og-navbar";
 export * from "./og-product-form";

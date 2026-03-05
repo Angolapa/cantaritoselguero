@@ -1,15 +1,16 @@
 "use client";
 
 import Link from "next/link";
+
 import { Construction } from "lucide-react";
 
-import { OgNavbar } from "@/libs/cantaritos-ui";
+import { OgFooter, OgNavbar } from "@/libs/cantaritos-ui";
 
 export default function DirectorioPage() {
   return (
-    <div className="min-h-screen bg-background-light dark:bg-background-dark">
+    <div className="min-h-screen bg-background-light dark:bg-background-dark flex flex-col">
       <OgNavbar />
-      <main className="flex flex-col items-center justify-center py-32 px-4 text-center">
+      <main className="flex-1 flex flex-col items-center justify-center py-32 px-4 text-center">
         <Construction className="h-16 w-16 text-brand-yellow mb-4" />
         <h1 className="text-2xl md:text-4xl font-heading text-gray-900 dark:text-white mb-2">
           Directorio
@@ -24,6 +25,7 @@ export default function DirectorioPage() {
           Ir a Inicio
         </Link>
       </main>
+      <OgFooter />
     </div>
   );
 }
