@@ -1,7 +1,5 @@
 "use client";
 
-import { Form } from "@heroui/form";
-
 import { MlFormProps } from "./ml-form.types";
 
 export function MlForm({
@@ -10,8 +8,8 @@ export function MlForm({
   ...props
 }: MlFormProps) {
   return (
-    <Form
-      validationBehavior={validationBehavior}
+    <form
+      noValidate={validationBehavior !== "native"}
       className={`flex flex-col gap-4 ${className ?? ""}`.trim()}
       {...props}
     />
