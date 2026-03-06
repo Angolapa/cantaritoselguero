@@ -21,6 +21,14 @@ export default function HomePage() {
         priority
       />
 
+      <Image
+        src="/images/Banner1.png"
+        alt="Banner Cantaritos El Güero"
+        width={1440}
+        height={400}
+        className="w-full h-auto block"
+      />
+
       <main className="mx-auto max-w-7xl">
         {/* Hero section */}
         <section className="px-6 pt-8 pb-4 flex justify-center">
@@ -82,71 +90,13 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Image grid */}
-        <section className="px-6 py-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="aspect-square bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden relative group">
-              <Image
-                alt="Playera Oficial"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                src="/images/product.png"
-                fill
-              />
-              <div className="absolute bottom-0 left-0 right-0 p-3 bg-linear-to-t from-black/80 to-transparent">
-                <p className="text-white font-body font-bold text-sm">
-                  Playera Oficial
-                </p>
-                <p className="text-brand-yellow font-body font-bold text-sm">
-                  $249.00
-                </p>
-              </div>
-            </div>
-
-            <div className="aspect-square bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden relative group">
-              <Image
-                alt="Playera Oficial"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                src="/images/product.png"
-                fill
-              />
-              <div className="absolute bottom-0 left-0 right-0 p-3 bg-linear-to-t from-black/80 to-transparent">
-                <p className="text-white font-body font-bold text-sm">
-                  Playera Oficial
-                </p>
-                <p className="text-brand-yellow font-body font-bold text-sm">
-                  $249.00
-                </p>
-              </div>
-            </div>
-
-            {/* Placeholder cards for desktop (hidden on mobile) */}
-            <div className="hidden md:block aspect-square bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden relative">
-              <div className="w-full h-full flex items-center justify-center">
-                <div className="text-center text-gray-400">
-                  <UtensilsCrossed className="h-12 w-12 mx-auto mb-2" />
-                  <p className="font-body text-sm">Próximamente</p>
-                </div>
-              </div>
-            </div>
-            <div className="hidden md:block aspect-square bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden relative">
-              <div className="w-full h-full flex items-center justify-center">
-                <div className="text-center text-gray-400">
-                  <UtensilsCrossed className="h-12 w-12 mx-auto mb-2" />
-                  <p className="font-body text-sm">Próximamente</p>
-                </div>
-              </div>
+        {/* Video section */}
+        <section className="px-6 py-8 flex justify-center">
+          <div className="w-[335px] h-[440px] md:w-[1280px] md:h-[720px] bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden">
+            <div className="w-full h-full flex items-center justify-center text-gray-400">
+              <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg>
             </div>
           </div>
-        </section>
-
-        {/* CTA */}
-        <section className="px-6 py-4">
-          <Link
-            href="/products"
-            className="block w-full bg-primary hover:bg-orange-700 text-white font-body font-bold py-4 rounded-full shadow-lg transition-all active:scale-95 text-sm uppercase tracking-widest text-center"
-          >
-            ORDENAR AHORA
-          </Link>
         </section>
 
         {/* Promo Banners */}
@@ -198,6 +148,89 @@ export default function HomePage() {
             descriptionColor="text-[#1E293B]/80"
             buttonVariant="dark"
           />
+        </section>
+
+        {/* Merch Oficial */}
+        <section className="flex items-center justify-between px-6 md:px-[206px] py-8 max-w-[1443px] mx-auto">
+          <h2 className="font-heading text-[#1E293B] text-2xl md:text-5xl lg:text-6xl leading-tight whitespace-nowrap">
+            LA MERCH OFICIAL
+            <br />
+            NUMERO #1
+          </h2>
+          <Image
+            src="/images/cowboy.png"
+            alt="Cowboy NEW"
+            width={424}
+            height={198}
+            className="w-[150px] md:w-[424px] h-auto object-contain"
+          />
+        </section>
+
+        {/* Image grid */}
+        <section className="px-6 py-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="aspect-square bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden relative group">
+              <Image
+                alt="Playera Oficial"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                src="/images/product.png"
+                fill
+              />
+              <div className="absolute bottom-0 left-0 right-0 p-3 bg-linear-to-t from-black/80 to-transparent">
+                <p className="text-white font-body font-bold text-sm">
+                  Playera Oficial
+                </p>
+                <p className="text-brand-yellow font-body font-bold text-sm">
+                  $249.00
+                </p>
+              </div>
+            </div>
+
+            <div className="aspect-square bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden relative group">
+              <Image
+                alt="Playera Oficial"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                src="/images/product.png"
+                fill
+              />
+              <div className="absolute bottom-0 left-0 right-0 p-3 bg-linear-to-t from-black/80 to-transparent">
+                <p className="text-white font-body font-bold text-sm">
+                  Playera Oficial
+                </p>
+                <p className="text-brand-yellow font-body font-bold text-sm">
+                  $249.00
+                </p>
+              </div>
+            </div>
+
+            {/* Placeholder cards */}
+            <div className="aspect-square bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden relative">
+              <div className="w-full h-full flex items-center justify-center">
+                <div className="text-center text-gray-400">
+                  <UtensilsCrossed className="h-12 w-12 mx-auto mb-2" />
+                  <p className="font-body text-sm">Próximamente</p>
+                </div>
+              </div>
+            </div>
+            <div className="aspect-square bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden relative">
+              <div className="w-full h-full flex items-center justify-center">
+                <div className="text-center text-gray-400">
+                  <UtensilsCrossed className="h-12 w-12 mx-auto mb-2" />
+                  <p className="font-body text-sm">Próximamente</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="px-6 py-4 flex justify-center">
+          <Link
+            href="/products"
+            className="flex items-center justify-center w-[63px] h-[28px] md:w-[137px] md:h-[56px] bg-[#1E293B] hover:bg-[#334155] text-white font-body font-bold text-[10px] md:text-sm rounded-full transition-all active:scale-95"
+          >
+            Ver más
+          </Link>
         </section>
 
       </main>

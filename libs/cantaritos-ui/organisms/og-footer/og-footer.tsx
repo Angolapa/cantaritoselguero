@@ -25,7 +25,7 @@ export function OgFooter() {
       <div className="mx-auto max-w-[1440px] px-6 md:px-[208px] py-10 md:py-14">
         <div className="flex flex-col md:flex-row gap-10 md:gap-0 md:justify-between">
           {/* Left — Logo + Info */}
-          <div className="space-y-4 max-w-[320px]">
+          <div className="space-y-4 max-w-[320px] items-center text-center md:items-start md:text-left flex flex-col md:block">
             <Image
               src="/images/Logo.png"
               alt="Cantaritos El Güero #1"
