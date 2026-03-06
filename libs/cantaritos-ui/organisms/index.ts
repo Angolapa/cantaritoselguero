@@ -4,6 +4,7 @@ export * from "./og-footer";
 export * from "./og-modifier-groups-section";
 export * from "./og-navbar";
 export * from "./og-product-form";
+export * from "./og-promo-banner";
 export * from "./og-product-table";
 export * from "./og-sizes-section";
 export * from "./og-user-form";

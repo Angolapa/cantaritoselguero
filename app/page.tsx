@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { UtensilsCrossed } from "lucide-react";
 
-import { OgFooter, OgNavbar } from "@/libs/cantaritos-ui";
+import { OgFooter, OgNavbar, OgPromoBanner } from "@/libs/cantaritos-ui";
 
 export default function HomePage() {
   return (
@@ -88,6 +88,57 @@ export default function HomePage() {
           >
             ORDENAR AHORA
           </Link>
+        </section>
+
+        {/* Promo Banners */}
+        <section className="px-6 py-8 space-y-8">
+          <OgPromoBanner
+            bgColor="bg-[#E9DCB7]"
+            title="SI VIENES CON SED, PAGA ANTES"
+            subtitle=""
+            description="Así llegas directo por tu cantarito y arrancas sin escalas."
+            highlightText="La banda no espera... y tú tampoco deberías."
+            buttonLabel="Compra Anticipada"
+            buttonHref="/compra-anticipada"
+            imageSrc="/images/Anticipa_tu_consumo.png"
+            imageAlt="Ilustración de compra anticipada"
+            titleColor="text-[#1E293B]"
+            descriptionColor="text-[#1E293B]/80"
+            highlightColor="text-[#B22222]"
+            buttonVariant="dark"
+          />
+
+          <OgPromoBanner
+            bgColor="bg-[#B22222]"
+            title="¿RESERVACIÓN?"
+            subtitle="SOLO SI VIENES CON TODOS TUS REALES."
+            description="Siempre hay espacio para arrancar la fiesta."
+            warningText="Reservaciones a partir de 60 compas y requiere pago de consumo anticipado mínimo de $10,000 mxn."
+            buttonLabel="Reserva aquí"
+            buttonHref="/reservaciones"
+            imageSrc="/images/Reservaciones.png"
+            imageAlt="Ilustración de reservaciones"
+            titleColor="text-brand-yellow"
+            subtitleColor="text-white"
+            descriptionColor="text-white/80"
+            highlightColor="text-brand-yellow"
+            buttonVariant="dark"
+          />
+
+          <OgPromoBanner
+            bgColor="bg-[#F9B233]"
+            title="RUTA AL GÜERO"
+            subtitle="EL PLAN EMPIEZA DESDE QUE TE SUBES."
+            description="Súbete a La Ruta del Güero y llega sin manejar, sin complicaciones y con el plan armado."
+            buttonLabel="Ver Horarios"
+            buttonHref="/ruta-al-guero"
+            imageSrc="/images/Ruta_al_Güero.png"
+            imageAlt="Ilustración de la ruta al Güero"
+            titleColor="text-[#1E293B]"
+            subtitleColor="text-[#1E293B]"
+            descriptionColor="text-[#1E293B]/80"
+            buttonVariant="dark"
+          />
         </section>
 
       </main>
