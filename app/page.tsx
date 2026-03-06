@@ -5,22 +5,81 @@ import Link from "next/link";
 
 import { UtensilsCrossed } from "lucide-react";
 
-import { OgFooter, OgNavbar, OgPromoBanner } from "@/libs/cantaritos-ui";
+import { OgEventBanner, OgFooter, OgNavbar, OgPromoBanner } from "@/libs/cantaritos-ui";
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-background-light dark:bg-background-dark">
       <OgNavbar />
 
+      <Image
+        src="/images/home.png"
+        alt="Cantaritos El Güero"
+        width={1440}
+        height={400}
+        className="w-full h-auto block -mt-px"
+        priority
+      />
+
       <main className="mx-auto max-w-7xl">
         {/* Hero section */}
-        <section className="px-6 pt-8 pb-4 space-y-2">
-          <h1 className="text-4xl md:text-6xl font-heading text-gray-900 dark:text-white leading-tight">
-            Tradición de Jalisco
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400 font-body text-sm md:text-base">
-            SOMOS EL ALMA DE LA FIESTA JALICENSE
-          </p>
+        <section className="px-6 pt-8 pb-4 flex justify-center">
+          <div className="relative flex items-end justify-center gap-0 md:gap-0 max-w-[335px] md:max-w-[1023px] w-full">
+            <Image
+              src="/images/hat.png"
+              alt=""
+              width={150}
+              height={150}
+              className="w-[40px] h-[40px] md:w-[150px] md:h-[150px] self-end -mr-4 md:-mr-10"
+            />
+            <h1 className="font-heading text-[#E64927]">
+              <svg
+                viewBox="0 0 800 250"
+                className="w-[250px] md:w-[800px] h-auto"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <defs>
+                  <path
+                    id="curve1"
+                    d="M 50 110 Q 400 60 750 110"
+                    fill="none"
+                  />
+                  <path
+                    id="curve2"
+                    d="M 100 200 Q 400 130 700 200"
+                    fill="none"
+                  />
+                </defs>
+                <text
+                  fill="#E64927"
+                  fontSize="65"
+                  fontFamily="barrio, system-ui"
+                  textAnchor="middle"
+                >
+                  <textPath href="#curve1" startOffset="50%">
+                    ¡SOMOS EL ALMA DE LA
+                  </textPath>
+                </text>
+                <text
+                  fill="#E64927"
+                  fontSize="65"
+                  fontFamily="barrio, system-ui"
+                  textAnchor="middle"
+                >
+                  <textPath href="#curve2" startOffset="50%">
+                    FIESTA JALISCIENSE!
+                  </textPath>
+                </text>
+              </svg>
+            </h1>
+            <Image
+              src="/images/boots.png"
+              alt=""
+              width={134}
+              height={158}
+              className="w-[47px] h-[53px] md:w-[134px] md:h-[158px] self-end -ml-4 md:-ml-10"
+            />
+          </div>
         </section>
 
         {/* Image grid */}
@@ -143,6 +202,7 @@ export default function HomePage() {
 
       </main>
 
+      <OgEventBanner />
       <OgFooter />
     </div>
   );

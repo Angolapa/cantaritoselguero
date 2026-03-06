@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-primary: #e84e26;
+  --color-primary: #E64927;
   --color-brand-yellow: #fccb05;
   --color-background-light: #f8f9fa;
   --color-background-dark: #121212;

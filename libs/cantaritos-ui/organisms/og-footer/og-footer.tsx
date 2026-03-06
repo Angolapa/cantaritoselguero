@@ -80,7 +80,7 @@ export function OgFooter() {
           </div>
 
           {/* Right — Social icons */}
-          <div className="flex items-end gap-4">
+          <div className="flex items-end justify-center gap-4 flex-wrap">
             {/* Facebook */}
             <a
               href="https://facebook.com"
