@@ -408,7 +408,7 @@ export default function FaqPage() {
               />
               {/* Hand */}
               <Image
-                src="/images/hands_!.png"
+                src="/images/hands_exclamation.png"
                 alt=""
                 width={80}
                 height={100}
@@ -426,6 +426,7 @@ export default function FaqPage() {
               <input
                 type="text"
                 placeholder="Buscar"
+                aria-label="Buscar preguntas frecuentes"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-12 pr-4 py-3 rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-body text-base focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors"
@@ -457,7 +458,7 @@ export default function FaqPage() {
               >
                 {filteredFaqs.map((faq, index) => (
                   <AccordionItem
-                    key={index}
+                    key={faq.question}
                     aria-label={faq.question}
                     title={faq.question}
                     indicator={({ isOpen }) => (
