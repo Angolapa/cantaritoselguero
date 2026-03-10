@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Roboto, Roboto_Condensed } from "next/font/google";
 import localFont from "next/font/local";
 
 import { Providers } from "./providers";
@@ -19,6 +19,13 @@ const roboto = Roboto({
   display: "swap",
 });
 
+const robotoCondensed = Roboto_Condensed({
+  variable: "--font-roboto-condensed",
+  weight: ["500"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Cantaritos El Güero",
   description: "Tradición de Jalisco — Authentic Mexican experience",
@@ -30,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${barrio.variable} ${roboto.variable}`}>
+    <html lang="es" className={`${barrio.variable} ${roboto.variable} ${robotoCondensed.variable}`}>
       <body className="antialiased">
         <Providers>{children}</Providers>
       </body>

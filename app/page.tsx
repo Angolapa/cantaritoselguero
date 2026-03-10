@@ -103,10 +103,10 @@ export default function HomePage() {
         <section className="px-6 py-8 space-y-8">
           <OgPromoBanner
             bgColor="bg-[#E9DCB7]"
-            title="SI VIENES CON SED, PAGA ANTES"
+            title={<>Si vienes {" "}<span className="hidden md:inline"><br /></span>con sed,<br />paga antes</>}
             subtitle=""
-            description="Así llegas directo por tu cantarito y arrancas sin escalas."
-            highlightText="La banda no espera... y tú tampoco deberías."
+            description={<>Así llegas directo por tu cantarito<br />y arrancas sin escalas.</>}
+            highlightText={<>La banda no espera…<br />y tú tampoco deberías.</>}
             buttonLabel="Compra Anticipada"
             buttonHref="/compra-anticipada"
             imageSrc="/images/Anticipa_tu_consumo.png"
@@ -121,14 +121,14 @@ export default function HomePage() {
             bgColor="bg-[#B22222]"
             title="¿RESERVACIÓN?"
             subtitle="SOLO SI VIENES CON TODOS TUS REALES."
-            description="Siempre hay espacio para arrancar la fiesta."
-            warningText="Reservaciones a partir de 60 compas y requiere pago de consumo anticipado mínimo de $10,000 mxn."
+            description={<>Siempre hay espacio para<br />arrancar la fiesta.</>}
+            warningText={<><span className="md:hidden">Reservaciones a partir de 60 compas y requiere pago de consumo anticipado mínimo de $10,000 mxn.</span><span className="hidden md:inline">Reservaciones a partir de 60 compas<br />y requiere pago de consumo<br />anticipado mínimo de $10,000 mxn.</span></>}
             buttonLabel="Reserva aquí"
             buttonHref="/reservaciones"
             imageSrc="/images/Reservaciones.png"
             imageAlt="Ilustración de reservaciones"
-            titleColor="text-brand-yellow"
-            subtitleColor="text-white"
+            titleColor="text-[#EDDCB6] md:text-brand-yellow"
+            subtitleColor="text-[#FFAF32] md:text-white"
             descriptionColor="text-white/80"
             highlightColor="text-brand-yellow"
             buttonVariant="dark"
@@ -137,8 +137,8 @@ export default function HomePage() {
           <OgPromoBanner
             bgColor="bg-[#F9B233]"
             title="RUTA AL GÜERO"
-            subtitle="EL PLAN EMPIEZA DESDE QUE TE SUBES."
-            description="Súbete a La Ruta del Güero y llega sin manejar, sin complicaciones y con el plan armado."
+            subtitle={<><span className="md:hidden">El plan empieza desde<br />que te subes.</span><span className="hidden md:inline">El plan<br />empieza desde<br />que te subes.</span></>}
+            description={<><span className="md:hidden">Súbete a La Ruta del Güero y llega<br />sin manejar, sin complicaciones y<br />con el plan armado.</span><span className="hidden md:inline">Súbete a La Ruta del Güero y llega sin<br />manejar, sin complicaciones y<br />con el plan armado.</span></>}
             buttonLabel="Ver Horarios"
             buttonHref="/ruta-al-guero"
             imageSrc="/images/Ruta_al_Güero.png"
