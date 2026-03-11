@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { Menu, ShoppingCart, X } from "lucide-react";
+import { Globe, Menu, ShoppingCart, X } from "lucide-react";
 
 import { getCartItemCount,useAuthStore, useCartStore } from "@/domain/stores";
 
@@ -36,7 +36,7 @@ export function OgNavbar() {
   ];
 
   return (
-    <header className="bg-primary shadow-lg relative z-50">
+    <header className="bg-primary relative z-50">
       <div className="mx-auto max-w-[1440px] px-4 md:px-[208px] h-[112px] md:h-[154px] flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-1 group">
@@ -98,6 +98,13 @@ export function OgNavbar() {
                 {cartCount > 99 ? "99+" : cartCount}
               </span>
             )}
+          </button>
+
+          <button
+            aria-label="Cambiar idioma"
+            className="text-white hover:bg-white/10 p-1.5 rounded-full transition-colors"
+          >
+            <Globe className="h-6 w-6" />
           </button>
 
           <button

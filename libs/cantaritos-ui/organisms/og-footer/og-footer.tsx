@@ -23,9 +23,9 @@ export function OgFooter() {
   return (
     <footer className="bg-[#E9DCB7] w-full">
       <div className="mx-auto max-w-[1440px] px-6 md:px-[208px] py-10 md:py-14">
-        <div className="flex flex-col md:flex-row gap-10 md:gap-0 md:justify-between">
+        <div className="flex flex-col items-center md:items-stretch md:flex-row gap-10 md:gap-0 md:justify-between">
           {/* Left — Logo + Info */}
-          <div className="space-y-4 max-w-[320px]">
+          <div className="space-y-4 max-w-[320px] items-center text-center md:items-start md:text-left flex flex-col md:block">
             <Image
               src="/images/Logo.png"
               alt="Cantaritos El Güero #1"
@@ -34,7 +34,7 @@ export function OgFooter() {
               className="w-[160px] h-auto md:w-[255px] md:h-[99px]"
             />
 
-            <div className="flex gap-2 text-sm font-body text-primary leading-snug">
+            <div className="flex gap-2 text-xs md:text-base font-condensed font-medium text-primary leading-none">
               <MapPin className="h-8 w-8 shrink-0 text-[#137171]" />
               <p>
                 Carretera internacional, Carr. Guadalajara - Tepic km 49 #4970,
@@ -42,36 +42,36 @@ export function OgFooter() {
               </p>
             </div>
 
-            <p className="font-body text-sm text-primary font-bold leading-snug">
+            <p className="font-condensed text-xs md:text-base text-primary font-medium leading-none">
               Abrimos los 365 días del año de 9am a 12am,
               <br />
               No contamos con sucursales ni franquicias.
             </p>
 
-            <p className="font-body text-sm text-[#901F18] font-bold">
+            <p className="font-condensed text-xs md:text-base text-[#901F18] font-medium leading-none">
               ¡Musica en vivo todos los días!
             </p>
           </div>
 
           {/* Center — Nav links */}
-          <div className="flex gap-10 md:gap-16 items-end">
-            <nav className="flex flex-col gap-3">
+          <div className="flex gap-10 md:gap-16 items-center md:items-end">
+            <nav className="flex flex-col gap-3 items-center md:items-start">
               {NAV_COL_1.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="font-body text-sm text-gray-800 hover:text-primary transition-colors"
+                  className="font-condensed text-xs md:text-base font-medium text-gray-800 leading-none hover:text-primary transition-colors"
                 >
                   {link.label}
                 </Link>
               ))}
             </nav>
-            <nav className="flex flex-col gap-3">
+            <nav className="flex flex-col gap-3 items-center md:items-start">
               {NAV_COL_2.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="font-body text-sm text-gray-800 hover:text-primary transition-colors"
+                  className="font-condensed text-xs md:text-base font-medium text-gray-800 leading-none hover:text-primary transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -80,7 +80,7 @@ export function OgFooter() {
           </div>
 
           {/* Right — Social icons */}
-          <div className="flex items-end gap-4">
+          <div className="flex items-end justify-center gap-4 flex-wrap">
             {/* Facebook */}
             <a
               href="https://facebook.com"
@@ -146,7 +146,7 @@ export function OgFooter() {
 
         {/* Copyright */}
         <div className="mt-10 pt-6 border-t border-gray-800/10 text-center">
-          <p className="font-body text-sm text-gray-600">
+          <p className="font-condensed text-xs md:text-base font-medium text-gray-600 leading-none">
             &copy; Copyright Cantaritos el Güero #1
           </p>
         </div>
