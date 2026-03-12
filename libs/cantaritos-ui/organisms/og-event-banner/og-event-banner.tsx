@@ -12,9 +12,9 @@ export function OgEventBanner() {
           <h2 className="order-1 md:hidden font-heading text-2xl leading-tight text-[#1E293B] text-center">
             SI NO VIENES
             {" "}AL{" "}
-            <span className="text-[#E9DCB7] font-extrabold">GU&#776;ERO,</span>
+            <span className="text-[#E9DCB7] font-extrabold">G<span className="mr-[4px]">Ü</span>ERO,</span>
             <br />
-            EL GU&#776;ERO VA
+            EL G<span className="mr-[2px]">Ü</span>ERO VA
             <br />
             <span className="text-[#FFAF32] font-extrabold">CONTIGO.</span>
           </h2>
@@ -52,13 +52,13 @@ export function OgEventBanner() {
 
           {/* Left content - desktop has title + description together */}
           <div className="order-3 md:order-1 flex-1 space-y-6">
-            <h2 className="hidden md:block font-heading md:text-4xl lg:text-5xl leading-tight text-[#1E293B]">
+            <h2 className="hidden md:block font-heading md:text-4xl lg:text-[56px] leading-none tracking-normal text-[#1E293B]">
               SI NO VIENES
               <br />
               AL{" "}
-              <span className="text-[#E9DCB7] font-extrabold">GU&#776;ERO,</span>
+              <span className="text-[#E9DCB7] font-extrabold">G<span className="mr-[2px]">Ü</span>ERO,</span>
               <br />
-              EL GU&#776;ERO VA
+              EL G<span className="mr-[2px]">Ü</span>ERO VA
               <br />
               <span className="text-[#FFAF32] font-extrabold">CONTIGO.</span>
             </h2>

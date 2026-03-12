@@ -15,7 +15,7 @@ const NAV_LINKS = [
   { href: "/nosotros", label: "Nosotros" },
   { href: "/planea-tu-visita", label: "Planea tu Visita" },
   { href: "/reservaciones", label: "Reservaciones" },
-  { href: "/products", label: "Compra el Guero" },
+  { href: "/products", label: "Compra en El Güero" },
   { href: "/directorio", label: "Directorio" },
   { href: "/login", label: "Login" },
 ];
