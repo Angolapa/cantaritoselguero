@@ -11,7 +11,7 @@ export function OgEventBanner() {
 
   return (
     <section className="w-full min-h-[588px] lg:h-[872px] bg-[url('/images/vector.png')] bg-top bg-no-repeat bg-cover mt-[50px] md:mt-0">
-      <div className="mx-auto px-6 md:px-[206px] pt-[126px] md:pt-[18vw] lg:pt-[200px] pb-10 md:pb-16">
+      <div className="mx-auto px-6 md:px-10 xl:px-[206px] pt-[126px] md:pt-[18vw] lg:pt-[200px] pb-10 md:pb-16">
         <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12">
           {/* Title */}
           <h2 className="order-1 md:hidden font-heading text-2xl leading-tight text-[#1E293B] text-center">

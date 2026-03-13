@@ -39,7 +39,7 @@ export function OgNavbar() {
 
   return (
     <header className="bg-primary relative z-50">
-      <div className="mx-auto max-w-[1440px] px-4 md:px-[208px] h-[112px] md:h-[154px] flex items-center justify-between">
+      <div className="mx-auto max-w-[1440px] px-4 md:px-10 xl:px-[208px] h-[112px] md:h-[154px] flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-1 group">
           <Image
