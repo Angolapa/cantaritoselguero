@@ -3,6 +3,7 @@ export interface BannerFormValues {
   altText: string;
   linkUrl: string;
   section: string;
+  locale: string;
   order: string;
   backgroundColor: string;
   startDate: string;
