@@ -96,19 +96,28 @@ export function OgEventBanner() {
             </h2>
 
             <p className="text-[#1E293B] font-body font-medium text-sm md:text-[24px] md:leading-snug max-w-[380px] md:max-w-[480px] text-center md:text-left">
-              {translate("eventBanner.description")}
+              <span className="md:hidden">
+                {translate("eventBanner.descLine1")}<br />
+                {translate("eventBanner.descLine2")}<br />
+                {translate("eventBanner.descLine3")}
+              </span>
+              <span className="hidden md:inline">
+                {translate("eventBanner.descFull")}
+              </span>
             </p>
 
-            <div className="flex items-center gap-3 justify-center md:justify-start">
+            <div className="flex items-center gap-3 justify-center md:justify-start -ml-20 md:-ml-[50px]">
               <Image
                 src="/images/cantarito.png"
                 alt="Cantarito"
                 width={154}
                 height={156}
-                className="shrink-0 w-[60px] h-[60px] md:w-[154px] md:h-[156px]"
+                className="shrink-0 w-[80px] h-[81px] md:w-[154px] md:h-[156px]"
               />
-              <p className="text-white font-body font-bold text-sm md:text-base max-w-[280px]">
-                {translate("eventBanner.cta")}
+              <p className="text-white font-body font-bold text-xs leading-none md:text-base md:leading-normal max-w-[280px]">
+                {translate("eventBanner.ctaLine1")}
+                <br />
+                {translate("eventBanner.ctaLine2")}
               </p>
             </div>
           </div>
@@ -127,7 +136,7 @@ export function OgEventBanner() {
                 alt=""
                 width={50}
                 height={50}
-                className="absolute right-[-70px] top-[10px]"
+                className="absolute right-[-64px] top-[8px]"
               />
             </div>
           </div>

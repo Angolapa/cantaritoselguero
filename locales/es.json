@@ -15,23 +15,46 @@
   "home": {
     "heroAlt": "¡Somos el alma de la fiesta jalisciense!",
     "preOrder": {
-      "title": "Si vienes con sed, paga antes",
-      "description": "Así llegas directo por tu cantarito y arrancas sin escalas.",
-      "highlight": "La banda no espera… y tú tampoco deberías.",
+      "titleMobileLine1": "Si vienes con sed,",
+      "titleMobileLine2": "paga antes",
+      "titleDesktopLine1": "Si vienes",
+      "titleDesktopLine2": "con sed,",
+      "titleDesktopLine3": "paga antes",
+      "descMobileLine1": "Así llegas directo por tu cantarito",
+      "descMobileLine2": "y arrancas sin escalas.",
+      "descDesktopLine1": "Así llegas directo por tu cantarito",
+      "descDesktopLine2": "y arrancas sin escalas.",
+      "highlightMobileLine1": "La banda no espera…",
+      "highlightMobileLine2": "y tú tampoco deberías.",
+      "highlightDesktopLine1": "La banda no espera…",
+      "highlightDesktopLine2": "y tú tampoco deberías.",
       "button": "Compra Anticipada"
     },
     "reservation": {
       "title": "¿RESERVACIÓN?",
+      "subtitleMobileLine1": "Solo si vienes con",
+      "subtitleMobileLine2": "todos tus reales.",
       "subtitle": "SOLO SI VIENES CON TODOS TUS REALES.",
+      "descDesktopLine1": "Siempre hay espacio para",
+      "descDesktopLine2": "arrancar la fiesta.",
       "description": "Siempre hay espacio para arrancar la fiesta.",
+      "warningMobileLine1": "Reservaciones a partir de 60 compas y",
+      "warningMobileLine2": "requiere pago de consumo anticipado",
+      "warningMobileLine3": "mínimo de $10,000 mxn.",
       "warning": "Reservaciones a partir de 60 compas y requiere pago de consumo anticipado mínimo de $10,000 mxn.",
-      "warningDesktop": "Reservaciones a partir de 60 compas y requiere pago de consumo anticipado mínimo de $10,000 mxn.",
       "button": "Reserva aquí"
     },
     "shuttle": {
       "title": "RUTA AL GÜERO",
       "subtitle": "El plan empieza desde que te subes.",
-      "subtitleDesktop": "El plan empieza desde que te subes.",
+      "subtitleDesktopLine1": "El plan",
+      "subtitleDesktopLine2": "empieza desde",
+      "subtitleDesktopLine3": "que te subes.",
+      "subtitleMobileLine1": "El plan empieza desde",
+      "subtitleMobileLine2": "que te subes.",
+      "descMobileLine1": "Súbete a La Ruta del Güero y llega",
+      "descMobileLine2": "sin manejar, sin complicaciones y",
+      "descMobileLine3": "con el plan armado.",
       "description": "Súbete a La Ruta del Güero y llega sin manejar, sin complicaciones y con el plan armado.",
       "button": "Ver Horarios"
     },
@@ -39,8 +62,12 @@
     "shopButton": "Comprar en el Güero"
   },
   "eventBanner": {
-    "description": "Lleva el Cantarito Gigante y el mood cantaristico a tu fiesta, boda o evento empresarial.",
-    "cta": "Nosotros ponemos el ambiente. Tu solo invita a tus compas.",
+    "descLine1": "Lleva el Cantarito Gigante y el",
+    "descLine2": "mood cantarístico a tu fiesta,",
+    "descLine3": "boda o evento empresarial.",
+    "descFull": "Lleva el Cantarito Gigante y el mood cantarístico a tu fiesta, boda o evento empresarial.",
+    "ctaLine1": "Nosotros ponemos el ambiente.",
+    "ctaLine2": "¡Tú solo invita a tus compas!",
     "button": "Cotizar Mi Evento"
   },
   "footer": {
