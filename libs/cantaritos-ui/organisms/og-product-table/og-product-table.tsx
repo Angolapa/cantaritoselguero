@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  Image,
   Spinner,
   Table,
   TableBody,
@@ -70,7 +69,7 @@ export function OgProductTable({
             <TableCell>
               <div className="flex items-center gap-3">
                 {product.image ? (
-                  <Image
+                  <img
                     src={product.image}
                     alt={product.name}
                     className="h-10 w-10 rounded-lg object-cover"
@@ -94,26 +93,21 @@ export function OgProductTable({
             </TableCell>
             <TableCell>
               <div className="flex items-center gap-1">
-                <AtButton
-                  isIconOnly
-                  variant="light"
-                  size="sm"
-                  onPress={() => onEdit(product)}
+                <button
+                  className="inline-flex items-center justify-center p-1.5 rounded-lg text-gray-700 hover:bg-gray-100"
+                  onClick={() => onEdit(product)}
                   aria-label="Editar producto"
                 >
                   <Pencil className="h-4 w-4" />
-                </AtButton>
+                </button>
                 {onDelete && (
-                  <AtButton
-                    isIconOnly
-                    variant="light"
-                    size="sm"
-                    color="danger"
-                    onPress={() => onDelete(product)}
+                  <button
+                    className="inline-flex items-center justify-center p-1.5 rounded-lg text-red-600 hover:bg-red-50"
+                    onClick={() => onDelete(product)}
                     aria-label="Eliminar producto"
                   >
                     <Trash2 className="h-4 w-4" />
-                  </AtButton>
+                  </button>
                 )}
               </div>
             </TableCell>
