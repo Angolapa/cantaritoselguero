@@ -3,11 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { UtensilsCrossed } from "lucide-react";
-
-import { OgEventBanner, OgFooter, OgNavbar, OgPromoBanner } from "@/libs/cantaritos-ui";
+import { OgBannerCarousel, OgEventBanner, OgFooter, OgNavbar, OgPromoBanner } from "@/libs/cantaritos-ui";
+import { useBanners } from "@/domain/hooks/banners";
 
 export default function HomePage() {
+  const { data: banners = [], isLoading: isLoadingBanners } = useBanners({
+    section: "home-carousel",
+    active: true,
+  });
+
   return (
     <div className="min-h-screen bg-background-light dark:bg-background-dark">
       <OgNavbar />
@@ -23,13 +27,7 @@ export default function HomePage() {
         />
       </div>
 
-      <Image
-        src="/images/Banner1.png"
-        alt="Banner Cantaritos El Güero"
-        width={1440}
-        height={400}
-        className="w-full h-auto block"
-      />
+      <OgBannerCarousel banners={banners} isLoading={isLoadingBanners} />
 
       <main className="mx-auto max-w-[1440px]">
         {/* Hero section */}
@@ -118,60 +116,23 @@ export default function HomePage() {
           />
         </section>
 
-        {/* Image grid */}
-        <section className="px-6 py-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="aspect-square bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden relative group">
-              <Image
-                alt="Playera Oficial"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                src="/images/product.png"
-                fill
-              />
-              <div className="absolute bottom-0 left-0 right-0 p-3 bg-linear-to-t from-black/80 to-transparent">
-                <p className="text-white font-body font-bold text-sm">
-                  Playera Oficial
-                </p>
-                <p className="text-brand-yellow font-body font-bold text-sm">
-                  $249.00
-                </p>
+        {/* Cantaritos grid */}
+        <section className="px-6 py-4 flex justify-center">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 w-full max-w-[1071px] md:h-[270px]">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <div
+                key={i}
+                className={`rounded-2xl overflow-hidden h-[200px] md:h-full ${i === 4 ? "hidden md:block" : ""}`}
+              >
+                <Image
+                  src="/images/Cantarito.jpg"
+                  alt="Cantaritos El Güero"
+                  width={200}
+                  height={270}
+                  className="w-full h-full object-cover"
+                />
               </div>
-            </div>
-
-            <div className="aspect-square bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden relative group">
-              <Image
-                alt="Playera Oficial"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                src="/images/product.png"
-                fill
-              />
-              <div className="absolute bottom-0 left-0 right-0 p-3 bg-linear-to-t from-black/80 to-transparent">
-                <p className="text-white font-body font-bold text-sm">
-                  Playera Oficial
-                </p>
-                <p className="text-brand-yellow font-body font-bold text-sm">
-                  $249.00
-                </p>
-              </div>
-            </div>
-
-            {/* Placeholder cards */}
-            <div className="aspect-square bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden relative">
-              <div className="w-full h-full flex items-center justify-center">
-                <div className="text-center text-gray-400">
-                  <UtensilsCrossed className="h-12 w-12 mx-auto mb-2" />
-                  <p className="font-body text-sm">Próximamente</p>
-                </div>
-              </div>
-            </div>
-            <div className="aspect-square bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden relative">
-              <div className="w-full h-full flex items-center justify-center">
-                <div className="text-center text-gray-400">
-                  <UtensilsCrossed className="h-12 w-12 mx-auto mb-2" />
-                  <p className="font-body text-sm">Próximamente</p>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </section>
 
