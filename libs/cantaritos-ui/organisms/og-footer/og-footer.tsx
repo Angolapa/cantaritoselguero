@@ -26,8 +26,8 @@ export function OgFooter() {
 
   return (
     <footer className="bg-[#E9DCB7] w-full">
-      <div className="mx-auto max-w-[1440px] px-6 md:px-[208px] py-10 md:py-14">
-        <div className="flex flex-col items-center md:items-stretch md:flex-row gap-10 md:gap-0 md:justify-between">
+      <div className="mx-auto max-w-[1440px] px-6 md:px-10 xl:px-[208px] py-10 md:py-14">
+        <div className="flex flex-col items-center md:items-stretch md:flex-row gap-10 md:gap-8 xl:gap-0 md:justify-between">
           {/* Left — Logo + Info */}
           <div className="space-y-4 max-w-[320px] items-center text-center md:items-start md:text-left flex flex-col md:block">
             <Image
@@ -83,7 +83,7 @@ export function OgFooter() {
           </div>
 
           {/* Right — Social icons */}
-          <div className="flex items-end justify-center gap-4 flex-wrap">
+          <div className="flex items-end justify-center gap-4">
             {/* Facebook */}
             <a
               href="https://facebook.com"

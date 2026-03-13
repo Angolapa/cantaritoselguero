@@ -107,7 +107,7 @@ export default function HomePage() {
         </section>
 
         {/* Merch Oficial */}
-        <section className="flex items-center justify-center px-6 md:px-[206px] py-8 max-w-[1443px] mx-auto md:gap-[35px]">
+        <section className="flex items-center justify-center px-6 md:px-10 xl:px-[206px] py-8 max-w-[1443px] mx-auto md:gap-[35px]">
           <h2 className="font-heading text-[#14222F] text-2xl md:text-5xl lg:text-[56px] leading-none whitespace-nowrap">
             {translate("home.mostPopular")}
           </h2>
