@@ -37,7 +37,7 @@ export default function HomePage() {
         {/* Hero section */}
         <section className="px-6 pt-8 pb-4 flex justify-center">
           <Image
-            src="/images/hero-title.svg"
+            src={locale === "en" ? "/images/hero-title-i.png" : "/images/hero-title.svg"}
             alt={translate("home.heroAlt")}
             width={950}
             height={208}
