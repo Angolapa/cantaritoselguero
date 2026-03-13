@@ -166,7 +166,7 @@ export default function EditBannerPage({
           <div className="rounded-xl border border-gray-200 bg-white p-6 space-y-4">
             <h3 className="font-semibold text-sm">Imagen Desktop</h3>
             <MlImageUpload
-              currentImage={banner.imageUrl}
+              currentImage={banner.imageUrl ?? undefined}
               onFileSelect={handleDesktopUpload}
               isUploading={uploadImage.isPending}
             />
