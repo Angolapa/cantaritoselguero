@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "about": "About Us",
+    "planVisit": "Plan Your Visit",
+    "reservations": "Reservations",
+    "shop": "Shop at El Güero",
+    "directory": "Directory",
+    "login": "Login",
+    "adminPanel": "Admin Panel",
+    "changeLanguage": "Change language",
+    "cart": "Cart",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "home": {
+    "heroAlt": "We Are the Soul of Jalisco's Fiesta.",
+    "preOrder": {
+      "title": "Coming Thirsty? Pay Ahead.",
+      "description": "Skip the line and grab your cantarito the moment you arrive.",
+      "highlight": "The band won't wait… and neither should you.",
+      "button": "Pre-Order Now"
+    },
+    "reservation": {
+      "title": "RESERVATION?",
+      "subtitle": "ONLY IF YOU'RE BRINGING THE WHOLE CREW.",
+      "description": "There's always room to start the fiesta.",
+      "warning": "Reservations available for groups of 60+ guests, minimum pre-paid consumption of $10,000 MXN required.",
+      "warningDesktop": "Reservations available for groups of 60+ guests, minimum pre-paid consumption of $10,000 MXN required.",
+      "button": "Book for your Group"
+    },
+    "shuttle": {
+      "title": "GÜERO SHUTTLE",
+      "subtitle": "The plan starts the moment you hop on.",
+      "subtitleDesktop": "The plan starts the moment you hop on.",
+      "description": "Ride with the Güero Shuttle and arrive stress-free, no driving, no hassle, just the fiesta waiting for you.",
+      "button": "Book Your Ride"
+    },
+    "mostPopular": "Most popular",
+    "shopButton": "Order now"
+  },
+  "eventBanner": {
+    "description": "Bring the Giant Cantarito and the full cantarito vibe to your party, wedding, or corporate event.",
+    "cta": "We bring the energy, you bring the guests.",
+    "button": "Request a Quote"
+  },
+  "footer": {
+    "address": "Carretera Internacional, Guadalajara–Tepic Highway Km 49 #4970, La Meza, 45380 Amatitán, Jalisco, Mexico",
+    "hours": "Open 365 days a year, 9:00 AM – 12:00 AM",
+    "noFranchise": "This is our one and only location.",
+    "liveMusic": "Live music every day.",
+    "about": "About Us",
+    "planVisit": "Plan Your Visit",
+    "directory": "Directory",
+    "shopFooter": "Shop at El Güero",
+    "faq": "FAQ",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy",
+    "invoicing": "Invoice Requests"
+  }
+}

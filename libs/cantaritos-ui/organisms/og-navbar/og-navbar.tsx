@@ -7,17 +7,17 @@ import { usePathname } from "next/navigation";
 
 import { Globe, Menu, ShoppingCart, X } from "lucide-react";
 
-import { getCartItemCount,useAuthStore, useCartStore } from "@/domain/stores";
+import { getCartItemCount,useAuthStore, useCartStore, useLocaleStore, useTranslation } from "@/domain/stores";
 
 import { OgCartSheet } from "../og-cart-sheet";
 
-const NAV_LINKS = [
-  { href: "/nosotros", label: "Nosotros" },
-  { href: "/planea-tu-visita", label: "Planea tu Visita" },
-  { href: "/reservaciones", label: "Reservaciones" },
-  { href: "/products", label: "Compra en El Güero" },
-  { href: "/directorio", label: "Directorio" },
-  { href: "/login", label: "Login" },
+const NAV_LINK_KEYS = [
+  { href: "/nosotros", key: "nav.about" },
+  { href: "/planea-tu-visita", key: "nav.planVisit" },
+  { href: "/reservaciones", key: "nav.reservations" },
+  { href: "/products", key: "nav.shop" },
+  { href: "/directorio", key: "nav.directory" },
+  { href: "/login", key: "nav.login" },
 ];
 
 export function OgNavbar() {
@@ -27,11 +27,13 @@ export function OgNavbar() {
   const user = useAuthStore((state) => state.user);
   const cartItems = useCartStore((state) => state.items);
   const cartCount = getCartItemCount(cartItems);
+  const { translate } = useTranslation();
+  const toggleLocale = useLocaleStore((state) => state.toggleLocale);
 
   const allLinks = [
-    ...NAV_LINKS,
+    ...NAV_LINK_KEYS.map((link) => ({ href: link.href, label: translate(link.key) })),
     ...(user?.role === "ADMIN" || user?.role === "CATALOG_MANAGER" || user?.role === "STAND_OPERATOR"
-      ? [{ href: "/admin", label: "Panel Admin" }]
+      ? [{ href: "/admin", label: translate("nav.adminPanel") }]
       : []),
   ];
 
@@ -88,7 +90,7 @@ export function OgNavbar() {
         {/* Icons + mobile hamburger */}
         <div className="flex items-center gap-2">
           <button
-            aria-label="Carrito"
+            aria-label={translate("nav.cart")}
             className="text-white hover:bg-white/10 p-1.5 rounded-full transition-colors relative"
             onClick={() => setIsCartOpen(true)}
           >
@@ -101,14 +103,15 @@ export function OgNavbar() {
           </button>
 
           <button
-            aria-label="Cambiar idioma"
+            aria-label={translate("nav.changeLanguage")}
             className="text-white hover:bg-white/10 p-1.5 rounded-full transition-colors"
+            onClick={toggleLocale}
           >
             <Globe className="h-6 w-6" />
           </button>
 
           <button
-            aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-label={isMenuOpen ? translate("nav.closeMenu") : translate("nav.openMenu")}
             className="md:hidden text-white hover:bg-white/10 p-1.5 rounded-full transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >

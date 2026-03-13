@@ -5,10 +5,14 @@ import Link from "next/link";
 
 import { OgBannerCarousel, OgEventBanner, OgFooter, OgNavbar, OgPromoBanner } from "@/libs/cantaritos-ui";
 import { useBanners } from "@/domain/hooks/banners";
+import { useLocaleStore, useTranslation } from "@/domain/stores";
 
 export default function HomePage() {
+  const { translate } = useTranslation();
+  const locale = useLocaleStore((state) => state.locale);
+  const bannerSection = locale === "es" ? "home-carousel" : "home-carousel-en";
   const { data: banners = [], isLoading: isLoadingBanners } = useBanners({
-    section: "home-carousel",
+    section: bannerSection,
     active: true,
   });
 
@@ -21,7 +25,7 @@ export default function HomePage() {
           src="/images/home.png"
           alt="Cantaritos El Güero"
           width={1440}
-          height={400}
+          height={718}
           className="w-full h-auto block"
           priority
         />
@@ -33,8 +37,8 @@ export default function HomePage() {
         {/* Hero section */}
         <section className="px-6 pt-8 pb-4 flex justify-center">
           <Image
-            src="/images/hero-title.svg"
-            alt="¡Somos el alma de la fiesta jalisciense!"
+            src={locale === "en" ? "/images/hero-title-i.png" : "/images/hero-title.svg"}
+            alt={translate("home.heroAlt")}
             width={950}
             height={208}
             className="w-[300px] md:w-[950px] h-auto"
@@ -55,11 +59,11 @@ export default function HomePage() {
         <section className="px-6 py-8 space-y-8">
           <OgPromoBanner
             bgColor="bg-[#E9DCB7]"
-            title={<>Si vienes {" "}<span className="hidden md:inline"><br /></span>con sed,<br />paga antes</>}
+            title={translate("home.preOrder.title")}
             subtitle=""
-            description={<>Así llegas directo por tu cantarito<br />y arrancas sin escalas.</>}
-            highlightText={<>La banda no espera…<br />y tú tampoco deberías.</>}
-            buttonLabel="Compra Anticipada"
+            description={translate("home.preOrder.description")}
+            highlightText={translate("home.preOrder.highlight")}
+            buttonLabel={translate("home.preOrder.button")}
             buttonHref="/compra-anticipada"
             imageSrc="/images/Anticipa_tu_consumo.png"
             imageAlt="Ilustración de compra anticipada"
@@ -71,11 +75,11 @@ export default function HomePage() {
 
           <OgPromoBanner
             bgColor="bg-[#C02E19]"
-            title="¿RESERVACIÓN?"
-            subtitle="SOLO SI VIENES CON TODOS TUS REALES."
-            description={<>Siempre hay espacio para<br />arrancar la fiesta.</>}
-            warningText={<><span className="md:hidden">Reservaciones a partir de 60 compas y requiere pago de consumo anticipado mínimo de $10,000 mxn.</span><span className="hidden md:inline">Reservaciones a partir de 60 compas<br />y requiere pago de consumo<br />anticipado mínimo de $10,000 mxn.</span></>}
-            buttonLabel="Reserva aquí"
+            title={translate("home.reservation.title")}
+            subtitle={translate("home.reservation.subtitle")}
+            description={translate("home.reservation.description")}
+            warningText={translate("home.reservation.warning")}
+            buttonLabel={translate("home.reservation.button")}
             buttonHref="/reservaciones"
             imageSrc="/images/Reservaciones.png"
             imageAlt="Ilustración de reservaciones"
@@ -88,12 +92,12 @@ export default function HomePage() {
 
           <OgPromoBanner
             bgColor="bg-[#F9B233]"
-            title="RUTA AL GÜERO"
-            subtitle={<><span className="md:hidden">El plan empieza desde<br />que te subes.</span><span className="hidden md:inline">El plan<br />empieza desde<br />que te subes.</span></>}
-            description={<><span className="md:hidden">Súbete a La Ruta del Güero y llega<br />sin manejar, sin complicaciones y<br />con el plan armado.</span><span className="hidden md:inline">Súbete a La Ruta del Güero y llega<br />sin manejar, sin complicaciones y<br />con el plan armado.</span></>}
-            buttonLabel="Ver Horarios"
+            title={translate("home.shuttle.title")}
+            subtitle={translate("home.shuttle.subtitle")}
+            description={translate("home.shuttle.description")}
+            buttonLabel={translate("home.shuttle.button")}
             buttonHref="/ruta-al-guero"
-            imageSrc="/images/Ruta_al_Güero.png"
+            imageSrc="/images/Ruta_al_Guero.png"
             imageAlt="Ilustración de la ruta al Güero"
             titleColor="text-[#1E293B]"
             subtitleColor="text-[#1E293B]"
@@ -105,7 +109,7 @@ export default function HomePage() {
         {/* Merch Oficial */}
         <section className="flex items-center justify-center px-6 md:px-[206px] py-8 max-w-[1443px] mx-auto md:gap-[35px]">
           <h2 className="font-heading text-[#14222F] text-2xl md:text-5xl lg:text-[56px] leading-none whitespace-nowrap">
-            Los más pedidos
+            {translate("home.mostPopular")}
           </h2>
           <Image
             src="/images/cowboy.png"
@@ -142,7 +146,7 @@ export default function HomePage() {
             href="/products"
             className="flex items-center justify-center px-4 h-[28px] md:px-6 md:h-[56px] bg-[#1E293B] hover:bg-[#334155] text-white font-body font-bold text-[10px] md:text-2xl md:leading-6 rounded-full transition-all active:scale-95"
           >
-            Comprar en el Güero
+            {translate("home.shopButton")}
           </Link>
         </section>
 

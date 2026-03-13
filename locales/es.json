@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "about": "Nosotros",
+    "planVisit": "Planea tu Visita",
+    "reservations": "Reservaciones",
+    "shop": "Compra en El Güero",
+    "directory": "Directorio",
+    "login": "Login",
+    "adminPanel": "Panel Admin",
+    "changeLanguage": "Cambiar idioma",
+    "cart": "Carrito",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
+  },
+  "home": {
+    "heroAlt": "¡Somos el alma de la fiesta jalisciense!",
+    "preOrder": {
+      "title": "Si vienes con sed, paga antes",
+      "description": "Así llegas directo por tu cantarito y arrancas sin escalas.",
+      "highlight": "La banda no espera… y tú tampoco deberías.",
+      "button": "Compra Anticipada"
+    },
+    "reservation": {
+      "title": "¿RESERVACIÓN?",
+      "subtitle": "SOLO SI VIENES CON TODOS TUS REALES.",
+      "description": "Siempre hay espacio para arrancar la fiesta.",
+      "warning": "Reservaciones a partir de 60 compas y requiere pago de consumo anticipado mínimo de $10,000 mxn.",
+      "warningDesktop": "Reservaciones a partir de 60 compas y requiere pago de consumo anticipado mínimo de $10,000 mxn.",
+      "button": "Reserva aquí"
+    },
+    "shuttle": {
+      "title": "RUTA AL GÜERO",
+      "subtitle": "El plan empieza desde que te subes.",
+      "subtitleDesktop": "El plan empieza desde que te subes.",
+      "description": "Súbete a La Ruta del Güero y llega sin manejar, sin complicaciones y con el plan armado.",
+      "button": "Ver Horarios"
+    },
+    "mostPopular": "Los más pedidos",
+    "shopButton": "Comprar en el Güero"
+  },
+  "eventBanner": {
+    "description": "Lleva el Cantarito Gigante y el mood cantaristico a tu fiesta, boda o evento empresarial.",
+    "cta": "Nosotros ponemos el ambiente. Tu solo invita a tus compas.",
+    "button": "Cotizar Mi Evento"
+  },
+  "footer": {
+    "address": "Carretera internacional, Carr. Guadalajara - Tepic km 49 #4970, La Meza, 45380 Amatitán, Jal.",
+    "hours": "Abrimos los 365 días del año de 9am a 12am,",
+    "noFranchise": "No contamos con sucursales ni franquicias.",
+    "liveMusic": "¡Musica en vivo todos los días!",
+    "about": "Nosotros",
+    "planVisit": "Planea tu visita",
+    "directory": "Directorio",
+    "shopFooter": "Comprar en El Güero",
+    "faq": "FAQ",
+    "terms": "Términos y Condiciones",
+    "privacy": "Aviso de Privacidad",
+    "invoicing": "Facturación"
+  }
+}
