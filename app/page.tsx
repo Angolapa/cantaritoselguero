@@ -59,10 +59,19 @@ export default function HomePage() {
         <section className="px-6 py-8 space-y-8">
           <OgPromoBanner
             bgColor="bg-[#E9DCB7]"
-            title={translate("home.preOrder.title")}
+            title={<>
+              <span className="md:hidden">{translate("home.preOrder.titleMobileLine1")}<br />{translate("home.preOrder.titleMobileLine2")}</span>
+              <span className="hidden md:inline">{translate("home.preOrder.titleDesktopLine1")}<br />{translate("home.preOrder.titleDesktopLine2")}<br />{translate("home.preOrder.titleDesktopLine3")}</span>
+            </>}
             subtitle=""
-            description={translate("home.preOrder.description")}
-            highlightText={translate("home.preOrder.highlight")}
+            description={<>
+              <span className="md:hidden">{translate("home.preOrder.descMobileLine1")}<br />{translate("home.preOrder.descMobileLine2")}</span>
+              <span className="hidden md:inline">{translate("home.preOrder.descDesktopLine1")}<br />{translate("home.preOrder.descDesktopLine2")}</span>
+            </>}
+            highlightText={<>
+              <span className="md:hidden">{translate("home.preOrder.highlightMobileLine1")}<br />{translate("home.preOrder.highlightMobileLine2")}</span>
+              <span className="hidden md:inline">{translate("home.preOrder.highlightDesktopLine1")}<br />{translate("home.preOrder.highlightDesktopLine2")}</span>
+            </>}
             buttonLabel={translate("home.preOrder.button")}
             buttonHref="/compra-anticipada"
             imageSrc="/images/Anticipa_tu_consumo.png"
@@ -76,9 +85,18 @@ export default function HomePage() {
           <OgPromoBanner
             bgColor="bg-[#C02E19]"
             title={translate("home.reservation.title")}
-            subtitle={translate("home.reservation.subtitle")}
-            description={translate("home.reservation.description")}
-            warningText={translate("home.reservation.warning")}
+            subtitle={<>
+              <span className="md:hidden">{translate("home.reservation.subtitleMobileLine1")}<br />{translate("home.reservation.subtitleMobileLine2")}</span>
+              <span className="hidden md:inline">{translate("home.reservation.subtitle")}</span>
+            </>}
+            description={<>
+              <span className="md:hidden">{translate("home.reservation.description")}</span>
+              <span className="hidden md:inline">{translate("home.reservation.descDesktopLine1")}<br />{translate("home.reservation.descDesktopLine2")}</span>
+            </>}
+            warningText={<>
+              <span className="md:hidden">{translate("home.reservation.warningMobileLine1")}<br />{translate("home.reservation.warningMobileLine2")}<br />{translate("home.reservation.warningMobileLine3")}</span>
+              <span className="hidden md:inline">{translate("home.reservation.warning")}</span>
+            </>}
             buttonLabel={translate("home.reservation.button")}
             buttonHref="/reservaciones"
             imageSrc="/images/Reservaciones.png"
@@ -93,8 +111,14 @@ export default function HomePage() {
           <OgPromoBanner
             bgColor="bg-[#F9B233]"
             title={translate("home.shuttle.title")}
-            subtitle={translate("home.shuttle.subtitle")}
-            description={translate("home.shuttle.description")}
+            subtitle={<>
+              <span className="md:hidden">{translate("home.shuttle.subtitleMobileLine1")}<br />{translate("home.shuttle.subtitleMobileLine2")}</span>
+              <span className="hidden md:inline">{translate("home.shuttle.subtitleDesktopLine1")}<br />{translate("home.shuttle.subtitleDesktopLine2")}<br />{translate("home.shuttle.subtitleDesktopLine3")}</span>
+            </>}
+            description={<>
+              <span className="md:hidden">{translate("home.shuttle.descMobileLine1")}<br />{translate("home.shuttle.descMobileLine2")}<br />{translate("home.shuttle.descMobileLine3")}</span>
+              <span className="hidden md:inline">{translate("home.shuttle.description")}</span>
+            </>}
             buttonLabel={translate("home.shuttle.button")}
             buttonHref="/ruta-al-guero"
             imageSrc="/images/Ruta_al_Guero.png"
