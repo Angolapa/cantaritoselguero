@@ -29,7 +29,7 @@ export function OgPromoBanner({
 
   return (
     <div
-      className={`${bgColor} rounded-3xl overflow-hidden w-full max-w-[1023px] min-h-[300px] md:min-h-[556px] mx-auto`}
+      className={`${bgColor} rounded-3xl overflow-hidden w-full max-w-[1023px] min-h-[300px] mx-auto`}
     >
       <div className="flex flex-col md:flex-row items-center md:items-stretch h-full">
         {/* Title — first on mobile */}
@@ -47,27 +47,27 @@ export function OgPromoBanner({
         </div>
 
         {/* Left content — full on desktop */}
-        <div className="order-3 md:order-1 flex flex-col justify-center items-center md:items-start text-center md:text-left gap-4 px-8 pb-8 md:pl-16 md:py-12 flex-1 z-10">
+        <div className="order-3 md:order-1 flex flex-col items-center md:items-start text-center md:text-left gap-4 px-8 pb-8 md:pl-24 md:pt-12 md:pb-12 flex-1 z-10">
           {/* Title hidden on mobile, shown on desktop */}
           <h2
-            className={`hidden md:block font-heading md:text-4xl lg:text-5xl leading-tight ${titleColor}`}
+            className={`hidden md:block font-heading md:text-4xl lg:text-[56px] leading-none ${titleColor}`}
           >
             {title}
           </h2>
           {subtitle && (
-            <p className={`hidden md:block font-heading md:text-3xl lg:text-4xl leading-tight ${subtitleColor}`}>
+            <p className={`hidden md:block font-heading md:text-3xl lg:text-[48px] leading-none ${subtitleColor}`}>
               {subtitle}
             </p>
           )}
-          <p className={`font-body text-xs md:text-2xl font-medium leading-none ${descriptionColor}`}>
+          <p className={`font-body text-xs md:text-2xl font-medium leading-none ${warningText ? "md:my-auto" : "md:mt-auto"} ${descriptionColor}`}>
             {description}
           </p>
 
           {warningText && (
-            <div className="flex items-start gap-2">
-              <Image src="/images/alert.png" alt="Alerta" width={41} height={35} className="shrink-0 mt-0.5" />
+            <div className="flex items-start gap-2 md:gap-4 md:-ml-[50px]">
+              <Image src="/images/alert.png" alt="Alerta" width={41} height={35} className="shrink-0 mt-0.5 md:w-[51px] md:h-[44px]" />
               <p
-                className={`font-body text-xs md:text-xl font-bold leading-none ${highlightColor}`}
+                className={`font-body text-xs md:text-2xl font-bold leading-none ${highlightColor}`}
               >
                 {warningText}
               </p>
@@ -85,8 +85,8 @@ export function OgPromoBanner({
         </div>
 
         {/* Illustration */}
-        <div className="order-2 md:order-2 relative w-full md:w-[50%] flex flex-col items-center justify-center p-6 md:pr-16 md:py-8">
-          <div className="relative w-[250px] h-[198px] md:w-[350px] md:h-[277px] lg:w-[452px] lg:h-[357px]">
+        <div className="order-2 md:order-2 relative w-full md:w-[45%] flex flex-col items-center justify-center p-6 md:pr-16 md:py-8">
+          <div className="relative w-[250px] h-[198px] md:w-[350px] md:h-[277px] lg:w-[413px] lg:h-[341px]">
             <Image
               src={imageSrc}
               alt={imageAlt}
@@ -97,7 +97,7 @@ export function OgPromoBanner({
           {/* Button inside image container on desktop */}
           <Link
             href={buttonHref}
-            className={`hidden md:inline-flex items-center justify-center w-[255px] h-[56px] font-body font-bold text-base rounded-full transition-colors mt-6 ${buttonClasses}`}
+            className={`hidden md:inline-flex items-center justify-center h-[56px] px-6 py-4 gap-2 font-body font-bold text-2xl leading-6 rounded-full transition-colors mt-6 ${buttonClasses}`}
           >
             {buttonLabel}
           </Link>

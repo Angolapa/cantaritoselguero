@@ -1,9 +1,9 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-import { Card, CardBody, Image, Spinner } from "@heroui/react";
-import { ImageIcon,Upload } from "lucide-react";
+import { Card, CardBody, Spinner } from "@heroui/react";
+import { ImageIcon, Upload } from "lucide-react";
 
 import { MlImageUploadProps } from "./ml-image-upload.types";
 
@@ -14,6 +14,7 @@ export function MlImageUpload({
 }: MlImageUploadProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [preview, setPreview] = useState<string | null>(null);
 
   const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
   const maxSizeBytes = 5 * 1024 * 1024; // 5MB
@@ -22,10 +23,19 @@ export function MlImageUpload({
     (file: File) => {
       if (!allowedTypes.includes(file.type)) return;
       if (file.size > maxSizeBytes) return;
+      const objectUrl = URL.createObjectURL(file);
+      setPreview(objectUrl);
       onFileSelect(file);
     },
     [onFileSelect],
   );
+
+  // Cleanup blob URL on unmount or when preview changes
+  useEffect(() => {
+    return () => {
+      if (preview) URL.revokeObjectURL(preview);
+    };
+  }, [preview]);
 
   const handleDrop = useCallback(
     (e: React.DragEvent) => {
@@ -45,6 +55,8 @@ export function MlImageUpload({
   const handleDragLeave = useCallback(() => {
     setIsDragging(false);
   }, []);
+
+  const displayImage = preview || currentImage;
 
   return (
     <Card shadow="sm">
@@ -68,12 +80,11 @@ export function MlImageUpload({
         >
           {isUploading ? (
             <Spinner label="Subiendo imagen..." />
-          ) : currentImage ? (
-            <Image
-              src={currentImage}
+          ) : displayImage ? (
+            <img
+              src={displayImage}
               alt="Producto"
               className="h-full w-full rounded-lg object-cover"
-              removeWrapper
             />
           ) : (
             <>
