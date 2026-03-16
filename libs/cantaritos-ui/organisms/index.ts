@@ -2,6 +2,8 @@ export * from "./og-admin-sidebar";
 export * from "./og-banner-carousel";
 export * from "./og-banner-form";
 export * from "./og-banner-table";
+export * from "./og-coupon-form";
+export * from "./og-coupon-table";
 export * from "./og-cart-sheet";
 export * from "./og-event-banner";
 export * from "./og-footer";
