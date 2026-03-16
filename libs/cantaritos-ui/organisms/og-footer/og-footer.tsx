@@ -5,25 +5,29 @@ import Link from "next/link";
 
 import { MapPin } from "lucide-react";
 
-const NAV_COL_1 = [
-  { href: "/nosotros", label: "Nosotros" },
-  { href: "/planea-tu-visita", label: "Planea tu visita" },
-  { href: "/directorio", label: "Directorio" },
-  { href: "/products", label: "Comprar en El Güero" },
+import { useTranslation } from "@/domain/stores";
+
+const NAV_COL_1_KEYS = [
+  { href: "/nosotros", key: "footer.about" },
+  { href: "/planea-tu-visita", key: "footer.planVisit" },
+  { href: "/directorio", key: "footer.directory" },
+  { href: "/products", key: "footer.shopFooter" },
 ];
 
-const NAV_COL_2 = [
-  { href: "/faq", label: "FAQ" },
-  { href: "/terminos-y-condiciones", label: "Términos y Condiciones" },
-  { href: "/aviso-de-privacidad", label: "Aviso de Privacidad" },
-  { href: "/facturacion", label: "Facturación" },
+const NAV_COL_2_KEYS = [
+  { href: "/faq", key: "footer.faq" },
+  { href: "/terminos-y-condiciones", key: "footer.terms" },
+  { href: "/aviso-de-privacidad", key: "footer.privacy" },
+  { href: "/facturacion", key: "footer.invoicing" },
 ];
 
 export function OgFooter() {
+  const { translate } = useTranslation();
+
   return (
     <footer className="bg-[#E9DCB7] w-full">
-      <div className="mx-auto max-w-[1440px] px-6 md:px-[208px] py-10 md:py-14">
-        <div className="flex flex-col items-center md:items-stretch md:flex-row gap-10 md:gap-0 md:justify-between">
+      <div className="mx-auto max-w-[1440px] px-6 md:px-10 xl:px-[208px] py-10 md:py-14">
+        <div className="flex flex-col items-center md:items-stretch md:flex-row gap-10 md:gap-8 xl:gap-0 md:justify-between">
           {/* Left — Logo + Info */}
           <div className="space-y-4 max-w-[320px] items-center text-center md:items-start md:text-left flex flex-col md:block">
             <Image
@@ -37,50 +41,49 @@ export function OgFooter() {
             <div className="flex gap-2 text-xs md:text-base font-condensed font-medium text-primary leading-none">
               <MapPin className="h-8 w-8 shrink-0 text-[#137171]" />
               <p>
-                Carretera internacional, Carr. Guadalajara - Tepic km 49 #4970,
-                La Meza, 45380 Amatitán, Jal.
+                {translate("footer.address")}
               </p>
             </div>
 
             <p className="font-condensed text-xs md:text-base text-primary font-medium leading-none">
-              Abrimos los 365 días del año de 9am a 12am,
+              {translate("footer.hours")}
               <br />
-              No contamos con sucursales ni franquicias.
+              {translate("footer.noFranchise")}
             </p>
 
             <p className="font-condensed text-xs md:text-base text-[#901F18] font-medium leading-none">
-              ¡Musica en vivo todos los días!
+              {translate("footer.liveMusic")}
             </p>
           </div>
 
           {/* Center — Nav links */}
           <div className="flex gap-10 md:gap-16 items-center md:items-end">
             <nav className="flex flex-col gap-3 items-center md:items-start">
-              {NAV_COL_1.map((link) => (
+              {NAV_COL_1_KEYS.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   className="font-condensed text-xs md:text-base font-medium text-gray-800 leading-none hover:text-primary transition-colors"
                 >
-                  {link.label}
+                  {translate(link.key)}
                 </Link>
               ))}
             </nav>
             <nav className="flex flex-col gap-3 items-center md:items-start">
-              {NAV_COL_2.map((link) => (
+              {NAV_COL_2_KEYS.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   className="font-condensed text-xs md:text-base font-medium text-gray-800 leading-none hover:text-primary transition-colors"
                 >
-                  {link.label}
+                  {translate(link.key)}
                 </Link>
               ))}
             </nav>
           </div>
 
           {/* Right — Social icons */}
-          <div className="flex items-end justify-center gap-4 flex-wrap">
+          <div className="flex items-end justify-center gap-4">
             {/* Facebook */}
             <a
               href="https://facebook.com"

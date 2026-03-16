@@ -16,6 +16,15 @@ import { Banner } from "@/domain/types";
 
 import { OgBannerTableProps } from "./og-banner-table.types";
 
+function LocaleChip({ section }: { section: string }) {
+  const isEnglish = section.endsWith("-en");
+  return (
+    <AtChip size="sm" variant="flat" color={isEnglish ? "primary" : "default"}>
+      {isEnglish ? "EN" : "ES"}
+    </AtChip>
+  );
+}
+
 function StatusChip({ banner }: { banner: Banner }) {
   if (!banner.isActive) {
     return (
@@ -59,6 +68,7 @@ export function OgBannerTable({
       <TableHeader>
         <TableColumn>Banner</TableColumn>
         <TableColumn>Sección</TableColumn>
+        <TableColumn>Idioma</TableColumn>
         <TableColumn>Orden</TableColumn>
         <TableColumn>Estado</TableColumn>
         <TableColumn width={120}>Acciones</TableColumn>
@@ -94,8 +104,11 @@ export function OgBannerTable({
             </TableCell>
             <TableCell>
               <AtChip size="sm" variant="flat">
-                {banner.section}
+                {banner.section.replace(/-en$/, "")}
               </AtChip>
+            </TableCell>
+            <TableCell>
+              <LocaleChip section={banner.section} />
             </TableCell>
             <TableCell>{banner.order}</TableCell>
             <TableCell>

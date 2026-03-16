@@ -1,0 +1,87 @@
+{
+  "nav": {
+    "about": "About Us",
+    "planVisit": "Plan Your Visit",
+    "reservations": "Reservations",
+    "shop": "Shop at El Güero",
+    "directory": "Directory",
+    "login": "Login",
+    "adminPanel": "Admin Panel",
+    "changeLanguage": "Change language",
+    "cart": "Cart",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "home": {
+    "heroAlt": "We Are the Soul of Jalisco's Fiesta.",
+    "preOrder": {
+      "titleMobileLine1": "Coming Thirsty?",
+      "titleMobileLine2": "Pay Ahead.",
+      "titleDesktopLine1": "Coming",
+      "titleDesktopLine2": "Thirsty?",
+      "titleDesktopLine3": "Pay Ahead.",
+      "descMobileLine1": "Skip the line and grab your cantarito",
+      "descMobileLine2": "the moment you arrive.",
+      "descDesktopLine1": "Skip the line and grab your cantarito",
+      "descDesktopLine2": "the moment you arrive.",
+      "highlightMobileLine1": "The band won't wait…",
+      "highlightMobileLine2": "and neither should you.",
+      "highlightDesktopLine1": "The band won't wait…",
+      "highlightDesktopLine2": "and neither should you.",
+      "button": "Pre-Order Now"
+    },
+    "reservation": {
+      "title": "RESERVATION?",
+      "subtitleMobileLine1": "Only if you're bringing",
+      "subtitleMobileLine2": "the whole crew.",
+      "subtitle": "ONLY IF YOU'RE BRINGING THE WHOLE CREW.",
+      "descDesktopLine1": "There's always room to",
+      "descDesktopLine2": "start the fiesta.",
+      "description": "There's always room to start the fiesta.",
+      "warningMobileLine1": "Reservations available for groups of 60+",
+      "warningMobileLine2": "guests, minimum pre-paid consumption",
+      "warningMobileLine3": "of $10,000 MXN required.",
+      "warning": "Reservations available for groups of 60+ guests, minimum pre-paid consumption of $10,000 MXN required.",
+      "button": "Book for your Group"
+    },
+    "shuttle": {
+      "title": "GÜERO SHUTTLE",
+      "subtitle": "The plan starts the moment you hop on.",
+      "subtitleDesktopLine1": "The plan starts",
+      "subtitleDesktopLine2": "the moment",
+      "subtitleDesktopLine3": "you hop on.",
+      "subtitleMobileLine1": "The plan starts the moment",
+      "subtitleMobileLine2": "you hop on.",
+      "descMobileLine1": "Ride with the Güero Shuttle and",
+      "descMobileLine2": "arrive stress-free, no driving,",
+      "descMobileLine3": "no hassle, just the fiesta waiting for you.",
+      "description": "Ride with the Güero Shuttle and arrive stress-free, no driving, no hassle, just the fiesta waiting for you.",
+      "button": "Book Your Ride"
+    },
+    "mostPopular": "Most popular",
+    "shopButton": "Order now"
+  },
+  "eventBanner": {
+    "descLine1": "Bring the Giant Cantarito and the",
+    "descLine2": "full cantarito vibe to your party,",
+    "descLine3": "wedding, or corporate event.",
+    "descFull": "Bring the Giant Cantarito and the full cantarito vibe to your party, wedding, or corporate event.",
+    "ctaLine1": "We bring the energy,",
+    "ctaLine2": "you bring the guests.",
+    "button": "Request a Quote"
+  },
+  "footer": {
+    "address": "Carretera Internacional, Guadalajara–Tepic Highway Km 49 #4970, La Meza, 45380 Amatitán, Jalisco, Mexico",
+    "hours": "Open 365 days a year, 9:00 AM – 12:00 AM",
+    "noFranchise": "This is our one and only location.",
+    "liveMusic": "Live music every day.",
+    "about": "About Us",
+    "planVisit": "Plan Your Visit",
+    "directory": "Directory",
+    "shopFooter": "Shop at El Güero",
+    "faq": "FAQ",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy",
+    "invoicing": "Invoice Requests"
+  }
+}
