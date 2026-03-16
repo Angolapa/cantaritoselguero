@@ -110,12 +110,12 @@ export function OgBannerCarousel({ banners: rawBanners, isLoading = false }: OgB
       </div>
 
       {/* Dots */}
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 md:gap-2">
         {banners.map((banner, index) => (
           <button
             key={banner.id}
             type="button"
-            className={`w-2.5 h-2.5 rounded-full transition-colors ${
+            className={`size-[6px] md:size-2.5 rounded-full transition-colors ${
               index === selectedIndex
                 ? "bg-white"
                 : "bg-white/50 hover:bg-white/75"
