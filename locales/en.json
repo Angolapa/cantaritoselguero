@@ -83,5 +83,12 @@
     "terms": "Terms & Conditions",
     "privacy": "Privacy Policy",
     "invoicing": "Invoice Requests"
+  },
+  "faq": {
+"searchPlaceholder": "Search",
+    "searchAriaLabel": "Search frequently asked questions",
+    "noResults": "No results found for",
+    "menuButton": "View Menu",
+    "reservationButton": "Book Now"
   }
 }

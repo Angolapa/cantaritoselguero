@@ -83,5 +83,12 @@
     "terms": "Términos y Condiciones",
     "privacy": "Aviso de Privacidad",
     "invoicing": "Facturación"
+  },
+  "faq": {
+"searchPlaceholder": "Buscar",
+    "searchAriaLabel": "Buscar preguntas frecuentes",
+    "noResults": "No se encontraron resultados para",
+    "menuButton": "Ver Menú",
+    "reservationButton": "Reservar"
   }
 }
