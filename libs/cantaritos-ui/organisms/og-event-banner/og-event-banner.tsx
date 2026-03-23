@@ -14,24 +14,23 @@ export function OgEventBanner() {
       <div className="mx-auto px-6 md:px-10 xl:px-[206px] pt-[126px] md:pt-[18vw] lg:pt-[200px] pb-10 md:pb-16">
         <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12">
           {/* Title */}
-          <h2 className="order-1 md:hidden font-heading text-2xl leading-tight text-[#1E293B] text-center">
+          <h2 className="order-1 md:hidden font-heading text-2xl leading-none text-[#14222F] text-center">
             {locale === "es" ? (
               <>
                 SI NO VIENES{" "}AL{" "}
-                <span className="text-[#E9DCB7] font-extrabold">G<span className="mr-[4px]">Ü</span>ERO,</span>
+                G<span className="mr-[4px]">Ü</span>ERO,
                 <br />
-                EL G<span className="mr-[2px]">Ü</span>ERO VA
-                <br />
-                <span className="text-[#FFAF32] font-extrabold">CONTIGO.</span>
+                EL G<span className="mr-[2px]">Ü</span>ERO VA{" "}
+                <span className="text-[#FFAF32]">CONTIGO.</span>
               </>
             ) : (
               <>
                 CAN&apos;T MAKE IT TO THE{" "}
-                <span className="text-[#E9DCB7] font-extrabold">G<span className="mr-[4px]">Ü</span>ERO?</span>
+                G<span className="mr-[4px]">Ü</span>ERO?
                 <br />
                 WE&apos;LL BRING THE G<span className="mr-[2px]">Ü</span>ERO
                 <br />
-                <span className="text-[#FFAF32] font-extrabold">TO YOU.</span>
+                <span className="text-[#FFAF32]">TO YOU.</span>
               </>
             )}
           </h2>
@@ -95,7 +94,7 @@ export function OgEventBanner() {
               )}
             </h2>
 
-            <p className="text-[#1E293B] font-body font-medium text-sm md:text-[24px] md:leading-snug max-w-[380px] md:max-w-[480px] text-center md:text-left">
+            <p className="text-[#14222F] font-body font-semibold text-[13px] md:text-[24px] leading-none md:leading-[100%] max-w-[380px] md:max-w-[480px] text-center md:text-left">
               <span className="md:hidden">
                 {translate("eventBanner.descLine1")}<br />
                 {translate("eventBanner.descLine2")}<br />
@@ -114,7 +113,7 @@ export function OgEventBanner() {
                 height={156}
                 className="shrink-0 w-[80px] h-[81px] md:w-[154px] md:h-[156px]"
               />
-              <p className="text-white font-body font-bold text-xs leading-none md:text-base md:leading-normal max-w-[280px]">
+              <p className="text-white font-body font-bold text-[13px] leading-none md:text-[1.2rem] md:leading-[1.275] max-w-[280px]">
                 {translate("eventBanner.ctaLine1")}
                 <br />
                 {translate("eventBanner.ctaLine2")}
