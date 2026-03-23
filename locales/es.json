@@ -72,7 +72,13 @@
   },
   "footer": {
     "address": "Carretera internacional, Carr. Guadalajara - Tepic km 49 #4970, La Meza, 45380 Amatitán, Jal.",
+    "addressLine1": "Carretera internacional, Carr.",
+    "addressLine2": "Guadalajara - Tepic km 49 #4970,",
+    "addressLine3": "La Meza, 45380 Amatitán, Jal.",
     "hours": "Abrimos los 365 días del año de 9am a 12am,",
+    "hoursLine1": "Abrimos los 365 días del año de",
+    "hoursLine2": "9am a 12am, No contamos con",
+    "hoursLine3": "sucursales ni franquicias.",
     "noFranchise": "No contamos con sucursales ni franquicias.",
     "liveMusic": "¡Musica en vivo todos los días!",
     "about": "Nosotros",

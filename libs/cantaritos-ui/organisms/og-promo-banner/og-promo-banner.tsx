@@ -59,7 +59,7 @@ export function OgPromoBanner({
               {subtitle}
             </p>
           )}
-          <p className={`font-body text-xs md:text-2xl font-medium leading-none ${warningText ? "md:my-auto" : "md:mt-auto"} ${descriptionColor}`}>
+          <p className={`font-body text-sm md:text-2xl font-medium leading-[1.275] md:leading-none whitespace-nowrap md:whitespace-normal ${warningText ? "md:my-auto" : "md:mt-auto"} ${descriptionColor}`}>
             {description}
           </p>
 
@@ -67,7 +67,7 @@ export function OgPromoBanner({
             <div className="flex items-start gap-2 md:gap-4 md:-ml-[50px]">
               <Image src="/images/alert.png" alt="Alerta" width={41} height={35} className="shrink-0 mt-0.5 md:w-[51px] md:h-[44px]" />
               <p
-                className={`font-body text-xs md:text-2xl font-bold leading-none ${highlightColor}`}
+                className={`font-body text-xs md:text-2xl font-bold leading-[1.275] md:leading-none text-left w-[209px] md:w-auto ${highlightColor}`}
               >
                 {warningText}
               </p>

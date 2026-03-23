@@ -155,7 +155,7 @@ export default function NosotrosPage() {
             {/* Mobile text */}
             <div className="lg:hidden">
               <div className="relative inline-flex flex-col mb-2">
-                <p className="font-body text-xs font-medium leading-tight text-[#14222F]">
+                <p className="font-body text-xs font-bold leading-none text-[#14222F]">
                   {translate("about.gueroIntro")}
                 </p>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -168,7 +168,7 @@ export default function NosotrosPage() {
                   {translate("about.gueroQuote")}
                 </p>
               </div>
-              <p className="font-body text-xs font-medium leading-tight text-[#14222F] mb-6">
+              <p className="font-body text-xs font-medium leading-none text-[#14222F] mb-6">
                 {translate("about.gueroDescLine1")}
                 <br />
                 {translate("about.gueroDescLine2")}
@@ -627,11 +627,16 @@ export default function NosotrosPage() {
                 className="w-[155px] h-auto flex-shrink-0"
               />
 
-              <p className="font-body text-[24px] font-bold leading-[100%] text-white mb-2">
-                {translate("about.soulLine1")}
-                <br />
-                {translate("about.soulLine2")}
-              </p>
+              <div className="text-center">
+                <p className="font-body text-[32px] font-bold leading-[100%] text-white">
+                  {translate("about.soulLine1")}
+                  <br />
+                  {translate("about.soulLine2")}
+                </p>
+                <p className="font-body text-[32px] font-bold leading-[100%] text-white mt-4">
+                  {translate("about.soulGrowth")}
+                </p>
+              </div>
 
               <Image
                 src="/images/boots.svg"
@@ -643,13 +648,13 @@ export default function NosotrosPage() {
             </div>
 
             {/* Texto soul - solo mobile */}
-            <p className="font-body text-base font-bold leading-tight text-white mb-2 md:hidden">
+            <p className="font-body text-base font-bold leading-tight text-white mb-4 md:hidden">
               {translate("about.soulLine1")}
               <br />
               {translate("about.soulLine2")}
             </p>
 
-            <p className="font-body text-base md:text-[24px] font-bold leading-tight md:leading-[100%] text-white mb-6 md:mb-0">
+            <p className="font-body text-base font-bold leading-tight text-white mb-6 md:hidden">
               {translate("about.soulGrowth")}
             </p>
 
