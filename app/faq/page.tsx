@@ -697,7 +697,7 @@ const faqDataEn: FaqItem[] = [
           hours.
         </p>
         <p>
-          If there is no record, we cannot guarantee its recovery. We are not
+          If there is no record, we cannot guarantee recovery. We are not
           responsible for lost items.
         </p>
       </div>
@@ -708,7 +708,7 @@ const faqDataEn: FaqItem[] = [
     answer: (
       <div className="space-y-2">
         <p>
-          Send your application and resume to:
+          Please send your completed application and résumé to:
           <br />
           <a
             href="mailto:empleados@cantaritoselguero.mx"
