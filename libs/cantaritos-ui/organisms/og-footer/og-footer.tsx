@@ -29,26 +29,34 @@ export function OgFooter() {
       <div className="mx-auto max-w-[1440px] px-6 md:px-10 xl:px-[208px] py-10 md:py-14">
         <div className="flex flex-col items-center md:items-stretch md:flex-row gap-10 md:gap-8 xl:gap-0 md:justify-between">
           {/* Left — Logo + Info */}
-          <div className="space-y-4 max-w-[320px] items-center text-center md:items-start md:text-left flex flex-col md:block">
+          <div className="space-y-4 max-w-[207px] md:max-w-[320px] items-center md:items-start text-center md:text-left flex flex-col md:block">
             <Image
               src="/images/Logo.png"
               alt="Cantaritos El Güero #1"
               width={255}
               height={99}
-              className="w-[160px] h-auto md:w-[255px] md:h-[99px]"
+              className="w-[207px] h-auto md:w-[255px] md:h-[99px]"
             />
 
-            <div className="flex gap-2 text-xs md:text-base font-condensed font-medium text-primary leading-none">
+            <div className="flex flex-row-reverse md:flex-row gap-2 text-xs md:text-base font-condensed font-medium text-primary leading-none">
               <MapPin className="h-8 w-8 shrink-0 text-[#137171]" />
               <p>
-                {translate("footer.address")}
+                {translate("footer.addressLine1")}<br />
+                {translate("footer.addressLine2")}<br />
+                {translate("footer.addressLine3")}
               </p>
             </div>
 
-            <p className="font-condensed text-xs md:text-base text-primary font-medium leading-none">
-              {translate("footer.hours")}
-              <br />
-              {translate("footer.noFranchise")}
+            <p className="font-condensed text-xs md:text-base text-[#E64927] md:text-primary font-medium leading-none">
+              <span className="md:hidden">
+                {translate("footer.hoursLine1")}<br />
+                {translate("footer.hoursLine2")}<br />
+                {translate("footer.hoursLine3")}
+              </span>
+              <span className="hidden md:inline">
+                {translate("footer.hours")}<br />
+                {translate("footer.noFranchise")}
+              </span>
             </p>
 
             <p className="font-condensed text-xs md:text-base text-[#901F18] font-medium leading-none">
@@ -57,24 +65,24 @@ export function OgFooter() {
           </div>
 
           {/* Center — Nav links */}
-          <div className="flex gap-10 md:gap-16 items-center md:items-end">
-            <nav className="flex flex-col gap-3 items-center md:items-start">
+          <div className="flex gap-10 md:gap-16 items-start md:items-end">
+            <nav className="flex flex-col gap-3 items-start">
               {NAV_COL_1_KEYS.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="font-condensed text-xs md:text-base font-medium text-gray-800 leading-none hover:text-primary transition-colors"
+                  className="font-condensed text-xs md:text-base font-medium text-[#14222F] md:text-gray-800 leading-none hover:text-primary transition-colors"
                 >
                   {translate(link.key)}
                 </Link>
               ))}
             </nav>
-            <nav className="flex flex-col gap-3 items-center md:items-start">
+            <nav className="flex flex-col gap-3 items-start">
               {NAV_COL_2_KEYS.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="font-condensed text-xs md:text-base font-medium text-gray-800 leading-none hover:text-primary transition-colors"
+                  className="font-condensed text-xs md:text-base font-medium text-[#14222F] md:text-gray-800 leading-none hover:text-primary transition-colors"
                 >
                   {translate(link.key)}
                 </Link>
