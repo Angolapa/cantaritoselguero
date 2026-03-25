@@ -1,9 +1,15 @@
+import { Tag } from "./tag.types";
+
 // --- Product ---
 
 export interface Product {
   id: string;
   name: string;
+  nameEs?: string;
+  nameEn?: string;
   description?: string;
+  descriptionEs?: string;
+  descriptionEn?: string;
   basePrice: number;
   image?: string;
   stock?: number;
@@ -13,11 +19,14 @@ export interface Product {
   updatedAt: string;
   sizes: ProductSize[];
   modifierGroups: ModifierGroup[];
+  tags?: Tag[];
 }
 
 export interface CreateProductRequest {
-  name: string;
-  description?: string;
+  nameEs: string;
+  nameEn: string;
+  descriptionEs?: string;
+  descriptionEn?: string;
   basePrice: number;
   image?: string;
   stock?: number;
@@ -26,11 +35,13 @@ export interface CreateProductRequest {
 }
 
 export interface UpdateProductRequest {
-  name?: string;
-  description?: string;
+  nameEs?: string;
+  nameEn?: string;
+  descriptionEs?: string;
+  descriptionEn?: string;
   basePrice?: number;
   image?: string;
-  stock?: number;
+  stock?: number | null;
   isActive?: boolean;
   standId?: string;
 }
