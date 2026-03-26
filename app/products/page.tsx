@@ -2,20 +2,27 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
 import { Package } from "lucide-react";
 
 import { MlSearchBar, OgNavbar } from "@/libs/cantaritos-ui";
 import { useProducts } from "@/domain/hooks/products";
+import { useTags } from "@/domain/hooks/tags";
 import { useAuthStore } from "@/domain/stores";
-import { Product } from "@/domain/types";
+import { Product, Tag } from "@/domain/types";
 
 export default function ProductsPage() {
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const { data: products = [], isLoading } = useProducts();
+  const { data: tags = [] } = useTags();
   const [search, setSearch] = useState("");
   const [showAvailableOnly, setShowAvailableOnly] = useState(false);
+
+  const selectedTagId = searchParams.get("tag");
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -23,21 +30,37 @@ export default function ProductsPage() {
     }
   }, [isAuthenticated, router]);
 
+  const handleSelectTag = (tagId: string | null) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (tagId) {
+      params.set("tag", tagId);
+    } else {
+      params.delete("tag");
+    }
+    router.push(`${pathname}?${params.toString()}`);
+  };
+
   const filteredProducts = useMemo(() => {
     let result = products;
     if (search.trim()) {
-      const term = search.toLowerCase();
-      result = result.filter((p: Product) =>
-        p.name.toLowerCase().includes(term),
+      const searchTerm = search.toLowerCase();
+      result = result.filter((product: Product) =>
+        product.name.toLowerCase().includes(searchTerm),
       );
     }
     if (showAvailableOnly) {
       result = result.filter(
-        (p: Product) => p.isActive && (p.stock === undefined || p.stock > 0),
+        (product: Product) =>
+          product.isActive && (product.stock === undefined || product.stock > 0),
+      );
+    }
+    if (selectedTagId) {
+      result = result.filter((product: Product) =>
+        product.tags?.some((tag) => tag.id === selectedTagId),
       );
     }
     return result;
-  }, [products, search, showAvailableOnly]);
+  }, [products, search, showAvailableOnly, selectedTagId]);
 
   if (!isAuthenticated) return null;
 
@@ -61,12 +84,41 @@ export default function ProductsPage() {
             <input
               type="checkbox"
               checked={showAvailableOnly}
-              onChange={(e) => setShowAvailableOnly(e.target.checked)}
+              onChange={(event) => setShowAvailableOnly(event.target.checked)}
               className="rounded border-gray-300 text-primary focus:ring-primary"
             />
             Solo disponibles
           </label>
         </div>
+
+        {/* Tag filters */}
+        {tags.length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => handleSelectTag(null)}
+              className={`text-sm font-body px-3 py-1 rounded-full border transition-colors ${
+                !selectedTagId
+                  ? "bg-primary text-white border-primary"
+                  : "border-gray-300 text-gray-600 dark:text-gray-400 hover:border-primary hover:text-primary"
+              }`}
+            >
+              Todos
+            </button>
+            {tags.map((tag: Tag) => (
+              <button
+                key={tag.id}
+                onClick={() => handleSelectTag(tag.id)}
+                className={`text-sm font-body px-3 py-1 rounded-full border transition-colors ${
+                  selectedTagId === tag.id
+                    ? "bg-primary text-white border-primary"
+                    : "border-gray-300 text-gray-600 dark:text-gray-400 hover:border-primary hover:text-primary"
+                }`}
+              >
+                {tag.name}
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Loading */}
         {isLoading && (

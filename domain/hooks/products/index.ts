@@ -1,3 +1,4 @@
+export { useAssignProductTags } from "./useAssignProductTags";
 export { useCreateModifier } from "./useCreateModifier";
 export { useCreateModifierGroup } from "./useCreateModifierGroup";
 export { useCreateProduct } from "./useCreateProduct";
@@ -9,6 +10,7 @@ export { useModifiers } from "./useModifiers";
 export { useProduct } from "./useProduct";
 export { useProducts } from "./useProducts";
 export { useProductSizes } from "./useProductSizes";
+export { useRemoveProductTag } from "./useRemoveProductTag";
 export { useUpdateModifier } from "./useUpdateModifier";
 export { useUpdateModifierGroup } from "./useUpdateModifierGroup";
 export { useUpdateProduct } from "./useUpdateProduct";

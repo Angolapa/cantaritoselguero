@@ -49,6 +49,19 @@ export const productService = {
     });
   },
 
+  // --- Tags ---
+
+  assignTags: (productId: string, tagIds: string[]): Promise<Product> =>
+    authFetcher<Product>(`/products/${productId}/tags`, {
+      method: "POST",
+      body: JSON.stringify({ tagIds }),
+    }),
+
+  removeTag: (productId: string, tagId: string): Promise<void> =>
+    authFetcher<void>(`/products/${productId}/tags/${tagId}`, {
+      method: "DELETE",
+    }),
+
   // --- Sizes ---
 
   getSizes: (productId: string): Promise<ProductSize[]> =>

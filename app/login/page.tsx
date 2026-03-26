@@ -22,9 +22,9 @@ export default function LoginPage() {
           </h1>
 
           <MlForm
-            onSubmit={(e) => {
-              e.preventDefault();
-              const formData = new FormData(e.currentTarget);
+            onSubmit={(event) => {
+              event.preventDefault();
+              const formData = new FormData(event.currentTarget);
               const email = (formData.get("email") ?? "").toString().trim();
               const password = (formData.get("password") ?? "").toString();
               if (!email || !password) return;

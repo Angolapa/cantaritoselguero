@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 
-import { Image, Images, LogOut, Package, ShoppingBag, Tag, Users } from "lucide-react";
+import { Image, Images, Layers, LayoutList, LogOut, Package, ShoppingBag, Tag, Tags, Users } from "lucide-react";
 
 import { AtButton } from "@/libs/cantaritos-ui/atoms";
 import { MlSidebarItem } from "@/libs/cantaritos-ui/molecules";
@@ -24,6 +24,21 @@ const NAV_ITEMS = [
     href: "/admin/mood-gallery",
     label: "Mood Gallery",
     icon: <Images className="h-5 w-5" />,
+  },
+  {
+    href: "/admin/combos",
+    label: "Combos",
+    icon: <Layers className="h-5 w-5" />,
+  },
+  {
+    href: "/admin/tags",
+    label: "Etiquetas",
+    icon: <Tags className="h-5 w-5" />,
+  },
+  {
+    href: "/admin/sections",
+    label: "Secciones",
+    icon: <LayoutList className="h-5 w-5" />,
   },
   {
     href: "/admin/coupons",
