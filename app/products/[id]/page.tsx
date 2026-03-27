@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 
 import { ArrowLeft, Minus, Package, Plus } from "lucide-react";
@@ -20,11 +21,28 @@ export default function ProductDetailPage() {
 
   const { data: product, isLoading } = useProduct(productId);
 
+  const [lastSyncedProductId, setLastSyncedProductId] = useState<string | null>(null);
   const [selectedSizeId, setSelectedSizeId] = useState<string | null>(null);
   const [selectedModifiers, setSelectedModifiers] = useState<
     Record<string, string[]>
   >({});
   const [quantity, setQuantity] = useState(1);
+
+  if (product && product.id !== lastSyncedProductId) {
+    const defaultSize =
+      product.sizes.find((sizeOption) => sizeOption.isDefault && sizeOption.isActive) ||
+      product.sizes.find((sizeOption) => sizeOption.isActive);
+    setSelectedSizeId(defaultSize?.id ?? null);
+
+    const defaults: Record<string, string[]> = {};
+    for (const group of product.modifierGroups) {
+      defaults[group.id] = group.modifiers
+        .filter((modifierOption) => modifierOption.isDefault && modifierOption.isActive)
+        .map((modifierOption) => modifierOption.id);
+    }
+    setSelectedModifiers(defaults);
+    setLastSyncedProductId(product.id);
+  }
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -32,39 +50,13 @@ export default function ProductDetailPage() {
     }
   }, [isAuthenticated, router]);
 
-  // Set default size when product loads
-  useEffect(() => {
-    if (product && !selectedSizeId) {
-      const defaultSize =
-        product.sizes.find((s) => s.isDefault && s.isActive) ||
-        product.sizes.find((s) => s.isActive);
-      if (defaultSize) {
-        setSelectedSizeId(defaultSize.id);
-      }
-    }
-  }, [product, selectedSizeId]);
-
-  // Set default modifiers when product loads
-  useEffect(() => {
-    if (product && Object.keys(selectedModifiers).length === 0) {
-      const defaults: Record<string, string[]> = {};
-      for (const group of product.modifierGroups) {
-        const defaultMods = group.modifiers
-          .filter((m) => m.isDefault && m.isActive)
-          .map((m) => m.id);
-        defaults[group.id] = defaultMods;
-      }
-      setSelectedModifiers(defaults);
-    }
-  }, [product, selectedModifiers]);
-
   const activeSizes = useMemo(
-    () => product?.sizes.filter((s) => s.isActive) ?? [],
+    () => product?.sizes.filter((sizeOption) => sizeOption.isActive) ?? [],
     [product],
   );
 
   const selectedSize = useMemo(
-    () => activeSizes.find((s) => s.id === selectedSizeId),
+    () => activeSizes.find((sizeOption) => sizeOption.id === selectedSizeId),
     [activeSizes, selectedSizeId],
   );
 
@@ -85,7 +77,7 @@ export default function ProductDetailPage() {
   const unitPrice = useMemo(() => {
     const sizePrice = selectedSize?.price ?? product?.basePrice ?? 0;
     const modSum = allSelectedModifiers.reduce(
-      (sum, m) => sum + m.priceAdjustment,
+      (sum, modifierOption) => sum + modifierOption.priceAdjustment,
       0,
     );
     return sizePrice + modSum;
@@ -138,10 +130,10 @@ export default function ProductDetailPage() {
         name: selectedSize.name,
         price: selectedSize.price,
       },
-      selectedModifiers: allSelectedModifiers.map((m) => ({
-        id: m.id,
-        name: m.name,
-        priceAdjustment: m.priceAdjustment,
+      selectedModifiers: allSelectedModifiers.map((selectedModifier) => ({
+        id: selectedModifier.id,
+        name: selectedModifier.name,
+        priceAdjustment: selectedModifier.priceAdjustment,
       })),
       quantity,
       unitPrice,
@@ -196,12 +188,13 @@ export default function ProductDetailPage() {
         </button>
 
         {/* Product image */}
-        <div className="aspect-square max-h-80 w-full rounded-2xl bg-gray-100 dark:bg-gray-800 overflow-hidden">
+        <div className="relative aspect-square max-h-80 w-full rounded-2xl bg-gray-100 dark:bg-gray-800 overflow-hidden">
           {product.image ? (
-            <img
+            <Image
               src={product.image}
               alt={product.name}
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
@@ -254,7 +247,9 @@ export default function ProductDetailPage() {
 
         {/* Modifier groups */}
         {product.modifierGroups.map((group) => {
-          const activeModifiers = group.modifiers.filter((m) => m.isActive);
+          const activeModifiers = group.modifiers.filter(
+            (modifierOption) => modifierOption.isActive,
+          );
           if (activeModifiers.length === 0) return null;
           const groupSelection = selectedModifiers[group.id] ?? [];
           const isRadio = group.maxSelect === 1;
@@ -331,7 +326,11 @@ export default function ProductDetailPage() {
           </h2>
           <div className="flex items-center gap-4">
             <button
-              onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+              onClick={() =>
+                setQuantity((currentQuantity) =>
+                  Math.max(1, currentQuantity - 1),
+                )
+              }
               className="h-10 w-10 rounded-full border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:border-primary hover:text-primary transition-colors"
             >
               <Minus className="h-4 w-4" />
@@ -340,7 +339,7 @@ export default function ProductDetailPage() {
               {quantity}
             </span>
             <button
-              onClick={() => setQuantity((q) => q + 1)}
+              onClick={() => setQuantity((currentQuantity) => currentQuantity + 1)}
               className="h-10 w-10 rounded-full border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:border-primary hover:text-primary transition-colors"
             >
               <Plus className="h-4 w-4" />
