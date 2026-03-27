@@ -73,7 +73,7 @@ export function AtButton({
         <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
       )}
       {!isLoading && startContent}
-      {!isIconOnly && children}
+      {isIconOnly ? !isLoading && children : children}
       {!isLoading && endContent}
     </>
   );

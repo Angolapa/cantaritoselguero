@@ -153,6 +153,7 @@ export async function authFetcher<TResponse>(
       ...fetchOptions,
       headers,
       signal: controller.signal,
+      cache: "no-store",
     });
 
     if (response.status === 401) {

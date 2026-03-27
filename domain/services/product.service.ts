@@ -145,4 +145,45 @@ export const productService = {
         body: JSON.stringify(data),
       },
     ),
+
+  deleteModifier: (
+    productId: string,
+    groupId: string,
+    id: string,
+  ): Promise<void> =>
+    authFetcher<void>(
+      `/products/${productId}/modifier-groups/${groupId}/modifiers/${id}`,
+      {
+        method: "DELETE",
+      },
+    ),
+
+  // --- Modifier Tags ---
+
+  assignModifierTags: (
+    productId: string,
+    groupId: string,
+    modifierId: string,
+    tagIds: string[],
+  ): Promise<Modifier> =>
+    authFetcher<Modifier>(
+      `/products/${productId}/modifier-groups/${groupId}/modifiers/${modifierId}/tags`,
+      {
+        method: "POST",
+        body: JSON.stringify({ tagIds }),
+      },
+    ),
+
+  removeModifierTag: (
+    productId: string,
+    groupId: string,
+    modifierId: string,
+    tagId: string,
+  ): Promise<void> =>
+    authFetcher<void>(
+      `/products/${productId}/modifier-groups/${groupId}/modifiers/${modifierId}/tags/${tagId}`,
+      {
+        method: "DELETE",
+      },
+    ),
 };
