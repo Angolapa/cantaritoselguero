@@ -1,8 +1,10 @@
+export { useAssignModifierTags } from "./useAssignModifierTags";
 export { useAssignProductTags } from "./useAssignProductTags";
 export { useCreateModifier } from "./useCreateModifier";
 export { useCreateModifierGroup } from "./useCreateModifierGroup";
 export { useCreateProduct } from "./useCreateProduct";
 export { useCreateSize } from "./useCreateSize";
+export { useDeleteModifier } from "./useDeleteModifier";
 export { useDeleteProduct } from "./useDeleteProduct";
 export { useDeleteSize } from "./useDeleteSize";
 export { useModifierGroups } from "./useModifierGroups";
@@ -10,6 +12,7 @@ export { useModifiers } from "./useModifiers";
 export { useProduct } from "./useProduct";
 export { useProducts } from "./useProducts";
 export { useProductSizes } from "./useProductSizes";
+export { useRemoveModifierTag } from "./useRemoveModifierTag";
 export { useRemoveProductTag } from "./useRemoveProductTag";
 export { useUpdateModifier } from "./useUpdateModifier";
 export { useUpdateModifierGroup } from "./useUpdateModifierGroup";

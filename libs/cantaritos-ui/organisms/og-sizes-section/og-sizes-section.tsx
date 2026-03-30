@@ -19,23 +19,23 @@ export function OgSizesSection({ productId, sizes }: OgSizesSectionProps) {
   const [showNewRow, setShowNewRow] = useState(false);
   const [updatingSizeId, setUpdatingSizeId] = useState<string | null>(null);
 
-  const handleCreateSize = (values: { name: string; price: number; stock?: number | null }) => {
+  const handleCreateSize = (values: { nameEs: string; nameEn: string; price: number; stock?: number | null }) => {
     createSize.mutate(
-      { productId, data: { name: values.name, price: values.price, stock: values.stock } },
+      { productId, data: { nameEs: values.nameEs, nameEn: values.nameEn, price: values.price, stock: values.stock } },
       { onSuccess: () => setShowNewRow(false) },
     );
   };
 
   const handleUpdateSize = (
     sizeId: string,
-    values: { name: string; price: number; stock?: number | null },
+    values: { nameEs: string; nameEn: string; price: number; stock?: number | null },
   ) => {
     setUpdatingSizeId(sizeId);
     updateSize.mutate(
       {
         productId,
         id: sizeId,
-        data: { name: values.name, price: values.price, stock: values.stock },
+        data: { nameEs: values.nameEs, nameEn: values.nameEn, price: values.price, stock: values.stock },
       },
       { onSettled: () => setUpdatingSizeId(null) },
     );

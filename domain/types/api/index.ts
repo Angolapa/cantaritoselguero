@@ -6,5 +6,6 @@ export * from "./coupon.types";
 export * from "./mood-gallery.types";
 export * from "./product.types";
 export * from "./section.types";
+export * from "./stand.types";
 export * from "./tag.types";
 export * from "./user.types";

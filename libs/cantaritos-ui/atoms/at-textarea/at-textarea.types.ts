@@ -1,3 +1,15 @@
-import { TextAreaProps } from "@heroui/react";
+import { TextareaHTMLAttributes } from "react";
 
-export type AtTextareaProps = TextAreaProps;
+export interface AtTextareaProps
+	extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+	label?: string;
+	isRequired?: boolean;
+	isDisabled?: boolean;
+	minRows?: number;
+	labelPlacement?: "outside" | "inside";
+	classNames?: {
+		inputWrapper?: string;
+		input?: string;
+		label?: string;
+	};
+}

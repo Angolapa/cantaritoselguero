@@ -10,6 +10,7 @@ import { MlModifierGroupCard } from "@/libs/cantaritos-ui/molecules";
 import {
   useCreateModifier,
   useCreateModifierGroup,
+  useDeleteModifier,
   useUpdateModifierGroup,
 } from "@/domain/hooks/products";
 import { ModifierGroup } from "@/domain/types";
@@ -23,21 +24,25 @@ export function OgModifierGroupsSection({
   // Group form state
   const [showGroupForm, setShowGroupForm] = useState(false);
   const [editingGroup, setEditingGroup] = useState<ModifierGroup | null>(null);
-  const [groupName, setGroupName] = useState("");
+  const [groupNameEs, setGroupNameEs] = useState("");
+  const [groupNameEn, setGroupNameEn] = useState("");
   const [minSelect, setMinSelect] = useState("0");
   const [maxSelect, setMaxSelect] = useState("1");
 
   // Modifier form state
   const [addingModifierGroupId, setAddingModifierGroupId] = useState<string | null>(null);
-  const [modifierName, setModifierName] = useState("");
+  const [modifierNameEs, setModifierNameEs] = useState("");
+  const [modifierNameEn, setModifierNameEn] = useState("");
   const [modifierPrice, setModifierPrice] = useState("0");
 
   const createGroup = useCreateModifierGroup();
   const updateGroup = useUpdateModifierGroup();
   const createModifier = useCreateModifier();
+  const deleteModifier = useDeleteModifier();
 
   const resetGroupForm = () => {
-    setGroupName("");
+    setGroupNameEs("");
+    setGroupNameEn("");
     setMinSelect("0");
     setMaxSelect("1");
     setEditingGroup(null);
@@ -45,14 +50,16 @@ export function OgModifierGroupsSection({
   };
 
   const resetModifierForm = () => {
-    setModifierName("");
+    setModifierNameEs("");
+    setModifierNameEn("");
     setModifierPrice("0");
     setAddingModifierGroupId(null);
   };
 
   const handleOpenCreateGroup = () => {
     setEditingGroup(null);
-    setGroupName("");
+    setGroupNameEs("");
+    setGroupNameEn("");
     setMinSelect("0");
     setMaxSelect("1");
     setShowGroupForm(true);
@@ -60,14 +67,15 @@ export function OgModifierGroupsSection({
 
   const handleOpenEditGroup = (group: ModifierGroup) => {
     setEditingGroup(group);
-    setGroupName(group.name);
+    setGroupNameEs(group.nameEs ?? group.name);
+    setGroupNameEn(group.nameEn ?? "");
     setMinSelect(group.minSelect.toString());
     setMaxSelect(group.maxSelect.toString());
     setShowGroupForm(true);
   };
 
   const handleSaveGroup = () => {
-    if (!groupName.trim()) return;
+    if (!groupNameEs.trim() || !groupNameEn.trim()) return;
 
     const parsedMin = Number(minSelect);
     const parsedMax = Number(maxSelect);
@@ -76,7 +84,8 @@ export function OgModifierGroupsSection({
     if (parsedMin > parsedMax) return;
 
     const data = {
-      name: groupName.trim(),
+      nameEs: groupNameEs.trim(),
+      nameEn: groupNameEn.trim(),
       minSelect: parsedMin,
       maxSelect: parsedMax,
     };
@@ -96,19 +105,21 @@ export function OgModifierGroupsSection({
 
   const handleOpenAddModifier = (groupId: string) => {
     setAddingModifierGroupId(groupId);
-    setModifierName("");
+    setModifierNameEs("");
+    setModifierNameEn("");
     setModifierPrice("0");
   };
 
   const handleSaveModifier = () => {
-    if (!addingModifierGroupId || !modifierName.trim()) return;
+    if (!addingModifierGroupId || !modifierNameEs.trim() || !modifierNameEn.trim()) return;
 
     createModifier.mutate(
       {
         productId,
         groupId: addingModifierGroupId,
         data: {
-          name: modifierName.trim(),
+          nameEs: modifierNameEs.trim(),
+          nameEn: modifierNameEn.trim(),
           priceAdjustment: parseFloat(modifierPrice) || 0,
         },
       },
@@ -141,8 +152,12 @@ export function OgModifierGroupsSection({
           {modifierGroups.map((group: ModifierGroup) => (
             <div key={group.id} className="space-y-2">
               <MlModifierGroupCard
+                productId={productId}
                 group={group}
                 onEdit={handleOpenEditGroup}
+                onDeleteModifier={(groupId, modifierId) =>
+                  deleteModifier.mutate({ productId, groupId, modifierId })
+                }
               />
 
               {/* Inline modifier form for this group */}
@@ -151,10 +166,20 @@ export function OgModifierGroupsSection({
                   <div className="flex-1">
                     <AtInput
                       size="sm"
-                      label="Nombre del modificador"
+                      label="Nombre (ES)"
                       placeholder="Ej: Chile habanero"
-                      value={modifierName}
-                      onValueChange={setModifierName}
+                      value={modifierNameEs}
+                      onValueChange={setModifierNameEs}
+                      isDisabled={createModifier.isPending}
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <AtInput
+                      size="sm"
+                      label="Name (EN)"
+                      placeholder="E.g: Habanero chile"
+                      value={modifierNameEn}
+                      onValueChange={setModifierNameEn}
                       isDisabled={createModifier.isPending}
                     />
                   </div>
@@ -209,13 +234,22 @@ export function OgModifierGroupsSection({
               <h3 className="text-sm font-semibold">
                 {editingGroup ? "Editar Grupo" : "Nuevo Grupo de Modificadores"}
               </h3>
-              <AtInput
-                label="Nombre del grupo"
-                placeholder="Ej: Tipo de chile"
-                value={groupName}
-                onValueChange={setGroupName}
-                isDisabled={isSavingGroup}
-              />
+              <div className="grid grid-cols-2 gap-4">
+                <AtInput
+                  label="Nombre del grupo (ES)"
+                  placeholder="Ej: Tipo de chile"
+                  value={groupNameEs}
+                  onValueChange={setGroupNameEs}
+                  isDisabled={isSavingGroup}
+                />
+                <AtInput
+                  label="Group name (EN)"
+                  placeholder="E.g: Chile type"
+                  value={groupNameEn}
+                  onValueChange={setGroupNameEn}
+                  isDisabled={isSavingGroup}
+                />
+              </div>
               <div className="grid grid-cols-2 gap-4">
                 <AtInput
                   label="Min. seleccion"

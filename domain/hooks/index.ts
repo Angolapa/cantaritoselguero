@@ -3,5 +3,6 @@ export * from "./banners";
 export * from "./combos";
 export * from "./products";
 export * from "./sections";
+export * from "./stands";
 export * from "./tags";
 export * from "./users";

@@ -1,6 +1,5 @@
 "use client";
 
-import { Card, CardBody } from "@heroui/react";
 import { Tag as TagIcon } from "lucide-react";
 
 import { AtChip } from "@/libs/cantaritos-ui/atoms";
@@ -19,11 +18,8 @@ export function OgProductTagsSection({
   const removeTag = useRemoveProductTag();
 
   const assignedTagIds = new Set(currentTags.map((tag) => tag.id));
-  const isMutating = assignTags.isPending || removeTag.isPending;
 
   const handleToggleTag = (tag: Tag) => {
-    if (isMutating) return;
-
     if (assignedTagIds.has(tag.id)) {
       removeTag.mutate({ productId, tagId: tag.id });
     } else {
@@ -32,36 +28,34 @@ export function OgProductTagsSection({
   };
 
   return (
-    <Card shadow="sm">
-      <CardBody className="p-6">
-        <div className="mb-4 flex items-center gap-2">
-          <TagIcon className="h-5 w-5 text-primary" />
-          <h2 className="text-lg font-semibold">Etiquetas</h2>
-        </div>
+    <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+      <div className="mb-4 flex items-center gap-2">
+        <TagIcon className="h-5 w-5 text-primary" />
+        <h2 className="text-lg font-semibold">Etiquetas</h2>
+      </div>
 
-        {allTags.length === 0 ? (
-          <p className="text-center text-sm text-gray-500">
-            No hay etiquetas. Créalas en Admin &rsaquo; Etiquetas.
-          </p>
-        ) : (
-          <div className="flex flex-wrap gap-2">
-            {allTags.map((tag: Tag) => {
-              const isAssigned = assignedTagIds.has(tag.id);
-              return (
-                <AtChip
-                  key={tag.id}
-                  variant={isAssigned ? "solid" : "bordered"}
-                  color={isAssigned ? "primary" : "default"}
-                  className="cursor-pointer select-none"
-                  onClick={() => handleToggleTag(tag)}
-                >
-                  {tag.name}
-                </AtChip>
-              );
-            })}
-          </div>
-        )}
-      </CardBody>
-    </Card>
+      {allTags.length === 0 ? (
+        <p className="text-center text-sm text-gray-500">
+          No hay etiquetas. Créalas en Admin &rsaquo; Etiquetas.
+        </p>
+      ) : (
+        <div className="flex flex-wrap gap-2">
+          {allTags.map((tag: Tag) => {
+            const isAssigned = assignedTagIds.has(tag.id);
+            return (
+              <AtChip
+                key={tag.id}
+                variant={isAssigned ? "solid" : "bordered"}
+                color={isAssigned ? "primary" : "default"}
+                className="cursor-pointer select-none"
+                onClick={() => handleToggleTag(tag)}
+              >
+                {tag.name}
+              </AtChip>
+            );
+          })}
+        </div>
+      )}
+    </div>
   );
 }

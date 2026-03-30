@@ -1,3 +1,6 @@
-import { SwitchProps } from "@heroui/react";
-
-export type AtSwitchProps = SwitchProps;
+export interface AtSwitchProps {
+  isSelected?: boolean;
+  onValueChange?: (value: boolean) => void;
+  isDisabled?: boolean;
+  "aria-label"?: string;
+}

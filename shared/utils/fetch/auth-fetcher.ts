@@ -8,6 +8,37 @@ interface FetchOptions extends RequestInit {
   timeout?: number;
 }
 
+async function parseSuccessResponse<TResponse>(response: Response): Promise<TResponse> {
+  if (response.status === 204 || response.status === 205) {
+    return undefined as TResponse;
+  }
+
+  const contentLength = response.headers.get("content-length");
+  if (contentLength === "0") {
+    return undefined as TResponse;
+  }
+
+  const contentType = response.headers.get("content-type")?.toLowerCase() || "";
+  if (!contentType.includes("application/json")) {
+    const text = await response.text();
+    if (!text.trim()) {
+      return undefined as TResponse;
+    }
+    try {
+      return JSON.parse(text) as TResponse;
+    } catch {
+      return text as TResponse;
+    }
+  }
+
+  const text = await response.text();
+  if (!text.trim()) {
+    return undefined as TResponse;
+  }
+
+  return JSON.parse(text) as TResponse;
+}
+
 async function parseErrorResponse(
   response: Response
 ): Promise<ApiError> {
@@ -88,10 +119,10 @@ async function refreshAccessToken(): Promise<boolean> {
   }
 }
 
-export async function authFetcher<T>(
+export async function authFetcher<TResponse>(
   endpoint: string,
   options: FetchOptions = {}
-): Promise<T> {
+): Promise<TResponse> {
   const { timeout = TIMEOUT_MS, ...fetchOptions } = options;
 
   const url = endpoint.startsWith("http")
@@ -122,6 +153,7 @@ export async function authFetcher<T>(
       ...fetchOptions,
       headers,
       signal: controller.signal,
+      cache: "no-store",
     });
 
     if (response.status === 401) {
@@ -159,11 +191,7 @@ export async function authFetcher<T>(
       throw await parseErrorResponse(response);
     }
 
-    if (response.status === 204) {
-      return undefined as T;
-    }
-
-    return (await response.json()) as T;
+    return await parseSuccessResponse<TResponse>(response);
   } catch (error: unknown) {
     if (
       error instanceof DOMException &&
@@ -181,10 +209,10 @@ export async function authFetcher<T>(
   }
 }
 
-export async function fetcher<T>(
+export async function fetcher<TResponse>(
   endpoint: string,
   options: FetchOptions = {}
-): Promise<T> {
+): Promise<TResponse> {
   const { timeout = TIMEOUT_MS, ...fetchOptions } = options;
 
   const url = endpoint.startsWith("http")
@@ -216,11 +244,7 @@ export async function fetcher<T>(
       throw await parseErrorResponse(response);
     }
 
-    if (response.status === 204) {
-      return undefined as T;
-    }
-
-    return (await response.json()) as T;
+    return await parseSuccessResponse<TResponse>(response);
   } catch (error: unknown) {
     if (
       error instanceof DOMException &&

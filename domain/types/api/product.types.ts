@@ -2,6 +2,7 @@ import { Tag } from "./tag.types";
 
 // --- Product ---
 
+
 export interface Product {
   id: string;
   name: string;
@@ -52,6 +53,8 @@ export interface ProductSize {
   id: string;
   productId: string;
   name: string;
+  nameEs?: string;
+  nameEn?: string;
   price: number;
   stock?: number | null;
   sortOrder: number;
@@ -60,7 +63,8 @@ export interface ProductSize {
 }
 
 export interface CreateSizeRequest {
-  name: string;
+  nameEs: string;
+  nameEn: string;
   price: number;
   stock?: number | null;
   sortOrder?: number;
@@ -69,7 +73,8 @@ export interface CreateSizeRequest {
 }
 
 export interface UpdateSizeRequest {
-  name?: string;
+  nameEs?: string;
+  nameEn?: string;
   price?: number;
   stock?: number | null;
   sortOrder?: number;
@@ -83,6 +88,8 @@ export interface ModifierGroup {
   id: string;
   productId: string;
   name: string;
+  nameEs?: string;
+  nameEn?: string;
   description?: string;
   minSelect: number;
   maxSelect: number;
@@ -92,7 +99,8 @@ export interface ModifierGroup {
 }
 
 export interface CreateModifierGroupRequest {
-  name: string;
+  nameEs: string;
+  nameEn: string;
   description?: string;
   minSelect?: number;
   maxSelect?: number;
@@ -100,7 +108,8 @@ export interface CreateModifierGroupRequest {
 }
 
 export interface UpdateModifierGroupRequest {
-  name?: string;
+  nameEs?: string;
+  nameEn?: string;
   description?: string;
   minSelect?: number;
   maxSelect?: number;
@@ -113,14 +122,18 @@ export interface Modifier {
   id: string;
   groupId: string;
   name: string;
+  nameEs?: string;
+  nameEn?: string;
   priceAdjustment: number;
   isDefault: boolean;
   isActive: boolean;
   sortOrder: number;
+  tags?: Tag[];
 }
 
 export interface CreateModifierRequest {
-  name: string;
+  nameEs: string;
+  nameEn: string;
   priceAdjustment?: number;
   isDefault?: boolean;
   isActive?: boolean;
@@ -128,7 +141,8 @@ export interface CreateModifierRequest {
 }
 
 export interface UpdateModifierRequest {
-  name?: string;
+  nameEs?: string;
+  nameEn?: string;
   priceAdjustment?: number;
   isDefault?: boolean;
   isActive?: boolean;
