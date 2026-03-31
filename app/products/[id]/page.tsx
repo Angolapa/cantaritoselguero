@@ -9,7 +9,7 @@ import { ArrowLeft, Minus, Package, Plus } from "lucide-react";
 import { OgNavbar } from "@/libs/cantaritos-ui";
 import { useProduct } from "@/domain/hooks/products";
 import { useAuthStore, useCartStore } from "@/domain/stores";
-import type { Modifier, ModifierGroup } from "@/domain/types";
+import type { Modifier, ModifierGroup, ModifierSizePrice } from "@/domain/types";
 
 export default function ProductDetailPage() {
   const router = useRouter();
@@ -45,6 +45,24 @@ export default function ProductDetailPage() {
   }
 
   useEffect(() => {
+    if (!product || !selectedSizeId) return;
+    setSelectedModifiers((prev) => {
+      const cleaned: Record<string, string[]> = {};
+      let changed = false;
+      for (const group of product.modifierGroups) {
+        const current = prev[group.id] ?? [];
+        const filtered = current.filter((modId) => {
+          const modifier = group.modifiers.find((mod) => mod.id === modId);
+          return modifier ? isModifierAvailable(modifier, selectedSizeId) : false;
+        });
+        cleaned[group.id] = filtered;
+        if (filtered.length !== current.length) changed = true;
+      }
+      return changed ? cleaned : prev;
+    });
+  }, [selectedSizeId, product]);
+
+  useEffect(() => {
     if (!isAuthenticated) {
       router.replace("/login");
     }
@@ -74,14 +92,30 @@ export default function ProductDetailPage() {
     return mods;
   }, [product, selectedModifiers]);
 
+  const isModifierAvailable = (modifier: Modifier, sizeId: string | null): boolean => {
+    if (!modifier.sizeRestricted) return true;
+    if (!sizeId) return true;
+    return modifier.sizePrices?.some(
+      (sizePrice: ModifierSizePrice) => sizePrice.productSizeId === sizeId,
+    ) ?? false;
+  };
+
+  const getModifierPrice = (modifier: Modifier, sizeId: string | null): number => {
+    if (!sizeId) return modifier.priceAdjustment;
+    const sizeOverride = modifier.sizePrices?.find(
+      (sizePrice: ModifierSizePrice) => sizePrice.productSizeId === sizeId,
+    );
+    return sizeOverride ? sizeOverride.priceAdjustment : modifier.priceAdjustment;
+  };
+
   const unitPrice = useMemo(() => {
     const sizePrice = selectedSize?.price ?? product?.basePrice ?? 0;
     const modSum = allSelectedModifiers.reduce(
-      (sum, modifierOption) => sum + modifierOption.priceAdjustment,
+      (sum, modifierOption) => sum + getModifierPrice(modifierOption, selectedSizeId),
       0,
     );
     return sizePrice + modSum;
-  }, [selectedSize, product, allSelectedModifiers]);
+  }, [selectedSize, product, allSelectedModifiers, selectedSizeId]);
 
   const totalPrice = unitPrice * quantity;
 
@@ -133,7 +167,7 @@ export default function ProductDetailPage() {
       selectedModifiers: allSelectedModifiers.map((selectedModifier) => ({
         id: selectedModifier.id,
         name: selectedModifier.name,
-        priceAdjustment: selectedModifier.priceAdjustment,
+        priceAdjustment: getModifierPrice(selectedModifier, selectedSizeId),
       })),
       quantity,
       unitPrice,
@@ -238,7 +272,12 @@ export default function ProductDetailPage() {
                       : "border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-gray-300"
                   }`}
                 >
-                  {size.name} — ${size.price.toFixed(2)}
+                  <span>{size.name} — ${size.price.toFixed(2)}</span>
+                  {size.description && (
+                    <span className="block text-xs text-gray-400 font-normal">
+                      {size.description}
+                    </span>
+                  )}
                 </button>
               ))}
             </div>
@@ -248,7 +287,9 @@ export default function ProductDetailPage() {
         {/* Modifier groups */}
         {product.modifierGroups.map((group) => {
           const activeModifiers = group.modifiers.filter(
-            (modifierOption) => modifierOption.isActive,
+            (modifierOption) =>
+              modifierOption.isActive &&
+              isModifierAvailable(modifierOption, selectedSizeId),
           );
           if (activeModifiers.length === 0) return null;
           const groupSelection = selectedModifiers[group.id] ?? [];
@@ -305,12 +346,15 @@ export default function ProductDetailPage() {
                           {mod.name}
                         </span>
                       </div>
-                      {mod.priceAdjustment !== 0 && (
-                        <span className="font-body text-sm text-gray-500">
-                          {mod.priceAdjustment > 0 ? "+" : ""}$
-                          {mod.priceAdjustment.toFixed(2)}
-                        </span>
-                      )}
+                      {(() => {
+                        const displayPrice = getModifierPrice(mod, selectedSizeId);
+                        return displayPrice !== 0 ? (
+                          <span className="font-body text-sm text-gray-500">
+                            {displayPrice > 0 ? "+" : ""}$
+                            {displayPrice.toFixed(2)}
+                          </span>
+                        ) : null;
+                      })()}
                     </button>
                   );
                 })}

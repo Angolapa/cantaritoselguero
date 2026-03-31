@@ -15,7 +15,6 @@ export interface Product {
   image?: string;
   stock?: number;
   isActive: boolean;
-  standId?: string;
   createdAt: string;
   updatedAt: string;
   sizes: ProductSize[];
@@ -32,7 +31,6 @@ export interface CreateProductRequest {
   image?: string;
   stock?: number;
   isActive?: boolean;
-  standId?: string;
 }
 
 export interface UpdateProductRequest {
@@ -44,7 +42,6 @@ export interface UpdateProductRequest {
   image?: string;
   stock?: number | null;
   isActive?: boolean;
-  standId?: string;
 }
 
 // --- Product Size ---
@@ -55,6 +52,9 @@ export interface ProductSize {
   name: string;
   nameEs?: string;
   nameEn?: string;
+  description?: string | null;
+  descriptionEs?: string;
+  descriptionEn?: string;
   price: number;
   stock?: number | null;
   sortOrder: number;
@@ -65,6 +65,8 @@ export interface ProductSize {
 export interface CreateSizeRequest {
   nameEs: string;
   nameEn: string;
+  descriptionEs?: string;
+  descriptionEn?: string;
   price: number;
   stock?: number | null;
   sortOrder?: number;
@@ -75,6 +77,8 @@ export interface CreateSizeRequest {
 export interface UpdateSizeRequest {
   nameEs?: string;
   nameEn?: string;
+  descriptionEs?: string;
+  descriptionEn?: string;
   price?: number;
   stock?: number | null;
   sortOrder?: number;
@@ -118,6 +122,11 @@ export interface UpdateModifierGroupRequest {
 
 // --- Modifier ---
 
+export interface ModifierSizePrice {
+  productSizeId: string;
+  priceAdjustment: number;
+}
+
 export interface Modifier {
   id: string;
   groupId: string;
@@ -127,8 +136,10 @@ export interface Modifier {
   priceAdjustment: number;
   isDefault: boolean;
   isActive: boolean;
+  sizeRestricted: boolean;
   sortOrder: number;
   tags?: Tag[];
+  sizePrices?: ModifierSizePrice[];
 }
 
 export interface CreateModifierRequest {
@@ -137,6 +148,7 @@ export interface CreateModifierRequest {
   priceAdjustment?: number;
   isDefault?: boolean;
   isActive?: boolean;
+  sizeRestricted?: boolean;
   sortOrder?: number;
 }
 
@@ -146,5 +158,10 @@ export interface UpdateModifierRequest {
   priceAdjustment?: number;
   isDefault?: boolean;
   isActive?: boolean;
+  sizeRestricted?: boolean;
   sortOrder?: number;
+}
+
+export interface UpdateModifierSizePricesRequest {
+  sizePrices: ModifierSizePrice[];
 }

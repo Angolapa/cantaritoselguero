@@ -15,6 +15,7 @@ export { useProductSizes } from "./useProductSizes";
 export { useRemoveModifierTag } from "./useRemoveModifierTag";
 export { useRemoveProductTag } from "./useRemoveProductTag";
 export { useUpdateModifier } from "./useUpdateModifier";
+export { useUpdateModifierSizePrices } from "./useUpdateModifierSizePrices";
 export { useUpdateModifierGroup } from "./useUpdateModifierGroup";
 export { useUpdateProduct } from "./useUpdateProduct";
 export { useUpdateSize } from "./useUpdateSize";

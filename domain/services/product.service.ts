@@ -9,6 +9,7 @@ import {
   ProductSize,
   UpdateModifierGroupRequest,
   UpdateModifierRequest,
+  UpdateModifierSizePricesRequest,
   UpdateProductRequest,
   UpdateSizeRequest,
 } from "@/domain/types";
@@ -155,6 +156,22 @@ export const productService = {
       `/products/${productId}/modifier-groups/${groupId}/modifiers/${id}`,
       {
         method: "DELETE",
+      },
+    ),
+
+  // --- Modifier Size Prices ---
+
+  updateModifierSizePrices: (
+    productId: string,
+    groupId: string,
+    modifierId: string,
+    data: UpdateModifierSizePricesRequest,
+  ): Promise<void> =>
+    authFetcher<void>(
+      `/products/${productId}/modifier-groups/${groupId}/modifiers/${modifierId}/size-prices`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(data),
       },
     ),
 

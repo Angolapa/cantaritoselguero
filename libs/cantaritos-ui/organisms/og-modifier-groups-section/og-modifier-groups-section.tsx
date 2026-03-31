@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-import { Card, CardBody } from "@heroui/react";
 import { Plus, Settings } from "lucide-react";
 
 import { AtButton, AtInput } from "@/libs/cantaritos-ui/atoms";
@@ -20,6 +19,7 @@ import { OgModifierGroupsSectionProps } from "./og-modifier-groups-section.types
 export function OgModifierGroupsSection({
   productId,
   modifierGroups,
+  sizes,
 }: OgModifierGroupsSectionProps) {
   // Group form state
   const [showGroupForm, setShowGroupForm] = useState(false);
@@ -130,8 +130,8 @@ export function OgModifierGroupsSection({
   const isSavingGroup = createGroup.isPending || updateGroup.isPending;
 
   return (
-    <Card shadow="sm">
-      <CardBody className="p-6">
+    <div className="rounded-xl border border-gray-200 bg-white shadow-sm">
+      <div className="p-6">
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Settings className="h-5 w-5 text-primary" />
@@ -154,10 +154,14 @@ export function OgModifierGroupsSection({
               <MlModifierGroupCard
                 productId={productId}
                 group={group}
+                sizes={sizes}
                 onEdit={handleOpenEditGroup}
-                onDeleteModifier={(groupId, modifierId) =>
-                  deleteModifier.mutate({ productId, groupId, modifierId })
-                }
+                onDeleteModifier={(groupId, modifierId) => {
+                  const modifier = group.modifiers.find((mod) => mod.id === modifierId);
+                  const modifierName = modifier?.name ?? "este modificador";
+                  if (!window.confirm(`Eliminar "${modifierName}"?`)) return;
+                  deleteModifier.mutate({ productId, groupId, modifierId });
+                }}
               />
 
               {/* Inline modifier form for this group */}
@@ -295,7 +299,7 @@ export function OgModifierGroupsSection({
             </p>
           )}
         </div>
-      </CardBody>
-    </Card>
+      </div>
+    </div>
   );
 }
