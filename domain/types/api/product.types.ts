@@ -1,38 +1,47 @@
+import { Tag } from "./tag.types";
+
 // --- Product ---
+
 
 export interface Product {
   id: string;
   name: string;
+  nameEs?: string;
+  nameEn?: string;
   description?: string;
+  descriptionEs?: string;
+  descriptionEn?: string;
   basePrice: number;
   image?: string;
   stock?: number;
   isActive: boolean;
-  standId?: string;
   createdAt: string;
   updatedAt: string;
   sizes: ProductSize[];
   modifierGroups: ModifierGroup[];
+  tags?: Tag[];
 }
 
 export interface CreateProductRequest {
-  name: string;
-  description?: string;
+  nameEs: string;
+  nameEn: string;
+  descriptionEs?: string;
+  descriptionEn?: string;
   basePrice: number;
   image?: string;
   stock?: number;
   isActive?: boolean;
-  standId?: string;
 }
 
 export interface UpdateProductRequest {
-  name?: string;
-  description?: string;
+  nameEs?: string;
+  nameEn?: string;
+  descriptionEs?: string;
+  descriptionEn?: string;
   basePrice?: number;
   image?: string;
-  stock?: number;
+  stock?: number | null;
   isActive?: boolean;
-  standId?: string;
 }
 
 // --- Product Size ---
@@ -41,6 +50,11 @@ export interface ProductSize {
   id: string;
   productId: string;
   name: string;
+  nameEs?: string;
+  nameEn?: string;
+  description?: string | null;
+  descriptionEs?: string;
+  descriptionEn?: string;
   price: number;
   stock?: number | null;
   sortOrder: number;
@@ -49,7 +63,10 @@ export interface ProductSize {
 }
 
 export interface CreateSizeRequest {
-  name: string;
+  nameEs: string;
+  nameEn: string;
+  descriptionEs?: string;
+  descriptionEn?: string;
   price: number;
   stock?: number | null;
   sortOrder?: number;
@@ -58,7 +75,10 @@ export interface CreateSizeRequest {
 }
 
 export interface UpdateSizeRequest {
-  name?: string;
+  nameEs?: string;
+  nameEn?: string;
+  descriptionEs?: string;
+  descriptionEn?: string;
   price?: number;
   stock?: number | null;
   sortOrder?: number;
@@ -72,6 +92,8 @@ export interface ModifierGroup {
   id: string;
   productId: string;
   name: string;
+  nameEs?: string;
+  nameEn?: string;
   description?: string;
   minSelect: number;
   maxSelect: number;
@@ -81,7 +103,8 @@ export interface ModifierGroup {
 }
 
 export interface CreateModifierGroupRequest {
-  name: string;
+  nameEs: string;
+  nameEn: string;
   description?: string;
   minSelect?: number;
   maxSelect?: number;
@@ -89,7 +112,8 @@ export interface CreateModifierGroupRequest {
 }
 
 export interface UpdateModifierGroupRequest {
-  name?: string;
+  nameEs?: string;
+  nameEn?: string;
   description?: string;
   minSelect?: number;
   maxSelect?: number;
@@ -98,28 +122,46 @@ export interface UpdateModifierGroupRequest {
 
 // --- Modifier ---
 
+export interface ModifierSizePrice {
+  productSizeId: string;
+  priceAdjustment: number;
+}
+
 export interface Modifier {
   id: string;
   groupId: string;
   name: string;
+  nameEs?: string;
+  nameEn?: string;
   priceAdjustment: number;
   isDefault: boolean;
   isActive: boolean;
+  sizeRestricted: boolean;
   sortOrder: number;
+  tags?: Tag[];
+  sizePrices?: ModifierSizePrice[];
 }
 
 export interface CreateModifierRequest {
-  name: string;
+  nameEs: string;
+  nameEn: string;
   priceAdjustment?: number;
   isDefault?: boolean;
   isActive?: boolean;
+  sizeRestricted?: boolean;
   sortOrder?: number;
 }
 
 export interface UpdateModifierRequest {
-  name?: string;
+  nameEs?: string;
+  nameEn?: string;
   priceAdjustment?: number;
   isDefault?: boolean;
   isActive?: boolean;
+  sizeRestricted?: boolean;
   sortOrder?: number;
+}
+
+export interface UpdateModifierSizePricesRequest {
+  sizePrices: ModifierSizePrice[];
 }

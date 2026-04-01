@@ -1,6 +1,8 @@
 export interface ProductFormValues {
-  name: string;
-  description: string;
+  nameEs: string;
+  nameEn: string;
+  descriptionEs: string;
+  descriptionEn: string;
   basePrice: string;
   stock: string;
 }

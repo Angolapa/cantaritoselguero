@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 
-import { Card, CardBody } from "@heroui/react";
-import { Plus,Ruler } from "lucide-react";
+import { Plus, Ruler } from "lucide-react";
 
 import { AtButton } from "@/libs/cantaritos-ui/atoms";
 import { MlSizeRow } from "@/libs/cantaritos-ui/molecules";
@@ -19,31 +18,62 @@ export function OgSizesSection({ productId, sizes }: OgSizesSectionProps) {
   const [showNewRow, setShowNewRow] = useState(false);
   const [updatingSizeId, setUpdatingSizeId] = useState<string | null>(null);
 
-  const handleCreateSize = (values: { name: string; price: number; stock?: number | null }) => {
+  const handleCreateSize = (values: {
+    nameEs: string;
+    nameEn: string;
+    descriptionEs?: string;
+    descriptionEn?: string;
+    price: number;
+    stock?: number | null;
+  }) => {
     createSize.mutate(
-      { productId, data: { name: values.name, price: values.price, stock: values.stock } },
+      {
+        productId,
+        data: {
+          nameEs: values.nameEs,
+          nameEn: values.nameEn,
+          descriptionEs: values.descriptionEs,
+          descriptionEn: values.descriptionEn,
+          price: values.price,
+          stock: values.stock,
+        },
+      },
       { onSuccess: () => setShowNewRow(false) },
     );
   };
 
   const handleUpdateSize = (
     sizeId: string,
-    values: { name: string; price: number; stock?: number | null },
+    values: {
+      nameEs: string;
+      nameEn: string;
+      descriptionEs?: string;
+      descriptionEn?: string;
+      price: number;
+      stock?: number | null;
+    },
   ) => {
     setUpdatingSizeId(sizeId);
     updateSize.mutate(
       {
         productId,
         id: sizeId,
-        data: { name: values.name, price: values.price, stock: values.stock },
+        data: {
+          nameEs: values.nameEs,
+          nameEn: values.nameEn,
+          descriptionEs: values.descriptionEs,
+          descriptionEn: values.descriptionEn,
+          price: values.price,
+          stock: values.stock,
+        },
       },
       { onSettled: () => setUpdatingSizeId(null) },
     );
   };
 
   return (
-    <Card shadow="sm">
-      <CardBody className="p-6">
+    <div className="rounded-xl border border-gray-200 bg-white shadow-sm">
+      <div className="p-6">
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Ruler className="h-5 w-5 text-primary" />
@@ -85,7 +115,7 @@ export function OgSizesSection({ productId, sizes }: OgSizesSectionProps) {
             </p>
           )}
         </div>
-      </CardBody>
-    </Card>
+      </div>
+    </div>
   );
 }

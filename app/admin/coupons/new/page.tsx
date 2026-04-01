@@ -23,13 +23,15 @@ export default function NewCouponPage() {
   const isLoading = createCoupon.isPending;
 
   const handleSubmit = (values: CouponFormValues) => {
-    if (!values.name.trim()) return;
-    if (!values.discountPercent || !values.maxDiscount || !values.totalQuantity || !values.expiresAt) return;
+    if (!values.nameEs.trim()) return;
+    if (!values.discountPercent || 
+      !values.maxDiscount || !values.totalQuantity || !values.expiresAt) return;
 
     createCoupon.mutate(
       {
         type: values.type as "GLOBAL" | "UNIQUE",
-        name: values.name.trim(),
+        nameEs: values.nameEs.trim(),
+        nameEn: values.nameEn.trim() || undefined,
         discountPercent: Number(values.discountPercent),
         maxDiscount: Number(values.maxDiscount),
         totalQuantity: Number(values.totalQuantity),

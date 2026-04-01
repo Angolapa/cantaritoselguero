@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 
 import { ArrowLeft, Minus, Package, Plus } from "lucide-react";
@@ -8,7 +9,7 @@ import { ArrowLeft, Minus, Package, Plus } from "lucide-react";
 import { OgNavbar } from "@/libs/cantaritos-ui";
 import { useProduct } from "@/domain/hooks/products";
 import { useAuthStore, useCartStore } from "@/domain/stores";
-import type { Modifier, ModifierGroup } from "@/domain/types";
+import type { Modifier, ModifierGroup, ModifierSizePrice } from "@/domain/types";
 
 export default function ProductDetailPage() {
   const router = useRouter();
@@ -20,11 +21,46 @@ export default function ProductDetailPage() {
 
   const { data: product, isLoading } = useProduct(productId);
 
+  const [lastSyncedProductId, setLastSyncedProductId] = useState<string | null>(null);
   const [selectedSizeId, setSelectedSizeId] = useState<string | null>(null);
   const [selectedModifiers, setSelectedModifiers] = useState<
     Record<string, string[]>
   >({});
   const [quantity, setQuantity] = useState(1);
+
+  if (product && product.id !== lastSyncedProductId) {
+    const defaultSize =
+      product.sizes.find((sizeOption) => sizeOption.isDefault && sizeOption.isActive) ||
+      product.sizes.find((sizeOption) => sizeOption.isActive);
+    setSelectedSizeId(defaultSize?.id ?? null);
+
+    const defaults: Record<string, string[]> = {};
+    for (const group of product.modifierGroups) {
+      defaults[group.id] = group.modifiers
+        .filter((modifierOption) => modifierOption.isDefault && modifierOption.isActive)
+        .map((modifierOption) => modifierOption.id);
+    }
+    setSelectedModifiers(defaults);
+    setLastSyncedProductId(product.id);
+  }
+
+  useEffect(() => {
+    if (!product || !selectedSizeId) return;
+    setSelectedModifiers((prev) => {
+      const cleaned: Record<string, string[]> = {};
+      let changed = false;
+      for (const group of product.modifierGroups) {
+        const current = prev[group.id] ?? [];
+        const filtered = current.filter((modId) => {
+          const modifier = group.modifiers.find((mod) => mod.id === modId);
+          return modifier ? isModifierAvailable(modifier, selectedSizeId) : false;
+        });
+        cleaned[group.id] = filtered;
+        if (filtered.length !== current.length) changed = true;
+      }
+      return changed ? cleaned : prev;
+    });
+  }, [selectedSizeId, product]);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -32,39 +68,13 @@ export default function ProductDetailPage() {
     }
   }, [isAuthenticated, router]);
 
-  // Set default size when product loads
-  useEffect(() => {
-    if (product && !selectedSizeId) {
-      const defaultSize =
-        product.sizes.find((s) => s.isDefault && s.isActive) ||
-        product.sizes.find((s) => s.isActive);
-      if (defaultSize) {
-        setSelectedSizeId(defaultSize.id);
-      }
-    }
-  }, [product, selectedSizeId]);
-
-  // Set default modifiers when product loads
-  useEffect(() => {
-    if (product && Object.keys(selectedModifiers).length === 0) {
-      const defaults: Record<string, string[]> = {};
-      for (const group of product.modifierGroups) {
-        const defaultMods = group.modifiers
-          .filter((m) => m.isDefault && m.isActive)
-          .map((m) => m.id);
-        defaults[group.id] = defaultMods;
-      }
-      setSelectedModifiers(defaults);
-    }
-  }, [product, selectedModifiers]);
-
   const activeSizes = useMemo(
-    () => product?.sizes.filter((s) => s.isActive) ?? [],
+    () => product?.sizes.filter((sizeOption) => sizeOption.isActive) ?? [],
     [product],
   );
 
   const selectedSize = useMemo(
-    () => activeSizes.find((s) => s.id === selectedSizeId),
+    () => activeSizes.find((sizeOption) => sizeOption.id === selectedSizeId),
     [activeSizes, selectedSizeId],
   );
 
@@ -82,14 +92,30 @@ export default function ProductDetailPage() {
     return mods;
   }, [product, selectedModifiers]);
 
+  const isModifierAvailable = (modifier: Modifier, sizeId: string | null): boolean => {
+    if (!modifier.sizeRestricted) return true;
+    if (!sizeId) return true;
+    return modifier.sizePrices?.some(
+      (sizePrice: ModifierSizePrice) => sizePrice.productSizeId === sizeId,
+    ) ?? false;
+  };
+
+  const getModifierPrice = (modifier: Modifier, sizeId: string | null): number => {
+    if (!sizeId) return modifier.priceAdjustment;
+    const sizeOverride = modifier.sizePrices?.find(
+      (sizePrice: ModifierSizePrice) => sizePrice.productSizeId === sizeId,
+    );
+    return sizeOverride ? sizeOverride.priceAdjustment : modifier.priceAdjustment;
+  };
+
   const unitPrice = useMemo(() => {
     const sizePrice = selectedSize?.price ?? product?.basePrice ?? 0;
     const modSum = allSelectedModifiers.reduce(
-      (sum, m) => sum + m.priceAdjustment,
+      (sum, modifierOption) => sum + getModifierPrice(modifierOption, selectedSizeId),
       0,
     );
     return sizePrice + modSum;
-  }, [selectedSize, product, allSelectedModifiers]);
+  }, [selectedSize, product, allSelectedModifiers, selectedSizeId]);
 
   const totalPrice = unitPrice * quantity;
 
@@ -138,10 +164,10 @@ export default function ProductDetailPage() {
         name: selectedSize.name,
         price: selectedSize.price,
       },
-      selectedModifiers: allSelectedModifiers.map((m) => ({
-        id: m.id,
-        name: m.name,
-        priceAdjustment: m.priceAdjustment,
+      selectedModifiers: allSelectedModifiers.map((selectedModifier) => ({
+        id: selectedModifier.id,
+        name: selectedModifier.name,
+        priceAdjustment: getModifierPrice(selectedModifier, selectedSizeId),
       })),
       quantity,
       unitPrice,
@@ -196,12 +222,13 @@ export default function ProductDetailPage() {
         </button>
 
         {/* Product image */}
-        <div className="aspect-square max-h-80 w-full rounded-2xl bg-gray-100 dark:bg-gray-800 overflow-hidden">
+        <div className="relative aspect-square max-h-80 w-full rounded-2xl bg-gray-100 dark:bg-gray-800 overflow-hidden">
           {product.image ? (
-            <img
+            <Image
               src={product.image}
               alt={product.name}
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
@@ -245,7 +272,12 @@ export default function ProductDetailPage() {
                       : "border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-gray-300"
                   }`}
                 >
-                  {size.name} — ${size.price.toFixed(2)}
+                  <span>{size.name} — ${size.price.toFixed(2)}</span>
+                  {size.description && (
+                    <span className="block text-xs text-gray-400 font-normal">
+                      {size.description}
+                    </span>
+                  )}
                 </button>
               ))}
             </div>
@@ -254,7 +286,11 @@ export default function ProductDetailPage() {
 
         {/* Modifier groups */}
         {product.modifierGroups.map((group) => {
-          const activeModifiers = group.modifiers.filter((m) => m.isActive);
+          const activeModifiers = group.modifiers.filter(
+            (modifierOption) =>
+              modifierOption.isActive &&
+              isModifierAvailable(modifierOption, selectedSizeId),
+          );
           if (activeModifiers.length === 0) return null;
           const groupSelection = selectedModifiers[group.id] ?? [];
           const isRadio = group.maxSelect === 1;
@@ -310,12 +346,15 @@ export default function ProductDetailPage() {
                           {mod.name}
                         </span>
                       </div>
-                      {mod.priceAdjustment !== 0 && (
-                        <span className="font-body text-sm text-gray-500">
-                          {mod.priceAdjustment > 0 ? "+" : ""}$
-                          {mod.priceAdjustment.toFixed(2)}
-                        </span>
-                      )}
+                      {(() => {
+                        const displayPrice = getModifierPrice(mod, selectedSizeId);
+                        return displayPrice !== 0 ? (
+                          <span className="font-body text-sm text-gray-500">
+                            {displayPrice > 0 ? "+" : ""}$
+                            {displayPrice.toFixed(2)}
+                          </span>
+                        ) : null;
+                      })()}
                     </button>
                   );
                 })}
@@ -331,7 +370,11 @@ export default function ProductDetailPage() {
           </h2>
           <div className="flex items-center gap-4">
             <button
-              onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+              onClick={() =>
+                setQuantity((currentQuantity) =>
+                  Math.max(1, currentQuantity - 1),
+                )
+              }
               className="h-10 w-10 rounded-full border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:border-primary hover:text-primary transition-colors"
             >
               <Minus className="h-4 w-4" />
@@ -340,7 +383,7 @@ export default function ProductDetailPage() {
               {quantity}
             </span>
             <button
-              onClick={() => setQuantity((q) => q + 1)}
+              onClick={() => setQuantity((currentQuantity) => currentQuantity + 1)}
               className="h-10 w-10 rounded-full border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:border-primary hover:text-primary transition-colors"
             >
               <Plus className="h-4 w-4" />

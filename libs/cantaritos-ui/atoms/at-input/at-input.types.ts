@@ -6,6 +6,7 @@ export interface AtInputProps
   size?: "sm" | "md" | "lg";
   isRequired?: boolean;
   isDisabled?: boolean;
+  isInvalid?: boolean;
   startContent?: ReactNode;
   endContent?: ReactNode;
   value?: string;

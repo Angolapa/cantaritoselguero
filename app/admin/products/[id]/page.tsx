@@ -5,7 +5,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import { Spinner } from "@heroui/react";
 import { ArrowLeft } from "lucide-react";
 
 import {
@@ -14,6 +13,7 @@ import {
   MlImageUpload,
   OgModifierGroupsSection,
   OgProductForm,
+  OgProductTagsSection,
   OgSizesSection,
 } from "@/libs/cantaritos-ui";
 import { ProductFormValues } from "@/libs/cantaritos-ui/organisms/og-product-form";
@@ -37,20 +37,22 @@ export default function EditProductPage({
   const isSaving = updateProduct.isPending || uploadImage.isPending;
 
   const handleSubmit = (values: ProductFormValues) => {
-    if (!values.name.trim()) return;
+    if (!values.nameEs.trim()) return;
 
     const basePrice = Number(values.basePrice);
     if (!Number.isFinite(basePrice) || basePrice < 0) return;
 
-    const stock = values.stock ? Number(values.stock) : undefined;
-    if (stock !== undefined && (!Number.isFinite(stock) || stock < 0)) return;
+    const stock = values.stock ? Number(values.stock) : null;
+    if (stock !== null && (!Number.isFinite(stock) || stock < 0)) return;
 
     updateProduct.mutate(
       {
         id,
         data: {
-          name: values.name.trim(),
-          description: values.description || undefined,
+          nameEs: values.nameEs.trim(),
+          nameEn: values.nameEn.trim(),
+          descriptionEs: values.descriptionEs || undefined,
+          descriptionEn: values.descriptionEn || undefined,
           basePrice,
           stock,
           isActive,
@@ -69,7 +71,10 @@ export default function EditProductPage({
   if (isLoadingProduct) {
     return (
       <div className="flex h-96 items-center justify-center">
-        <Spinner label="Cargando producto..." />
+        <div className="flex flex-col items-center gap-2">
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+          <span className="text-sm text-gray-500">Cargando producto...</span>
+        </div>
       </div>
     );
   }
@@ -130,8 +135,10 @@ export default function EditProductPage({
         <div className="lg:col-span-2 space-y-6">
           <OgProductForm
             defaultValues={{
-              name: product.name,
-              description: product.description ?? "",
+              nameEs: product.nameEs ?? "",
+              nameEn: product.nameEn ?? "",
+              descriptionEs: product.descriptionEs ?? product.description ?? "",
+              descriptionEn: product.descriptionEn ?? "",
               basePrice: product.basePrice.toString(),
               stock: product.stock?.toString() ?? "",
             }}
@@ -145,6 +152,7 @@ export default function EditProductPage({
           <OgModifierGroupsSection
             productId={id}
             modifierGroups={product.modifierGroups ?? []}
+            sizes={product.sizes ?? []}
           />
         </div>
         <div className="space-y-6">
@@ -156,6 +164,10 @@ export default function EditProductPage({
           <MlAvailabilityCard
             isActive={isActive}
             onActiveChange={setIsActiveOverride}
+          />
+          <OgProductTagsSection
+            productId={id}
+            currentTags={product.tags ?? []}
           />
         </div>
       </div>

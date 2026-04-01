@@ -13,6 +13,7 @@ export function AtInput({
   size = "md",
   isRequired = false,
   isDisabled = false,
+  isInvalid = false,
   startContent,
   endContent,
   value,
@@ -22,6 +23,10 @@ export function AtInput({
   ...props
 }: AtInputProps) {
   const sizes = sizeStyles[size];
+
+  const borderClass = isInvalid
+    ? "border-red-500 ring-2 ring-red-500/20"
+    : "border-gray-300 dark:border-gray-700 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20";
 
   return (
     <div className={`flex flex-col gap-1.5 ${className}`}>
@@ -35,7 +40,7 @@ export function AtInput({
         </label>
       )}
       <div
-        className={`flex items-center rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 px-3 transition-colors focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 ${
+        className={`flex items-center rounded-xl ${borderClass} bg-white dark:bg-gray-800 px-3 transition-colors ${
           isDisabled ? "opacity-60 cursor-not-allowed bg-gray-50" : ""
         } ${sizes.wrapper} ${classNames?.inputWrapper ?? ""}`}
       >

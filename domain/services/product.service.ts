@@ -9,6 +9,7 @@ import {
   ProductSize,
   UpdateModifierGroupRequest,
   UpdateModifierRequest,
+  UpdateModifierSizePricesRequest,
   UpdateProductRequest,
   UpdateSizeRequest,
 } from "@/domain/types";
@@ -48,6 +49,19 @@ export const productService = {
       body: formData,
     });
   },
+
+  // --- Tags ---
+
+  assignTags: (productId: string, tagIds: string[]): Promise<Product> =>
+    authFetcher<Product>(`/products/${productId}/tags`, {
+      method: "POST",
+      body: JSON.stringify({ tagIds }),
+    }),
+
+  removeTag: (productId: string, tagId: string): Promise<void> =>
+    authFetcher<void>(`/products/${productId}/tags/${tagId}`, {
+      method: "DELETE",
+    }),
 
   // --- Sizes ---
 
@@ -99,6 +113,11 @@ export const productService = {
       body: JSON.stringify(data),
     }),
 
+  deleteModifierGroup: (productId: string, id: string): Promise<void> =>
+    authFetcher<void>(`/products/${productId}/modifier-groups/${id}`, {
+      method: "DELETE",
+    }),
+
   // --- Modifiers ---
 
   getModifiers: (productId: string, groupId: string): Promise<Modifier[]> =>
@@ -130,6 +149,63 @@ export const productService = {
       {
         method: "PATCH",
         body: JSON.stringify(data),
+      },
+    ),
+
+  deleteModifier: (
+    productId: string,
+    groupId: string,
+    id: string,
+  ): Promise<void> =>
+    authFetcher<void>(
+      `/products/${productId}/modifier-groups/${groupId}/modifiers/${id}`,
+      {
+        method: "DELETE",
+      },
+    ),
+
+  // --- Modifier Size Prices ---
+
+  updateModifierSizePrices: (
+    productId: string,
+    groupId: string,
+    modifierId: string,
+    data: UpdateModifierSizePricesRequest,
+  ): Promise<void> =>
+    authFetcher<void>(
+      `/products/${productId}/modifier-groups/${groupId}/modifiers/${modifierId}/size-prices`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(data),
+      },
+    ),
+
+  // --- Modifier Tags ---
+
+  assignModifierTags: (
+    productId: string,
+    groupId: string,
+    modifierId: string,
+    tagIds: string[],
+  ): Promise<Modifier> =>
+    authFetcher<Modifier>(
+      `/products/${productId}/modifier-groups/${groupId}/modifiers/${modifierId}/tags`,
+      {
+        method: "POST",
+        body: JSON.stringify({ tagIds }),
+      },
+    ),
+
+  removeModifierTag: (
+    productId: string,
+    groupId: string,
+    modifierId: string,
+    tagId: string,
+  ): Promise<void> =>
+    authFetcher<void>(
+      `/products/${productId}/modifier-groups/${groupId}/modifiers/${modifierId}/tags/${tagId}`,
+      {
+        method: "DELETE",
       },
     ),
 };
