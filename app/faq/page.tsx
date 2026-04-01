@@ -340,7 +340,7 @@ const faqDataEs: FaqItem[] = [
       <div className="space-y-2">
         <p>Envíanos:</p>
         <ol className="list-decimal pl-5 space-y-1">
-          <li>Descripción detallada</li>
+          <li>Descripción detallada del objeto al correo: atención@cantaritoselguero.mx</li>
           <li>Día y hora aproximada</li>
           <li>Zona donde lo dejaste</li>
           <li>Foto (si tienes)</li>
@@ -350,8 +350,10 @@ const faqDataEs: FaqItem[] = [
           operación.
         </p>
         <p>
-          Si no hay registro, no podremos garantizar su recuperación. No nos
-          hacemos responsables por objetos perdidos.
+          Si no hay registro, no podemos garantizar su recuperación.
+        </p>
+        <p>
+          No nos hacemos responsables por objetos perdidos.
         </p>
       </div>
     ),

@@ -5,7 +5,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import { Spinner } from "@heroui/react";
 import { ArrowLeft } from "lucide-react";
 
 import {
@@ -72,7 +71,10 @@ export default function EditProductPage({
   if (isLoadingProduct) {
     return (
       <div className="flex h-96 items-center justify-center">
-        <Spinner label="Cargando producto..." />
+        <div className="flex flex-col items-center gap-2">
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+          <span className="text-sm text-gray-500">Cargando producto...</span>
+        </div>
       </div>
     );
   }
@@ -150,6 +152,7 @@ export default function EditProductPage({
           <OgModifierGroupsSection
             productId={id}
             modifierGroups={product.modifierGroups ?? []}
+            sizes={product.sizes ?? []}
           />
         </div>
         <div className="space-y-6">

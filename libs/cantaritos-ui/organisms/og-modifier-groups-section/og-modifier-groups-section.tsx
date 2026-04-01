@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-import { Card, CardBody } from "@heroui/react";
 import { Plus, Settings } from "lucide-react";
 
 import { AtButton, AtInput } from "@/libs/cantaritos-ui/atoms";
@@ -11,15 +10,18 @@ import {
   useCreateModifier,
   useCreateModifierGroup,
   useDeleteModifier,
+  useDeleteModifierGroup,
+  useUpdateModifier,
   useUpdateModifierGroup,
 } from "@/domain/hooks/products";
-import { ModifierGroup } from "@/domain/types";
+import { Modifier, ModifierGroup } from "@/domain/types";
 
 import { OgModifierGroupsSectionProps } from "./og-modifier-groups-section.types";
 
 export function OgModifierGroupsSection({
   productId,
   modifierGroups,
+  sizes,
 }: OgModifierGroupsSectionProps) {
   // Group form state
   const [showGroupForm, setShowGroupForm] = useState(false);
@@ -31,13 +33,16 @@ export function OgModifierGroupsSection({
 
   // Modifier form state
   const [addingModifierGroupId, setAddingModifierGroupId] = useState<string | null>(null);
+  const [editingModifier, setEditingModifier] = useState<{ groupId: string; modifier: Modifier } | null>(null);
   const [modifierNameEs, setModifierNameEs] = useState("");
   const [modifierNameEn, setModifierNameEn] = useState("");
   const [modifierPrice, setModifierPrice] = useState("0");
 
   const createGroup = useCreateModifierGroup();
   const updateGroup = useUpdateModifierGroup();
+  const deleteGroup = useDeleteModifierGroup();
   const createModifier = useCreateModifier();
+  const updateModifier = useUpdateModifier();
   const deleteModifier = useDeleteModifier();
 
   const resetGroupForm = () => {
@@ -54,6 +59,7 @@ export function OgModifierGroupsSection({
     setModifierNameEn("");
     setModifierPrice("0");
     setAddingModifierGroupId(null);
+    setEditingModifier(null);
   };
 
   const handleOpenCreateGroup = () => {
@@ -111,7 +117,26 @@ export function OgModifierGroupsSection({
   };
 
   const handleSaveModifier = () => {
-    if (!addingModifierGroupId || !modifierNameEs.trim() || !modifierNameEn.trim()) return;
+    if (!modifierNameEs.trim() || !modifierNameEn.trim()) return;
+
+    if (editingModifier) {
+      updateModifier.mutate(
+        {
+          productId,
+          groupId: editingModifier.groupId,
+          id: editingModifier.modifier.id,
+          data: {
+            nameEs: modifierNameEs.trim(),
+            nameEn: modifierNameEn.trim(),
+            priceAdjustment: parseFloat(modifierPrice) || 0,
+          },
+        },
+        { onSuccess: resetModifierForm },
+      );
+      return;
+    }
+
+    if (!addingModifierGroupId) return;
 
     createModifier.mutate(
       {
@@ -127,11 +152,20 @@ export function OgModifierGroupsSection({
     );
   };
 
+  const handleOpenEditModifier = (groupId: string, modifier: Modifier) => {
+    setAddingModifierGroupId(null);
+    setEditingModifier({ groupId, modifier });
+    setModifierNameEs(modifier.nameEs ?? modifier.name ?? "");
+    setModifierNameEn(modifier.nameEn ?? "");
+    setModifierPrice(modifier.priceAdjustment.toString());
+  };
+
+  const isSavingModifier = createModifier.isPending || updateModifier.isPending;
   const isSavingGroup = createGroup.isPending || updateGroup.isPending;
 
   return (
-    <Card shadow="sm">
-      <CardBody className="p-6">
+    <div className="rounded-xl border border-gray-200 bg-white shadow-sm">
+      <div className="p-6">
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Settings className="h-5 w-5 text-primary" />
@@ -154,14 +188,23 @@ export function OgModifierGroupsSection({
               <MlModifierGroupCard
                 productId={productId}
                 group={group}
+                sizes={sizes}
                 onEdit={handleOpenEditGroup}
-                onDeleteModifier={(groupId, modifierId) =>
-                  deleteModifier.mutate({ productId, groupId, modifierId })
-                }
+                onDelete={(group) => {
+                  if (!window.confirm(`Eliminar grupo "${group.name}"? Esta acción no se puede deshacer.`)) return;
+                  deleteGroup.mutate({ productId, id: group.id });
+                }}
+                onEditModifier={handleOpenEditModifier}
+                onDeleteModifier={(groupId, modifierId) => {
+                  const modifier = group.modifiers.find((mod) => mod.id === modifierId);
+                  const modifierName = modifier?.name ?? "este modificador";
+                  if (!window.confirm(`Eliminar "${modifierName}"?`)) return;
+                  deleteModifier.mutate({ productId, groupId, modifierId });
+                }}
               />
 
-              {/* Inline modifier form for this group */}
-              {addingModifierGroupId === group.id ? (
+              {/* Inline modifier form for this group (create or edit) */}
+              {(addingModifierGroupId === group.id || editingModifier?.groupId === group.id) ? (
                 <div className="ml-4 flex items-end gap-3 rounded-lg border border-gray-200 bg-gray-50 p-3">
                   <div className="flex-1">
                     <AtInput
@@ -170,7 +213,7 @@ export function OgModifierGroupsSection({
                       placeholder="Ej: Chile habanero"
                       value={modifierNameEs}
                       onValueChange={setModifierNameEs}
-                      isDisabled={createModifier.isPending}
+                      isDisabled={isSavingModifier}
                     />
                   </div>
                   <div className="flex-1">
@@ -180,7 +223,7 @@ export function OgModifierGroupsSection({
                       placeholder="E.g: Habanero chile"
                       value={modifierNameEn}
                       onValueChange={setModifierNameEn}
-                      isDisabled={createModifier.isPending}
+                      isDisabled={isSavingModifier}
                     />
                   </div>
                   <div className="w-32">
@@ -192,22 +235,22 @@ export function OgModifierGroupsSection({
                       startContent={<span className="text-sm text-gray-400">$</span>}
                       value={modifierPrice}
                       onValueChange={setModifierPrice}
-                      isDisabled={createModifier.isPending}
+                      isDisabled={isSavingModifier}
                     />
                   </div>
                   <AtButton
                     color="primary"
                     size="sm"
                     onPress={handleSaveModifier}
-                    isLoading={createModifier.isPending}
+                    isLoading={isSavingModifier}
                   >
-                    Agregar
+                    {editingModifier ? "Guardar" : "Agregar"}
                   </AtButton>
                   <AtButton
                     variant="light"
                     size="sm"
                     onPress={resetModifierForm}
-                    isDisabled={createModifier.isPending}
+                    isDisabled={isSavingModifier}
                   >
                     Cancelar
                   </AtButton>
@@ -295,7 +338,7 @@ export function OgModifierGroupsSection({
             </p>
           )}
         </div>
-      </CardBody>
-    </Card>
+      </div>
+    </div>
   );
 }

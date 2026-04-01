@@ -74,7 +74,7 @@ export default function HomePage() {
             </>}
             buttonLabel={translate("home.preOrder.button")}
             buttonHref="/compra-anticipada"
-            imageSrc="/images/Anticipa_tu_consumo.png"
+            imageSrc="/images/Anticipa_tu_consumo.svg"
             imageAlt="Ilustración de compra anticipada"
             titleColor="text-[#14222F]"
             descriptionColor="text-[#14222F]"
@@ -99,7 +99,7 @@ export default function HomePage() {
             </>}
             buttonLabel={translate("home.reservation.button")}
             buttonHref="/reservaciones"
-            imageSrc="/images/Reservaciones.png"
+            imageSrc="/images/Reservaciones.svg"
             imageAlt="Ilustración de reservaciones"
             titleColor="text-[#EDDCB6]"
             subtitleColor="text-[#FFAF32]"
@@ -121,11 +121,11 @@ export default function HomePage() {
             </>}
             buttonLabel={translate("home.shuttle.button")}
             buttonHref="/ruta-al-guero"
-            imageSrc="/images/Ruta_al_Guero.png"
+            imageSrc="/images/Ruta_al_Guero.svg"
             imageAlt="Ilustración de la ruta al Güero"
-            titleColor="text-[#1E293B]"
-            subtitleColor="text-[#1E293B]"
-            descriptionColor="text-[#1E293B]/80"
+            titleColor="text-[#14222F]"
+            subtitleColor="text-[#14222F]"
+            descriptionColor="text-[#14222F]"
             buttonVariant="dark"
           />
         </section>

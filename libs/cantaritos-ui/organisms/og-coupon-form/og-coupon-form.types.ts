@@ -1,6 +1,7 @@
 export interface CouponFormValues {
   type: string;
-  name: string;
+  nameEs: string;
+  nameEn: string;
   discountPercent: string;
   maxDiscount: string;
   totalQuantity: string;

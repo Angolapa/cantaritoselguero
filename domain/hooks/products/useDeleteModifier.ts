@@ -15,7 +15,7 @@ export function useDeleteModifier() {
       groupId: string;
       modifierId: string;
     }) => productService.deleteModifier(productId, groupId, modifierId),
-    onSuccess: (_result, variables) => {
+    onSettled: (_result, _error, variables) => {
       queryClient.invalidateQueries({
         queryKey: ["products", variables.productId],
         exact: true,

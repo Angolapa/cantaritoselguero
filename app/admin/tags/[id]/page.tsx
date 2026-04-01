@@ -109,8 +109,8 @@ export default function EditTagPage({
         <div className="lg:col-span-2">
           <OgTagForm
             defaultValues={{
-              nameEs: tag.name,
-              nameEn: "",
+              nameEs: tag.nameEs ?? tag.name,
+              nameEn: tag.nameEn ?? "",
             }}
             onSubmit={handleSubmit}
             isLoading={isSaving}
