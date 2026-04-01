@@ -112,7 +112,7 @@ export default function NosotrosPage() {
           </div>
           {/* Mobile image */}
           <Image
-            src="/images/Origen-del-guero.png"
+            src="/images/Origen-del-guero.svg"
             alt={translate("about.heroImageAlt")}
             width={243}
             height={288}
@@ -122,7 +122,7 @@ export default function NosotrosPage() {
           {/* Desktop image */}
           <div className="hidden lg:flex lg:justify-end lg:items-end lg:max-w-[50%]">
             <Image
-              src="/images/Origen-del-güero-desktop.png"
+              src="/images/Origen-del-güero-desktop.svg"
               alt={translate("about.heroImageAlt")}
               width={473}
               height={561}
@@ -204,7 +204,7 @@ export default function NosotrosPage() {
 
           {/* Mobile image */}
           <Image
-            src="/images/celebration-agave.png"
+            src="/images/celebration-agave.svg"
             alt="Celebración con agave"
             width={300}
             height={350}
@@ -389,7 +389,7 @@ export default function NosotrosPage() {
             <div className="flex flex-col items-center">
               <div className="h-[167px] flex items-end justify-center mb-2">
                 <Image
-                  src="/images/charisma-vendor.png"
+                  src="/images/charisma-vendor.svg"
                   alt={translate("about.pillarCharisma")}
                   width={100}
                   height={155}

@@ -22,6 +22,8 @@ export function MlModifierGroupCard({
   sizes,
   onEdit,
   onRemove,
+  onDelete,
+  onEditModifier,
   onDeleteModifier,
 }: MlModifierGroupCardProps) {
   const selectType = group.maxSelect === 1 ? "Seleccion unica" : "Multi-seleccion";
@@ -181,6 +183,18 @@ export function MlModifierGroupCard({
               <Unlink className="h-4 w-4" />
             </AtButton>
           )}
+          {onDelete && (
+            <AtButton
+              isIconOnly
+              variant="light"
+              size="sm"
+              color="danger"
+              onPress={() => onDelete(group)}
+              aria-label="Eliminar grupo"
+            >
+              <Trash2 className="h-4 w-4" />
+            </AtButton>
+          )}
         </div>
       </div>
 
@@ -227,6 +241,17 @@ export function MlModifierGroupCard({
                         ) : (
                           <ChevronDown className="h-3.5 w-3.5" />
                         )}
+                      </AtButton>
+                    )}
+                    {onEditModifier && (
+                      <AtButton
+                        isIconOnly
+                        variant="light"
+                        size="sm"
+                        onPress={() => onEditModifier(group.id, modifier)}
+                        aria-label="Editar modificador"
+                      >
+                        <Pencil className="h-3.5 w-3.5" />
                       </AtButton>
                     )}
                     {onDeleteModifier && (

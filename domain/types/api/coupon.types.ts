@@ -11,6 +11,8 @@ export interface Coupon {
   id: string;
   type: "GLOBAL" | "UNIQUE";
   name: string;
+  nameEs: string;
+  nameEn: string | null;
   discountPercent: number;
   maxDiscount: number;
   totalQuantity: number;
@@ -24,7 +26,8 @@ export interface Coupon {
 
 export interface CreateCouponRequest {
   type: "GLOBAL" | "UNIQUE";
-  name: string;
+  nameEs: string;
+  nameEn?: string;
   discountPercent: number;
   maxDiscount: number;
   totalQuantity: number;
@@ -33,7 +36,8 @@ export interface CreateCouponRequest {
 }
 
 export interface UpdateCouponRequest {
-  name?: string;
+  nameEs?: string;
+  nameEn?: string;
   discountPercent?: number;
   maxDiscount?: number;
   totalQuantity?: number;

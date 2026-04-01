@@ -113,6 +113,11 @@ export const productService = {
       body: JSON.stringify(data),
     }),
 
+  deleteModifierGroup: (productId: string, id: string): Promise<void> =>
+    authFetcher<void>(`/products/${productId}/modifier-groups/${id}`, {
+      method: "DELETE",
+    }),
+
   // --- Modifiers ---
 
   getModifiers: (productId: string, groupId: string): Promise<Modifier[]> =>

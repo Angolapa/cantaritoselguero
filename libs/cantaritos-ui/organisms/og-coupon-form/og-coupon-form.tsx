@@ -37,7 +37,8 @@ export function OgCouponForm({
             const formData = new FormData(e.currentTarget);
             onSubmit({
               type: (formData.get("type") ?? "GLOBAL").toString().trim(),
-              name: (formData.get("name") ?? "").toString().trim(),
+              nameEs: (formData.get("nameEs") ?? "").toString().trim(),
+              nameEn: (formData.get("nameEn") ?? "").toString().trim(),
               discountPercent: (formData.get("discountPercent") ?? "").toString().trim(),
               maxDiscount: (formData.get("maxDiscount") ?? "").toString().trim(),
               totalQuantity: (formData.get("totalQuantity") ?? "").toString().trim(),
@@ -63,14 +64,23 @@ export function OgCouponForm({
               ))}
             </select>
           </div>
-          <AtInput
-            label="Nombre del cupón"
-            name="name"
-            placeholder="Ej: VERANO2026"
-            defaultValue={defaultValues?.name}
-            isRequired
-            isDisabled={isLoading}
-          />
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <AtInput
+              label="Nombre (Español)"
+              name="nameEs"
+              placeholder="Ej: VERANO2026"
+              defaultValue={defaultValues?.nameEs}
+              isRequired
+              isDisabled={isLoading}
+            />
+            <AtInput
+              label="Nombre (Inglés)"
+              name="nameEn"
+              placeholder="Ej: SUMMER2026"
+              defaultValue={defaultValues?.nameEn}
+              isDisabled={isLoading}
+            />
+          </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <AtInput
               label="Porcentaje de descuento"

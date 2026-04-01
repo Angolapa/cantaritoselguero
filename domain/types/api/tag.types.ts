@@ -3,6 +3,8 @@
 export interface Tag {
   id: string;
   name: string;
+  nameEs: string;
+  nameEn: string | null;
   isActive: boolean;
   createdAt: string;
   updatedAt: string;

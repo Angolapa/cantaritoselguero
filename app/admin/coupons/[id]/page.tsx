@@ -39,13 +39,14 @@ export default function EditCouponPage({
   const isSaving = updateCoupon.isPending;
 
   const handleSubmit = (values: CouponFormValues) => {
-    if (!values.name.trim()) return;
+    if (!values.nameEs.trim()) return;
 
     updateCoupon.mutate(
       {
         id,
         data: {
-          name: values.name.trim(),
+          nameEs: values.nameEs.trim(),
+          nameEn: values.nameEn.trim() || undefined,
           discountPercent: Number(values.discountPercent),
           maxDiscount: Number(values.maxDiscount),
           totalQuantity: Number(values.totalQuantity),
@@ -126,7 +127,8 @@ export default function EditCouponPage({
           <OgCouponForm
             defaultValues={{
               type: coupon.type,
-              name: coupon.name,
+              nameEs: coupon.nameEs,
+              nameEn: coupon.nameEn ?? "",
               discountPercent: String(coupon.discountPercent),
               maxDiscount: String(coupon.maxDiscount),
               totalQuantity: String(coupon.totalQuantity),

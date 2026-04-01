@@ -5,6 +5,7 @@ export { useCreateModifierGroup } from "./useCreateModifierGroup";
 export { useCreateProduct } from "./useCreateProduct";
 export { useCreateSize } from "./useCreateSize";
 export { useDeleteModifier } from "./useDeleteModifier";
+export { useDeleteModifierGroup } from "./useDeleteModifierGroup";
 export { useDeleteProduct } from "./useDeleteProduct";
 export { useDeleteSize } from "./useDeleteSize";
 export { useModifierGroups } from "./useModifierGroups";

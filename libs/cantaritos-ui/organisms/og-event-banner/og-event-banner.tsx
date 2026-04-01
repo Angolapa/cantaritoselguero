@@ -39,7 +39,7 @@ export function OgEventBanner() {
           <div className="order-2 md:order-2 flex flex-col items-center md:-mt-[90px]">
             <div className="relative w-[220px] h-[220px] md:w-[436px] md:h-[453px]">
               <Image
-                src="/images/card_1.png"
+                src="/images/card_1.svg"
                 alt="Carrito Cantaritos El Guero"
                 fill
                 className="object-contain"
@@ -56,7 +56,7 @@ export function OgEventBanner() {
                   {translate("eventBanner.button")}
                 </Link>
                 <Image
-                  src="/images/point_out.png"
+                  src="/images/point_out.svg"
                   alt=""
                   width={108}
                   height={108}
@@ -74,22 +74,22 @@ export function OgEventBanner() {
                   SI NO VIENES
                   <br />
                   AL{" "}
-                  <span className="text-[#E9DCB7] font-extrabold">G<span className="mr-[2px]">Ü</span>ERO,</span>
+                  <span className="text-[#E9DCB7]">G<span className="mr-[2px]">Ü</span>ERO,</span>
                   <br />
                   EL G<span className="mr-[2px]">Ü</span>ERO VA
                   <br />
-                  <span className="text-[#FFAF32] font-extrabold">CONTIGO.</span>
+                  <span className="text-[#FFAF32]">CONTIGO.</span>
                 </>
               ) : (
                 <>
                   CAN&apos;T MAKE IT
                   <br />
                   TO THE{" "}
-                  <span className="text-[#E9DCB7] font-extrabold">G<span className="mr-[2px]">Ü</span>ERO?</span>
+                  <span className="text-[#E9DCB7]">G<span className="mr-[2px]">Ü</span>ERO?</span>
                   <br />
                   WE&apos;LL BRING THE G<span className="mr-[2px]">Ü</span>ERO
                   <br />
-                  <span className="text-[#FFAF32] font-extrabold">TO YOU.</span>
+                  <span className="text-[#FFAF32]">TO YOU.</span>
                 </>
               )}
             </h2>
@@ -107,7 +107,7 @@ export function OgEventBanner() {
 
             <div className="flex items-center gap-3 justify-center md:justify-start -ml-20 md:-ml-[50px]">
               <Image
-                src="/images/cantarito.png"
+                src="/images/cantarito.svg"
                 alt="Cantarito"
                 width={154}
                 height={156}
@@ -131,7 +131,7 @@ export function OgEventBanner() {
                 {translate("eventBanner.button")}
               </Link>
               <Image
-                src="/images/point_out.png"
+                src="/images/point_out.svg"
                 alt=""
                 width={50}
                 height={50}
