@@ -17,6 +17,9 @@ export function useAddProductToStand() {
     }) => standService.addProductToCatalog(standId, productId, sortOrder),
     onSuccess: (_, { standId }) => {
       queryClient.invalidateQueries({ queryKey: ["stands", standId] });
+      queryClient.invalidateQueries({
+        queryKey: ["stands", standId, "catalog"],
+      });
     },
   });
 }

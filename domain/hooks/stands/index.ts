@@ -5,5 +5,6 @@ export { useDeleteStand } from "./useDeleteStand";
 export { useRemoveOperator } from "./useRemoveOperator";
 export { useRemoveProductFromStand } from "./useRemoveProductFromStand";
 export { useStand } from "./useStand";
+export { useStandCatalog } from "./useStandCatalog";
 export { useStands } from "./useStands";
 export { useUpdateStand } from "./useUpdateStand";
