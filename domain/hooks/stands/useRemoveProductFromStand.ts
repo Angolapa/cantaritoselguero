@@ -15,6 +15,9 @@ export function useRemoveProductFromStand() {
     }) => standService.removeProductFromCatalog(standId, productId),
     onSuccess: (_, { standId }) => {
       queryClient.invalidateQueries({ queryKey: ["stands", standId] });
+      queryClient.invalidateQueries({
+        queryKey: ["stands", standId, "catalog"],
+      });
     },
   });
 }

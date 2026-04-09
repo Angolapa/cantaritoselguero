@@ -34,3 +34,21 @@ export interface UpdateStandRequest {
   location?: string;
   isActive?: boolean;
 }
+
+export interface StandCatalogItem {
+  productId: string;
+  name: string;
+  nameEs: string | null;
+  nameEn: string | null;
+  description: string | null;
+  basePrice: number;
+  image: string | null;
+  isActive: boolean;
+  sortOrder: number;
+}
+
+export interface StandCatalog {
+  standId: string;
+  standName: string;
+  items: StandCatalogItem[];
+}

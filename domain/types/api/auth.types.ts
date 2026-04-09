@@ -8,6 +8,7 @@ export interface RegisterRequest {
   email: string;
   password: string;
   phone?: string;
+  birthDate?: string; // ISO 8601 "YYYY-MM-DD"
 }
 
 export type UserRole =
@@ -21,6 +22,7 @@ export interface User {
   email: string;
   name: string;
   phone?: string;
+  birthDate?: string | null; // ISO datetime devuelto por el backend
   role: UserRole;
 }
 
