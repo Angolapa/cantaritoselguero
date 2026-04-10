@@ -212,7 +212,10 @@
     "mapSpeechMobileLine2": "perdido buscando la barra",
     "mapSpeechMobileLine3": "cuando ya traes sed.",
     "mapInviteLine1": "El lugar es grande, el ambiente también.",
-    "mapInviteLine2": "Date una vuelta, explora y encuentra tu spot favorito."
+    "mapInviteLine2": "Date una vuelta, explora y encuentra tu spot favorito.",
+    "mapInviteMobileLine1": "El lugar es grande, el ambiente también.",
+    "mapInviteMobileLine2": "Date una vuelta, explora y encuentra tu",
+    "mapInviteMobileLine3": "spot favorito."
   },
   "terms": {
     "title": "Términos y condiciones de compra y consumo",

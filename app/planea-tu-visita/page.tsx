@@ -541,12 +541,12 @@ export default function PlaneaTuVisitaPage() {
         <section className="bg-white pb-12 md:pb-20 xl:pb-28">
           <div className="max-w-[1440px] mx-auto px-5 sm:px-6 md:px-10 lg:px-16 xl:px-24">
             <div className="relative">
-              {/* Left arrow */}
+              {/* Left arrow — hidden on mobile */}
               <button
                 type="button"
                 onClick={scrollPrevTips}
                 aria-label="Anterior"
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 cursor-pointer hover:scale-110 transition-transform"
+                className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 z-10 cursor-pointer hover:scale-110 transition-transform"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -558,7 +558,7 @@ export default function PlaneaTuVisitaPage() {
 
               {/* Embla viewport */}
               <div
-                className="overflow-hidden mx-10 md:mx-14 xl:mx-20"
+                className="overflow-hidden mx-0 md:mx-14 xl:mx-20"
                 ref={tipsEmblaRef}
               >
                 {isLoadingTipsBanners ? (
@@ -575,13 +575,21 @@ export default function PlaneaTuVisitaPage() {
                       banner.imageUrl ? (
                         <div
                           key={banner.id}
-                          className="shrink-0 basis-full md:basis-1/2"
+                          className="shrink-0 basis-[85%] md:basis-1/2"
                         >
+                          {/* Mobile image (uses imageMobileUrl if available, fallback to imageUrl) */}
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={banner.imageMobileUrl || banner.imageUrl}
+                            alt={banner.altText}
+                            className="w-[310px] h-[389px] object-cover rounded-2xl mx-auto md:hidden"
+                          />
+                          {/* Desktop image */}
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src={banner.imageUrl}
                             alt={banner.altText}
-                            className="w-[310px] h-[389px] md:w-[420px] md:h-[514px] xl:w-[504px] xl:h-[614px] object-cover rounded-2xl mx-auto"
+                            className="hidden md:block md:w-[420px] md:h-[514px] xl:w-[504px] xl:h-[614px] object-cover rounded-2xl mx-auto"
                           />
                         </div>
                       ) : null,
@@ -590,12 +598,12 @@ export default function PlaneaTuVisitaPage() {
                 )}
               </div>
 
-              {/* Right arrow */}
+              {/* Right arrow — hidden on mobile */}
               <button
                 type="button"
                 onClick={scrollNextTips}
                 aria-label="Siguiente"
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 cursor-pointer hover:scale-110 transition-transform"
+                className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 z-10 cursor-pointer hover:scale-110 transition-transform"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -1063,16 +1071,48 @@ export default function PlaneaTuVisitaPage() {
             </div>
           </div>
 
-          {/* Invite (bottom): "El lugar es grande..." with map-pin icon */}
-          <div className="max-w-[820px] mx-auto px-5 sm:px-6 md:px-10 mt-8 md:mt-10 xl:mt-12">
+          {/* Invite (bottom): "El lugar es grande..." — Mobile */}
+          <div className="md:hidden max-w-[820px] mx-auto px-5 sm:px-6 mt-8">
             <div className="flex items-center" style={{ gap: 0 }}>
-              {/* spacer placeholder so the negative margin below works */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/map-pin-clouds-icon.svg"
                 alt=""
                 aria-hidden
-                className="block shrink-0 w-[120px] md:w-[160px] xl:w-[200px] h-auto"
+                className="block shrink-0 w-[90px] h-auto"
+                style={{ marginTop: "28px" }}
+              />
+              <p
+                className="font-body text-[#14222F]"
+                style={{
+                  marginLeft: "-10px",
+                  fontWeight: 500,
+                  fontSize: "12px",
+                  lineHeight: "100%",
+                }}
+              >
+                {translate("planVisit.mapInviteMobileLine1")}
+                <br />
+                <span style={{ display: "inline-block", marginTop: "6px" }}>
+                  {translate("planVisit.mapInviteMobileLine2")}
+                </span>
+                <br />
+                <span style={{ display: "inline-block", marginTop: "2px" }}>
+                  {translate("planVisit.mapInviteMobileLine3")}
+                </span>
+              </p>
+            </div>
+          </div>
+
+          {/* Invite (bottom): "El lugar es grande..." — Desktop */}
+          <div className="hidden md:block max-w-[820px] mx-auto px-5 sm:px-6 md:px-10 mt-10 xl:mt-12">
+            <div className="flex items-center" style={{ gap: 0 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/map-pin-clouds-icon.svg"
+                alt=""
+                aria-hidden
+                className="block shrink-0 w-[160px] xl:w-[200px] h-auto"
                 style={{ marginTop: "30px" }}
               />
               <p
@@ -1082,7 +1122,7 @@ export default function PlaneaTuVisitaPage() {
                   maxWidth: "100%",
                   marginLeft: "-30px",
                   fontWeight: 700,
-                  fontSize: "clamp(14px, 2.4vw, 24px)",
+                  fontSize: "clamp(18px, 2.4vw, 24px)",
                   lineHeight: "100%",
                   whiteSpace: "nowrap",
                 }}
