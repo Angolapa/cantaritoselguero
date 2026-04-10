@@ -10,6 +10,7 @@ import { OgBannerFormProps } from "./og-banner-form.types";
 
 const SECTION_OPTIONS = [
   { value: "home-carousel", label: "Carrusel Home" },
+  { value: "plan-visit-carousel", label: "Carrusel Planea tu Visita" },
 ];
 
 const LOCALE_OPTIONS = [
