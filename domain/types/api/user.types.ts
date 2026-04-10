@@ -12,11 +12,13 @@ export interface CreateUserRequest {
   email: string;
   password: string;
   phone?: string;
+  birthDate?: string; // ISO 8601 "YYYY-MM-DD"
 }
 
 export interface UpdateUserRequest {
   name?: string;
   email?: string;
   phone?: string;
+  birthDate?: string; // ISO 8601 "YYYY-MM-DD"
   role?: UserRole;
 }

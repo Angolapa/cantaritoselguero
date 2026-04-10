@@ -1,6 +1,7 @@
 import {
   CreateStandRequest,
   Stand,
+  StandCatalog,
   UpdateStandRequest,
 } from "@/domain/types";
 import { authFetcher } from "@/shared/utils/fetch";
@@ -38,6 +39,23 @@ export const standService = {
     authFetcher<Stand>(`/stands/${standId}/operators/${userId}`, {
       method: "DELETE",
     }),
+
+  getCatalog: (
+    standId: string,
+    options?: { active?: boolean; lang?: "es" | "en" },
+  ): Promise<StandCatalog> => {
+    const params = new URLSearchParams();
+    if (options?.active !== undefined) {
+      params.set("active", String(options.active));
+    }
+    if (options?.lang) {
+      params.set("lang", options.lang);
+    }
+    const queryString = params.toString();
+    return authFetcher<StandCatalog>(
+      `/stands/${standId}/catalog${queryString ? `?${queryString}` : ""}`,
+    );
+  },
 
   addProductToCatalog: (
     standId: string,

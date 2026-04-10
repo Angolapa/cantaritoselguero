@@ -28,6 +28,7 @@ import {
   useRemoveOperator,
   useRemoveProductFromStand,
   useStand,
+  useStandCatalog,
   useUpdateStand,
 } from "@/domain/hooks/stands";
 import { useUsers } from "@/domain/hooks/users";
@@ -37,6 +38,10 @@ export default function EditStandPage() {
   const standId = params.id as string;
 
   const { data: stand, isLoading: isLoadingStand } = useStand(standId);
+  const { data: standCatalog, isLoading: isLoadingCatalog } = useStandCatalog(
+    standId,
+    { active: false },
+  );
   const updateStand = useUpdateStand(standId);
   const assignOperator = useAssignOperator();
   const removeOperator = useRemoveOperator();
@@ -72,6 +77,7 @@ export default function EditStandPage() {
 
   const isLoading =
     isLoadingStand ||
+    isLoadingCatalog ||
     updateStand.isPending ||
     assignOperator.isPending ||
     removeOperator.isPending ||
@@ -170,16 +176,29 @@ export default function EditStandPage() {
     );
   }, [users, stand, searchOperators]);
 
-  // Filtrar productos disponibles
+  // Productos ya en el catálogo del stand
+  const catalogItems = standCatalog?.items ?? [];
+  const catalogProductIds = useMemo(
+    () => new Set(catalogItems.map((item) => item.productId)),
+    [catalogItems],
+  );
+
+  // Filtrar productos disponibles (excluyendo los ya agregados)
   const availableProducts = useMemo(() => {
     if (!products) return [];
     const searchTerm = searchProducts.trim().toLowerCase();
-    return products.filter((product) =>
-      !searchTerm ||
-      product.name.toLowerCase().includes(searchTerm) ||
-      product.description?.toLowerCase().includes(searchTerm),
+    return products.filter(
+      (product) =>
+        !catalogProductIds.has(product.id) &&
+        (!searchTerm ||
+          product.name.toLowerCase().includes(searchTerm) ||
+          product.description?.toLowerCase().includes(searchTerm)),
     );
-  }, [products, searchProducts]);
+  }, [products, searchProducts, catalogProductIds]);
+
+  const handleRemoveProduct = (productId: string) => {
+    removeProductFromStand.mutate({ standId, productId });
+  };
 
   if (isLoadingStand) {
     return <div className="text-center py-10">Cargando...</div>;
@@ -477,6 +496,11 @@ export default function EditStandPage() {
                             <div className="min-w-0 flex-1">
                               <p className="truncate text-sm font-medium text-gray-900">
                                 {product.name}
+                                {!product.isActive && (
+                                  <span className="ml-2 rounded bg-gray-200 px-1.5 py-0.5 text-[10px] font-medium uppercase text-gray-600">
+                                    Inactivo
+                                  </span>
+                                )}
                               </p>
                               <p className="line-clamp-2 text-xs text-gray-500">
                                 {product.description || "Sin descripción"}
@@ -501,13 +525,84 @@ export default function EditStandPage() {
               </CardBody>
             </Card>
 
+            {/* Productos en el catálogo */}
+            <Card shadow="sm">
+              <CardBody className="p-6">
+                <h3 className="font-semibold mb-4">
+                  Productos en el catálogo ({catalogItems.length})
+                </h3>
+                {isLoadingCatalog ? (
+                  <p className="py-4 text-center text-sm text-gray-400">
+                    Cargando catálogo...
+                  </p>
+                ) : catalogItems.length > 0 ? (
+                  <div className="space-y-2">
+                    {catalogItems.map((item) => (
+                      <div
+                        key={item.productId}
+                        className="flex items-center justify-between gap-3 rounded-lg bg-gray-50 p-3"
+                      >
+                        <div className="flex min-w-0 items-center gap-3">
+                          <div className="h-10 w-10 shrink-0 overflow-hidden rounded bg-gray-100">
+                            {item.image ? (
+                              <Image
+                                src={item.image}
+                                alt={item.name}
+                                width={40}
+                                height={40}
+                                className="h-full w-full object-cover"
+                              />
+                            ) : (
+                              <div className="flex h-full w-full items-center justify-center text-xs text-gray-400">
+                                IMG
+                              </div>
+                            )}
+                          </div>
+                          <div className="min-w-0">
+                            <p className="truncate text-sm font-medium text-gray-900">
+                              {item.name}
+                              {!item.isActive && (
+                                <span className="ml-2 rounded bg-gray-200 px-1.5 py-0.5 text-[10px] font-medium uppercase text-gray-600">
+                                  Inactivo
+                                </span>
+                              )}
+                            </p>
+                            <p className="truncate text-xs text-gray-500">
+                              ${item.basePrice.toFixed(2)}
+                            </p>
+                          </div>
+                        </div>
+                        <Button
+                          isIconOnly
+                          variant="light"
+                          className="text-red-600 hover:bg-red-50"
+                          onPress={() => handleRemoveProduct(item.productId)}
+                          isDisabled={removeProductFromStand.isPending}
+                          aria-label={`Quitar ${item.name}`}
+                        >
+                          <X className="h-5 w-5" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-gray-500">
+                    No hay productos en el catálogo de este stand
+                  </p>
+                )}
+              </CardBody>
+            </Card>
+
             {/* Nota sobre el catálogo */}
             <Card shadow="sm" className="bg-blue-50 border border-blue-200">
               <CardBody className="p-6">
                 <p className="text-sm text-blue-900">
-                  💡 Los productos añadidos aquí estarán disponibles en el
-                  catálogo de este stand. Los clientes solo podrán ordenar
-                  productos que estén asignados al stand.
+                  💡 Este es el listado de productos que se retiran en este
+                  stand. Cuando un cliente hace una compra, debe pasar por cada
+                  stand asignado a retirar sus productos. A medida que se
+                  entregan, la orden cambia automáticamente a{" "}
+                  <strong>parcialmente entregada</strong> y, al completarse
+                  todos los stands, a <strong>entregada</strong>.
                 </p>
               </CardBody>
             </Card>
