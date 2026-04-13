@@ -6,12 +6,15 @@ import Image from "next/image";
 interface MapZone {
   id: string;
   name: string;
+  nameEn?: string;
   src: string;
   /** Native size in px, taken from Figma */
   width: number;
   height: number;
-  /** Label lines rendered on top of the SVG. Empty/undefined → no label. */
+  /** Label lines rendered on top of the SVG (Spanish). Empty/undefined → no label. */
   labelLines?: string[];
+  /** Label lines for English. Falls back to labelLines if not provided. */
+  labelLinesEn?: string[];
   /** Label text color: "light" = white on dark shapes, "dark" = #14222F on beige */
   labelColor?: "light" | "dark";
   /** Vertical offset (px) applied to the label, positive = move down */
@@ -26,16 +29,19 @@ const MAP_ZONES: Record<string, MapZone> = {
   spotFoto: {
     id: "spot-foto",
     name: "Spot pa' la foto",
+    nameEn: "Photo Spot",
     src: "/images/Mapa/SpotpalaFoto.svg",
     width: 468,
     height: 79,
     labelLines: ["Spot pa' la foto"],
+    labelLinesEn: ["Photo Spot"],
     labelColor: "dark",
     photoUrl: "/images/Mapa/Fotos/Spot pa la foto.jpg",
   },
   coffe: {
     id: "coffe",
     name: "Cantarito Gigante",
+    nameEn: "Giant Cantarito",
     src: "/images/Mapa/coffe.svg",
     width: 60.499,
     height: 50.732,
@@ -44,39 +50,47 @@ const MAP_ZONES: Record<string, MapZone> = {
   banos: {
     id: "banos",
     name: "Baños",
+    nameEn: "Restrooms",
     src: "/images/Mapa/Banos.svg",
     width: 69,
     height: 59,
     labelLines: ["Baños"],
+    labelLinesEn: ["Restrooms"],
     labelColor: "dark",
   },
   tiendita: {
     id: "tiendita",
     name: "Tiendita del Güero",
+    nameEn: "Güero Shop",
     src: "/images/Mapa/TienditadelGuero.svg",
     width: 101,
     height: 44,
     labelLines: ["Tiendita", "del Güero"],
+    labelLinesEn: ["Güero", "Shop"],
     labelColor: "light",
     photoUrl: "/images/Mapa/Fotos/Tiendita del Güero.jpg",
   },
   barra3: {
     id: "barra-3",
     name: "Barra 3",
+    nameEn: "Cantarito Pickup 3",
     src: "/images/Mapa/Barra3.svg",
     width: 104,
     height: 105.579,
     labelLines: ["Barra 3"],
+    labelLinesEn: ["Cantarito", "Pickup 3"],
     labelColor: "light",
     photoUrl: "/images/Mapa/Fotos/barra3.jpg",
   },
   zona2Palapas: {
     id: "zona-2-palapas",
     name: "Zona 2 de Palapas",
+    nameEn: "Palapa Seating 2",
     src: "/images/Mapa/Zona2dePalapas.svg",
     width: 320,
     height: 228,
     labelLines: ["Zona 2", "de Palapas"],
+    labelLinesEn: ["Palapa", "Seating 2"],
     labelColor: "dark",
     labelOffsetY: 40,
     photoUrl: "/images/Mapa/Fotos/Zona 2 de palapas.jpg",
@@ -84,134 +98,161 @@ const MAP_ZONES: Record<string, MapZone> = {
   cantaresEstrella: {
     id: "cantares-estrella",
     name: "Cantares de Estrella",
+    nameEn: "Cantares de Estrella",
     src: "/images/Mapa/CantaresdeEstrella.svg",
     width: 99.025,
     height: 63.741,
     labelLines: ["Cantares", "de Estrella"],
+    labelLinesEn: ["Cantares", "de Estrella"],
     labelColor: "light",
     photoUrl: "/images/Mapa/Fotos/Cantares de Estrella.jpg",
   },
   cantaritoSpot: {
     id: "cantarito-spot",
     name: "Cantarito Spot de foto",
+    nameEn: "Cantarito Photo Spot",
     src: "/images/Mapa/CantaritoSpotdefoto.svg",
     width: 128,
     height: 65,
     labelLines: ["Cantarito", "Spot de foto"],
+    labelLinesEn: ["Cantarito", "Photo Spot"],
     labelColor: "light",
   },
   zona1Cajas: {
     id: "zona-1-cajas",
     name: "Zona 1 de Cajas",
+    nameEn: "Order & Pay 1",
     src: "/images/Mapa/Zona1deCajas.svg",
     width: 130.297,
     height: 66.303,
     labelLines: ["Zona 1", "de Cajas"],
+    labelLinesEn: ["Order &", "Pay 1"],
     labelColor: "light",
     photoUrl: "/images/Mapa/Fotos/Zona de cajas.JPG",
   },
   botanas: {
     id: "botanas",
     name: "Botanas y Bebidas",
+    nameEn: "Snacks & Drinks",
     src: "/images/Mapa/BotanasyBebidas.svg",
     width: 123.585,
     height: 61.256,
     labelLines: ["Botanas y", "Bebidas"],
+    labelLinesEn: ["Snacks &", "Drinks"],
     labelColor: "light",
     photoUrl: "/images/Mapa/Fotos/entrega botanas.jpg",
   },
   barra1: {
     id: "barra-1",
     name: "Barra 1",
+    nameEn: "Cantarito Pickup 1",
     src: "/images/Mapa/Barra1.svg",
     width: 131.936,
     height: 102.807,
     labelLines: ["Barra 1"],
+    labelLinesEn: ["Cantarito", "Pickup 1"],
     labelColor: "light",
     photoUrl: "/images/Mapa/Fotos/barra 1.jpg",
   },
   estacionamiento: {
     id: "estacionamiento",
     name: "Estacionamiento",
+    nameEn: "Parking",
     src: "/images/Mapa/Estacionamiento.svg",
     width: 189,
     height: 685,
     labelLines: ["Estacionamiento"],
+    labelLinesEn: ["Parking"],
     labelColor: "dark",
     photoUrl: "/images/Mapa/Fotos/estacionamiento.jpg",
   },
   segundaEntrada: {
     id: "segunda-entrada",
     name: "Segunda Entrada",
+    nameEn: "Secondary Entrance",
     src: "/images/Mapa/SegundaEntrada.svg",
     width: 121,
     height: 64,
     labelLines: ["Segunda", "Entrada"],
+    labelLinesEn: ["Secondary", "Entrance"],
     labelColor: "dark",
   },
   zona2Cajas: {
     id: "zona-2-cajas",
     name: "Zona 2 de Cajas",
+    nameEn: "Order & Pay 2",
     src: "/images/Mapa/Zona2deCajas.svg",
     width: 118.452,
     height: 66.303,
     labelLines: ["Zona 2", "de Cajas"],
+    labelLinesEn: ["Order &", "Pay 2"],
     labelColor: "light",
     photoUrl: "/images/Mapa/Fotos/Zona 2 de Cajas.jpg",
   },
   zona1Palapas: {
     id: "zona-1-palapas",
     name: "Zona 1 de Palapas",
+    nameEn: "Palapa Seating 1",
     src: "/images/Mapa/Zona1dePalapas.svg",
     width: 207,
     height: 272,
     labelLines: ["Zona 1", "de Palapas"],
+    labelLinesEn: ["Palapa", "Seating 1"],
     labelColor: "dark",
     photoUrl: "/images/Mapa/Fotos/Zona 1 de Palapas.jpg",
   },
   patio: {
     id: "patio",
     name: "Patio",
+    nameEn: "Patio",
     src: "/images/Mapa/Patio.svg",
     width: 71,
     height: 68,
     labelLines: ["Patio"],
+    labelLinesEn: ["Patio"],
     labelColor: "dark",
     photoUrl: "/images/Mapa/Fotos/Patio.jpg",
   },
   restaurante: {
     id: "restaurante",
     name: "Restaurante",
+    nameEn: "Restaurant",
     src: "/images/Mapa/Restaurante.svg",
     width: 113.609,
     height: 131,
     labelLines: ["Restaurante"],
+    labelLinesEn: ["Restaurant"],
     labelColor: "light",
     photoUrl: "/images/Mapa/Fotos/Restaurante.jpg",
   },
   barra2: {
     id: "barra-2",
     name: "Barra 2",
+    nameEn: "Cantarito Pickup 2",
     src: "/images/Mapa/Barra2.svg",
     width: 105.787,
     height: 130.371,
     labelLines: ["Barra 2"],
+    labelLinesEn: ["Cantarito", "Pickup 2"],
     labelColor: "light",
     photoUrl: "/images/Mapa/Fotos/barra 2.jpg",
   },
   entradaPrincipal: {
     id: "entrada-principal",
     name: "Entrada Principal",
+    nameEn: "Main Entrance",
     src: "/images/Mapa/EntradaPrincipal.svg",
     width: 195,
     height: 49,
     labelLines: ["Entrada Principal"],
+    labelLinesEn: ["Main Entrance"],
     labelColor: "dark",
     photoUrl: "/images/Mapa/Fotos/Entrada Principal.jpg",
   },
   entrada: {
     id: "entrada",
     name: "Entrada Estacionamiento",
+    nameEn: "Parking Entrance",
     src: "/images/Mapa/Entrada.svg",
     width: 153,
     height: 52,
@@ -219,20 +260,20 @@ const MAP_ZONES: Record<string, MapZone> = {
   carretera: {
     id: "carretera",
     name: "Carretera Internacional",
+    nameEn: "International Highway",
     src: "/images/Mapa/Carretera.svg",
     width: 750,
     height: 71.43,
     labelLines: [
       "Carretera internacional, Carr. Guadalajara - Tepic km 49 #4970, La Meza, 45380 Amatitán, Jal.",
     ],
+    labelLinesEn: [
+      "International Highway, Guadalajara–Tepic Rd. km 49 #4970, La Meza, 45380 Amatitán, Jalisco, Mexico",
+    ],
     labelColor: "dark",
   },
 };
 
-// Base canvas dimensions (matches the Figma frame). The grid container scales
-// proportionally and every tile is rendered at width/height in CSS px so it
-// scales together with the canvas via the wrapper's transform.
-const MAP_CANVAS_WIDTH = 800;
 
 const MAP_GRID_AREAS = `
   "estacionamiento spotFoto         spotFoto         spotFoto         spotFoto"
@@ -271,11 +312,14 @@ export default function PlaneaTuVisitaPage() {
     extraStyle?: React.CSSProperties,
   ) => {
     const isHovered = hoveredZoneId === zone.id;
+    const zoneName = locale === "en" && zone.nameEn ? zone.nameEn : zone.name;
+    const zoneLabels =
+      locale === "en" && zone.labelLinesEn ? zone.labelLinesEn : zone.labelLines;
     return (
       <div
         role="button"
         tabIndex={0}
-        aria-label={zone.name}
+        aria-label={zoneName}
         onClick={(event) => {
           event.stopPropagation();
           setSelectedZone(zone);
@@ -294,17 +338,17 @@ export default function PlaneaTuVisitaPage() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={zone.src}
-          alt={zone.name}
+          alt={zoneName}
           width={zone.width}
           height={zone.height}
           className="block pointer-events-none select-none"
           style={{ width: `${zone.width}px`, height: `${zone.height}px` }}
         />
-        {zone.labelLines && zone.labelLines.length > 0 ? (
+        {zoneLabels && zoneLabels.length > 0 ? (
           <span
             className="absolute inset-0 flex items-center justify-center pointer-events-none select-none text-center"
             style={{
-              fontFamily: 'var(--font-roboto-condensed), "Roboto Condensed", Roboto, sans-serif',
+              fontFamily: "var(--font-roboto-condensed), \"Roboto Condensed\", Roboto, sans-serif",
               fontSize: "12px",
               fontWeight: 500,
               lineHeight: "100%",
@@ -314,7 +358,7 @@ export default function PlaneaTuVisitaPage() {
             }}
           >
             <span>
-              {zone.labelLines.map((line, idx) => (
+              {zoneLabels.map((line, idx) => (
                 <span
                   key={idx}
                   className="block"
@@ -331,11 +375,11 @@ export default function PlaneaTuVisitaPage() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={zone.photoUrl}
-              alt={zone.name}
+              alt={zoneName}
               className="block w-full h-auto"
             />
             <span className="block px-2 py-1 text-[11px] font-body font-bold text-[#14222F] text-center">
-              {zone.name}
+              {zoneName}
             </span>
           </span>
         ) : null}
@@ -805,7 +849,7 @@ export default function PlaneaTuVisitaPage() {
                 overflowY: "visible",
               }}
             >
-            <div
+              <div
               style={{
                 position: "absolute",
                 top: 0,
@@ -840,33 +884,33 @@ export default function PlaneaTuVisitaPage() {
                 rowGap: "6px",
               }}
             >
-              {renderZoneTile(MAP_ZONES.spotFoto, "spotFoto")}
-              {renderZoneTile(MAP_ZONES.coffe, "coffe")}
-              {renderZoneTile(MAP_ZONES.banos, "banos")}
-              {renderZoneTile(MAP_ZONES.tiendita, "tiendita")}
-              {renderZoneTile(MAP_ZONES.barra3, "barra3")}
-              {renderZoneTile(MAP_ZONES.zona2Palapas, "zona2Palapas")}
-              {renderZoneTile(MAP_ZONES.cantaresEstrella, "cantaresEstrella")}
-              {renderZoneTile(MAP_ZONES.cantaritoSpot, "cantaritoSpot")}
-              {renderZoneTile(MAP_ZONES.zona1Cajas, "zona1Cajas")}
-              {renderZoneTile(MAP_ZONES.botanas, "botanas")}
-              {renderZoneTile(MAP_ZONES.barra1, "barra1")}
-              {renderZoneTile(MAP_ZONES.zona2Cajas, "zona2Cajas")}
-              {renderZoneTile(MAP_ZONES.restaurante, "restaurante")}
-              {renderZoneTile(MAP_ZONES.barra2, "barra2")}
-              {renderZoneTile(MAP_ZONES.entrada, "entrada")}
-              {renderZoneTile(MAP_ZONES.entradaPrincipal, "entradaPrincipal")}
-              {renderZoneTile(MAP_ZONES.carretera, "carretera", {
+                {renderZoneTile(MAP_ZONES.spotFoto, "spotFoto")}
+                {renderZoneTile(MAP_ZONES.coffe, "coffe")}
+                {renderZoneTile(MAP_ZONES.banos, "banos")}
+                {renderZoneTile(MAP_ZONES.tiendita, "tiendita")}
+                {renderZoneTile(MAP_ZONES.barra3, "barra3")}
+                {renderZoneTile(MAP_ZONES.zona2Palapas, "zona2Palapas")}
+                {renderZoneTile(MAP_ZONES.cantaresEstrella, "cantaresEstrella")}
+                {renderZoneTile(MAP_ZONES.cantaritoSpot, "cantaritoSpot")}
+                {renderZoneTile(MAP_ZONES.zona1Cajas, "zona1Cajas")}
+                {renderZoneTile(MAP_ZONES.botanas, "botanas")}
+                {renderZoneTile(MAP_ZONES.barra1, "barra1")}
+                {renderZoneTile(MAP_ZONES.zona2Cajas, "zona2Cajas")}
+                {renderZoneTile(MAP_ZONES.restaurante, "restaurante")}
+                {renderZoneTile(MAP_ZONES.barra2, "barra2")}
+                {renderZoneTile(MAP_ZONES.entrada, "entrada")}
+                {renderZoneTile(MAP_ZONES.entradaPrincipal, "entradaPrincipal")}
+                {renderZoneTile(MAP_ZONES.carretera, "carretera", {
                 alignSelf: "end",
               })}
 
-              {/* Direction: Guadalajara (left) */}
-              <div
+                {/* Direction: Guadalajara (left) */}
+                <div
                 className="flex items-center justify-start gap-2 pointer-events-none select-none"
                 style={{ gridArea: "guadalajara", justifySelf: "start" }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                   src="/images/arrow-left-guadalajara.svg"
                   alt=""
                   width={47}
@@ -874,49 +918,49 @@ export default function PlaneaTuVisitaPage() {
                   className="block shrink-0"
                   style={{ width: "47px", height: "40px" }}
                 />
-                <span
+                  <span
                   className="text-center"
                   style={{
                     fontFamily:
-                      'var(--font-roboto-condensed), "Roboto Condensed", Roboto, sans-serif',
+                      "var(--font-roboto-condensed), \"Roboto Condensed\", Roboto, sans-serif",
                     fontSize: "12px",
                     fontWeight: 500,
                     lineHeight: "100%",
                     color: "#000",
                   }}
                 >
-                  Guadalajara
-                  <br />
-                  <span style={{ display: "inline-block", marginTop: "4px" }}>
-                    a 45 min
+                    Guadalajara
+                    <br />
+                    <span style={{ display: "inline-block", marginTop: "4px" }}>
+                      {locale === "en" ? "— 45 min" : "a 45 min"}
+                    </span>
                   </span>
-                </span>
-              </div>
+                </div>
 
-              {/* Direction: Tequila (right) */}
-              <div
+                {/* Direction: Tequila (right) */}
+                <div
                 className="flex items-center justify-end gap-2 pointer-events-none select-none"
                 style={{ gridArea: "tequila", justifySelf: "end" }}
               >
-                <span
+                  <span
                   className="text-center"
                   style={{
                     fontFamily:
-                      'var(--font-roboto-condensed), "Roboto Condensed", Roboto, sans-serif',
+                      "var(--font-roboto-condensed), \"Roboto Condensed\", Roboto, sans-serif",
                     fontSize: "12px",
                     fontWeight: 500,
                     lineHeight: "100%",
                     color: "#000",
                   }}
                 >
-                  Tequila, Jalisco
-                  <br />
-                  <span style={{ display: "inline-block", marginTop: "4px" }}>
-                    Pueblo mágico a 15 min
+                    Tequila, Jalisco
+                    <br />
+                    <span style={{ display: "inline-block", marginTop: "4px" }}>
+                      {locale === "en" ? "— 15 min" : "Pueblo mágico a 15 min"}
+                    </span>
                   </span>
-                </span>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                   src="/images/arrow-right-tequila.svg"
                   alt=""
                   width={47}
@@ -924,10 +968,10 @@ export default function PlaneaTuVisitaPage() {
                   className="block shrink-0"
                   style={{ width: "47px", height: "40px" }}
                 />
-              </div>
+                </div>
 
-              {/* Estacionamiento (parent grid containing Segunda Entrada) */}
-              <div
+                {/* Estacionamiento (parent grid containing Segunda Entrada) */}
+                <div
                 role="button"
                 tabIndex={0}
                 aria-label={MAP_ZONES.estacionamiento.name}
@@ -950,12 +994,12 @@ export default function PlaneaTuVisitaPage() {
                   display: "grid",
                   gridTemplateColumns: "1fr 1fr 1fr",
                   gridTemplateRows: "1fr 1fr 1fr",
-                  gridTemplateAreas: `". . ." ". . segundaEntrada" ". . ."`,
+                  gridTemplateAreas: "\". . .\" \". . segundaEntrada\" \". . .\"",
                   placeItems: "center",
                 }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                   src={MAP_ZONES.estacionamiento.src}
                   alt={MAP_ZONES.estacionamiento.name}
                   width={MAP_ZONES.estacionamiento.width}
@@ -966,12 +1010,12 @@ export default function PlaneaTuVisitaPage() {
                     height: `${MAP_ZONES.estacionamiento.height}px`,
                   }}
                 />
-                {/* Estacionamiento label (top of the column) */}
-                <span
+                  {/* Estacionamiento label (top of the column) */}
+                  <span
                   className="absolute left-0 right-0 text-center pointer-events-none select-none"
                   style={{
                     top: "160px",
-                    fontFamily: 'var(--font-roboto-condensed), "Roboto Condensed", Roboto, sans-serif',
+                    fontFamily: "var(--font-roboto-condensed), \"Roboto Condensed\", Roboto, sans-serif",
                     fontSize: "12px",
                     fontWeight: 500,
                     lineHeight: "100%",
@@ -979,14 +1023,14 @@ export default function PlaneaTuVisitaPage() {
                     zIndex: 1,
                   }}
                 >
-                  Estacionamiento
-                </span>
-                {/* Entrada Estacionamiento label (bottom of the column) */}
-                <span
+                    {locale === "en" ? "Parking" : "Estacionamiento"}
+                  </span>
+                  {/* Entrada Estacionamiento label (bottom of the column) */}
+                  <span
                   className="absolute left-0 right-0 text-center pointer-events-none select-none"
                   style={{
                     bottom: "20px",
-                    fontFamily: 'var(--font-roboto-condensed), "Roboto Condensed", Roboto, sans-serif',
+                    fontFamily: "var(--font-roboto-condensed), \"Roboto Condensed\", Roboto, sans-serif",
                     fontSize: "12px",
                     fontWeight: 500,
                     lineHeight: "100%",
@@ -994,17 +1038,15 @@ export default function PlaneaTuVisitaPage() {
                     zIndex: 1,
                   }}
                 >
-                  Entrada
-                  <br />
-                  Estacionamiento
-                </span>
-                {renderZoneTile(MAP_ZONES.segundaEntrada, "segundaEntrada", {
+                    {locale === "en" ? <>Parking<br />Entrance</> : <>Entrada<br />Estacionamiento</>}
+                  </span>
+                  {renderZoneTile(MAP_ZONES.segundaEntrada, "segundaEntrada", {
                   zIndex: 2,
                 })}
-              </div>
+                </div>
 
-              {/* Zona 1 de Palapas (parent grid containing Patio) */}
-              <div
+                {/* Zona 1 de Palapas (parent grid containing Patio) */}
+                <div
                 role="button"
                 tabIndex={0}
                 aria-label={MAP_ZONES.zona1Palapas.name}
@@ -1027,12 +1069,12 @@ export default function PlaneaTuVisitaPage() {
                   display: "grid",
                   gridTemplateColumns: "1fr 0.9fr 1.1fr",
                   gridTemplateRows: "1.3fr 0.7fr 1fr",
-                  gridTemplateAreas: `". . patio" ". . ." ". . ."`,
+                  gridTemplateAreas: "\". . patio\" \". . .\" \". . .\"",
                   placeItems: "center",
                 }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                   src={MAP_ZONES.zona1Palapas.src}
                   alt={MAP_ZONES.zona1Palapas.name}
                   width={MAP_ZONES.zona1Palapas.width}
@@ -1043,15 +1085,15 @@ export default function PlaneaTuVisitaPage() {
                     height: `${MAP_ZONES.zona1Palapas.height}px`,
                   }}
                 />
-                {/* Zona 1 de Palapas label */}
-                <span
+                  {/* Zona 1 de Palapas label */}
+                  <span
                   className="absolute text-center pointer-events-none select-none"
                   style={{
                     left: "0",
                     right: "60px",
                     bottom: "70px",
                     fontFamily:
-                      'var(--font-roboto-condensed), "Roboto Condensed", Roboto, sans-serif',
+                      "var(--font-roboto-condensed), \"Roboto Condensed\", Roboto, sans-serif",
                     fontSize: "12px",
                     fontWeight: 500,
                     lineHeight: "100%",
@@ -1059,15 +1101,15 @@ export default function PlaneaTuVisitaPage() {
                     zIndex: 1,
                   }}
                 >
-                  Zona 1
-                  <br />
-                  <span style={{ display: "inline-block", marginTop: "2px" }}>
-                    de Palapas
+                    {locale === "en" ? "Palapa" : "Zona 1"}
+                    <br />
+                    <span style={{ display: "inline-block", marginTop: "2px" }}>
+                      {locale === "en" ? "Seating 1" : "de Palapas"}
+                    </span>
                   </span>
-                </span>
-                {renderZoneTile(MAP_ZONES.patio, "patio", { zIndex: 2 })}
+                  {renderZoneTile(MAP_ZONES.patio, "patio", { zIndex: 2 })}
+                </div>
               </div>
-            </div>
             </div>
           </div>
 
@@ -1136,6 +1178,189 @@ export default function PlaneaTuVisitaPage() {
             </div>
           </div>
         </section>
+
+        {/* Section 6: ¿Qué hacer cuando llegas al Güero? */}
+        <section className="relative overflow-hidden bg-white">
+          {/* Union.svg as full background (includes zigzag top edge + orange fill) */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/Union.svg"
+            alt=""
+            aria-hidden
+            className="absolute inset-0 w-full h-full object-cover object-top pointer-events-none select-none"
+          />
+
+          <div className="relative z-10 max-w-[1200px] mx-auto px-6 md:px-10 xl:px-16 pt-10 md:pt-14 xl:pt-20 pb-10 md:pb-16 xl:pb-20">
+            {/* Title + Llegas character */}
+            <div className="flex flex-col md:flex-row items-center md:items-start md:justify-center gap-4 md:gap-[77px] mb-8 md:mb-12">
+              <h2 className="font-heading text-[28px] md:text-4xl xl:text-[56px] leading-[100%] text-[#14222F] text-center md:text-left whitespace-nowrap md:mt-[40px]">
+                {translate("planVisit.howToTitleLine1")}
+                <br />
+                {translate("planVisit.howToTitleLine2")}
+              </h2>
+              <div className="relative shrink-0">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/Llegas.svg"
+                  alt=""
+                  className="w-[180px] md:w-[320px] xl:w-[413px] h-auto"
+                />
+                <p
+                  className="absolute pointer-events-none select-none"
+                  style={{
+                    top: "18%",
+                    left: "14%",
+                    width: "55%",
+                    fontFamily:
+                      "var(--font-roboto-condensed), \"Roboto Condensed\", Roboto, sans-serif",
+                    fontSize: "clamp(10px, 1.6vw, 24px)",
+                    fontWeight: 500,
+                    lineHeight: "100%",
+                    color: "#EDDCB6",
+                  }}
+                >
+                  {translate("planVisit.howToSpeechLine1")}
+                  <br />
+                  <span style={{ display: "inline-block", marginTop: "4px" }}>
+                    {translate("planVisit.howToSpeechLine2")}
+                  </span>
+                  <br />
+                  <span style={{ display: "inline-block", marginTop: "4px" }}>
+                    {translate("planVisit.howToSpeechLine3")}
+                  </span>
+                  <br />
+                  <span style={{ display: "inline-block", marginTop: "4px" }}>
+                    {translate("planVisit.howToSpeechLine4")}
+                  </span>
+                </p>
+              </div>
+            </div>
+
+            {/* Steps */}
+            <div className="flex flex-col gap-6 md:gap-10 max-w-[700px] mx-auto">
+              {/* Step 1 */}
+              <div className="flex items-center gap-4 md:gap-6">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/Elige.svg"
+                  alt=""
+                  className="w-[80px] md:w-[140px] xl:w-[180px] h-auto shrink-0"
+                />
+                <div>
+                  <p className="font-body text-[16px] md:text-[32px] font-bold leading-[100%] text-[#14222F]">
+                    {translate("planVisit.howToStep1Title")}
+                  </p>
+                  <p className="font-body text-[12px] md:text-[24px] font-medium leading-[100%] text-[#14222F] mt-2 md:mt-3">
+                    {translate("planVisit.howToStep1DescLine1")}
+                    <br />
+                    {translate("planVisit.howToStep1DescLine2")}
+                  </p>
+                </div>
+              </div>
+
+              {/* Step 2 */}
+              <div className="flex items-center gap-4 md:gap-6">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/Caja.svg"
+                  alt=""
+                  className="w-[80px] md:w-[140px] xl:w-[180px] h-auto shrink-0"
+                />
+                <div>
+                  <p className="font-body text-[16px] md:text-[32px] font-bold leading-[100%] text-[#14222F]">
+                    {translate("planVisit.howToStep2Title")}
+                  </p>
+                  <p className="font-body text-[12px] md:text-[24px] font-medium leading-[100%] text-[#14222F] mt-2 md:mt-3">
+                    {translate("planVisit.howToStep2DescLine1")}
+                    <br />
+                    {translate("planVisit.howToStep2DescLine2")}
+                  </p>
+                </div>
+              </div>
+
+              {/* Step 3 */}
+              <div className="flex items-center gap-4 md:gap-6">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/recoge.svg"
+                  alt=""
+                  className="w-[80px] md:w-[140px] xl:w-[180px] h-auto shrink-0"
+                />
+                <div>
+                  <p className="font-body text-[16px] md:text-[32px] font-bold leading-[100%] text-[#14222F]">
+                    {translate("planVisit.howToStep3Title")}
+                  </p>
+                  <p className="font-body text-[12px] md:text-[24px] font-medium leading-[100%] text-[#14222F] mt-2 md:mt-3">
+                    {translate("planVisit.howToStep3DescLine1")}
+                    <br />
+                    {translate("planVisit.howToStep3DescLine2")}
+                    <br />
+                    {translate("planVisit.howToStep3DescLine3")}
+                  </p>
+                </div>
+              </div>
+
+              {/* Step 4 */}
+              <div className="flex items-center gap-4 md:gap-6">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/entrega.svg"
+                  alt=""
+                  className="w-[80px] md:w-[140px] xl:w-[180px] h-auto shrink-0"
+                />
+                <p className="font-body text-[16px] md:text-[32px] font-bold leading-[100%] text-[#14222F]">
+                  {translate("planVisit.howToStep4Line1")}
+                  <br />
+                  {translate("planVisit.howToStep4Line2")}
+                </p>
+              </div>
+            </div>
+
+            {/* Closing: "Así de simple. Así de cantarístico." */}
+            <div className="relative flex items-end justify-center gap-2 md:gap-4 mt-10 md:mt-14 xl:mt-16">
+              <h3 className="font-heading text-[24px] md:text-4xl xl:text-5xl leading-[100%] text-[#14222F]">
+                {translate("planVisit.howToClosingLine1")}
+                <br />
+                {translate("planVisit.howToClosingLine2")}
+              </h3>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/Asi.svg"
+                alt=""
+                className="w-[60px] md:w-[120px] xl:w-[160px] h-auto shrink-0"
+                style={{ marginBottom: "10px", marginLeft: "-10px" }}
+              />
+            </div>
+
+            {/* Velocity: "Compa, ¿Quieres más velocidad?" */}
+            <div className="flex flex-col md:flex-row items-center md:items-center justify-center gap-4 md:gap-6 mt-10 md:mt-14 xl:mt-16">
+              <div className="text-center md:text-left">
+                <p className="font-body text-[16px] md:text-[24px] font-bold leading-[100%] text-[#14222F]">
+                  {translate("planVisit.howToVelocityTitle")}
+                </p>
+                <p className="font-body text-[12px] md:text-[16px] font-medium leading-[100%] text-[#14222F] mt-2 md:mt-3">
+                  {translate("planVisit.howToVelocityDescLine1")}
+                  <br />
+                  {translate("planVisit.howToVelocityDescLine2")}
+                </p>
+              </div>
+              <div className="flex items-center gap-3 md:gap-6">
+                <button
+                  type="button"
+                  className="shrink-0 bg-[#14222F] text-white font-body font-bold text-[12px] md:text-[16px] px-5 py-3 md:px-6 md:py-4 rounded-full hover:bg-[#1e3448] transition-colors"
+                >
+                  {translate("planVisit.howToVelocityButton")}
+                </button>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/Señal.svg"
+                  alt=""
+                  className="w-[50px] md:w-[80px] xl:w-[100px] h-auto shrink-0"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
       {/* Modal: enlarged zone photo */}
@@ -1160,13 +1385,13 @@ export default function PlaneaTuVisitaPage() {
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={selectedZone.photoUrl}
-                alt={selectedZone.name}
+                alt={locale === "en" && selectedZone.nameEn ? selectedZone.nameEn : selectedZone.name}
                 className="w-full h-auto rounded-xl"
               />
             ) : (
               <div className="w-full aspect-[4/3] rounded-xl bg-[#EDDCB6] flex items-center justify-center">
                 <p className="font-body text-[#14222F] text-lg font-bold text-center px-4">
-                  {selectedZone.name}
+                  {locale === "en" && selectedZone.nameEn ? selectedZone.nameEn : selectedZone.name}
                   <br />
                   <span className="font-medium text-sm opacity-70">
                     (Foto pendiente)
@@ -1175,7 +1400,7 @@ export default function PlaneaTuVisitaPage() {
               </div>
             )}
             <p className="mt-4 text-white text-center font-body font-bold text-lg">
-              {selectedZone.name}
+              {locale === "en" && selectedZone.nameEn ? selectedZone.nameEn : selectedZone.name}
             </p>
           </div>
         </div>
