@@ -13,16 +13,16 @@ import {
   UpdateProductRequest,
   UpdateSizeRequest,
 } from "@/domain/types";
-import { authFetcher } from "@/shared/utils/fetch";
+import { authFetcher, fetcher } from "@/shared/utils/fetch";
 
 export const productService = {
   // --- Products ---
 
   getAll: (): Promise<Product[]> =>
-    authFetcher<Product[]>("/products"),
+    fetcher<Product[]>("/products"),
 
   getById: (id: string): Promise<Product> =>
-    authFetcher<Product>(`/products/${id}`),
+    fetcher<Product>(`/products/${id}`),
 
   create: (data: CreateProductRequest): Promise<Product> =>
     authFetcher<Product>("/products", {
@@ -66,7 +66,7 @@ export const productService = {
   // --- Sizes ---
 
   getSizes: (productId: string): Promise<ProductSize[]> =>
-    authFetcher<ProductSize[]>(`/products/${productId}/sizes`),
+    fetcher<ProductSize[]>(`/products/${productId}/sizes`),
 
   createSize: (productId: string, data: CreateSizeRequest): Promise<ProductSize> =>
     authFetcher<ProductSize>(`/products/${productId}/sizes`, {
@@ -92,7 +92,7 @@ export const productService = {
   // --- Modifier Groups ---
 
   getModifierGroups: (productId: string): Promise<ModifierGroup[]> =>
-    authFetcher<ModifierGroup[]>(`/products/${productId}/modifier-groups`),
+    fetcher<ModifierGroup[]>(`/products/${productId}/modifier-groups`),
 
   createModifierGroup: (
     productId: string,
@@ -121,7 +121,7 @@ export const productService = {
   // --- Modifiers ---
 
   getModifiers: (productId: string, groupId: string): Promise<Modifier[]> =>
-    authFetcher<Modifier[]>(
+    fetcher<Modifier[]>(
       `/products/${productId}/modifier-groups/${groupId}/modifiers`,
     ),
 

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { HeroUIProvider } from "@heroui/react";
 import { QueryClientProvider } from "@tanstack/react-query";
 
+import { OgAgeGate } from "@/libs/cantaritos-ui";
 import { createQueryClient } from "@/shared/config";
 
 export function Providers(
@@ -16,7 +17,10 @@ export function Providers(
 
   return (
     <QueryClientProvider client={queryClient}>
-      <HeroUIProvider>{children}</HeroUIProvider>
+      <HeroUIProvider>
+        {children}
+        <OgAgeGate />
+      </HeroUIProvider>
     </QueryClientProvider>
   );
 }

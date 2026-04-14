@@ -1,4 +1,5 @@
 export * from "./og-admin-sidebar";
+export * from "./og-age-gate";
 export * from "./og-banner-carousel";
 export * from "./og-banner-form";
 export * from "./og-banner-table";
