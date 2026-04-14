@@ -8,7 +8,7 @@ import { ArrowLeft, Minus, Package, Plus } from "lucide-react";
 
 import { OgNavbar } from "@/libs/cantaritos-ui";
 import { useProduct } from "@/domain/hooks/products";
-import { useAuthStore, useCartStore } from "@/domain/stores";
+import { useCartStore } from "@/domain/stores";
 import type { Modifier, ModifierGroup, ModifierSizePrice } from "@/domain/types";
 
 export default function ProductDetailPage() {
@@ -16,7 +16,6 @@ export default function ProductDetailPage() {
   const params = useParams();
   const productId = params.id as string;
 
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const addItem = useCartStore((state) => state.addItem);
 
   const { data: product, isLoading } = useProduct(productId);
@@ -61,12 +60,6 @@ export default function ProductDetailPage() {
       return changed ? cleaned : prev;
     });
   }, [selectedSizeId, product]);
-
-  useEffect(() => {
-    if (!isAuthenticated) {
-      router.replace("/login");
-    }
-  }, [isAuthenticated, router]);
 
   const activeSizes = useMemo(
     () => product?.sizes.filter((sizeOption) => sizeOption.isActive) ?? [],
@@ -175,8 +168,6 @@ export default function ProductDetailPage() {
 
     router.push("/products");
   }
-
-  if (!isAuthenticated) return null;
 
   if (isLoading) {
     return (
