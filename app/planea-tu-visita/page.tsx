@@ -306,6 +306,24 @@ export default function PlaneaTuVisitaPage() {
   const [selectedZone, setSelectedZone] = useState<MapZone | null>(null);
   const [hoveredZoneId, setHoveredZoneId] = useState<string | null>(null);
 
+  const renderZonePreview = (zone: MapZone) => {
+    if (hoveredZoneId !== zone.id || !zone.photoUrl) return null;
+    const zoneName = locale === "en" && zone.nameEn ? zone.nameEn : zone.name;
+    return (
+      <span className="absolute left-1/2 -translate-x-1/2 -top-2 -translate-y-full z-50 block w-[180px] rounded-lg overflow-hidden shadow-lg ring-2 ring-[#FD710C] bg-white pointer-events-none">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={zone.photoUrl}
+          alt={zoneName}
+          className="block w-full h-auto"
+        />
+        <span className="block px-2 py-1 text-[11px] font-body font-bold text-[#14222F] text-center">
+          {zoneName}
+        </span>
+      </span>
+    );
+  };
+
   const renderZoneTile = (
     zone: MapZone,
     gridAreaName: string,
@@ -332,7 +350,7 @@ export default function PlaneaTuVisitaPage() {
         }}
         onMouseEnter={() => setHoveredZoneId(zone.id)}
         onMouseLeave={() => setHoveredZoneId(null)}
-        className="relative cursor-pointer transition-transform duration-150 hover:scale-[1.04] focus:outline-none focus:ring-2 focus:ring-[#FD710C] flex items-center justify-center"
+        className={`relative cursor-pointer transition-transform duration-150 hover:scale-[1.04] focus:outline-none focus:ring-2 focus:ring-[#FD710C] flex items-center justify-center ${isHovered ? "z-40" : "z-0"}`}
         style={{ gridArea: gridAreaName, ...extraStyle }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -607,7 +625,7 @@ export default function PlaneaTuVisitaPage() {
               >
                 {isLoadingTipsBanners ? (
                   <div className="flex gap-4 md:gap-6 xl:gap-8">
-                    <div className="w-[310px] h-[389px] md:w-[420px] md:h-[514px] xl:w-[504px] xl:h-[614px] bg-gray-100 animate-pulse rounded-2xl shrink-0" />
+                    <div className="w-full max-w-[310px] md:max-w-[420px] xl:max-w-[504px] aspect-[310/389] md:aspect-[420/514] xl:aspect-[504/614] bg-gray-100 animate-pulse rounded-2xl shrink-0" />
                   </div>
                 ) : tipsBanners.length === 0 ? (
                   <p className="text-center text-sm text-gray-400 font-body py-10">
@@ -626,14 +644,14 @@ export default function PlaneaTuVisitaPage() {
                           <img
                             src={banner.imageMobileUrl || banner.imageUrl}
                             alt={banner.altText}
-                            className="w-[310px] h-[389px] object-cover rounded-2xl mx-auto md:hidden"
+                            className="w-full max-w-[310px] h-auto aspect-[310/389] object-contain rounded-2xl mx-auto md:hidden"
                           />
                           {/* Desktop image */}
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src={banner.imageUrl}
                             alt={banner.altText}
-                            className="hidden md:block md:w-[420px] md:h-[514px] xl:w-[504px] xl:h-[614px] object-cover rounded-2xl mx-auto"
+                            className="hidden md:block w-full md:max-w-[420px] xl:max-w-[504px] h-auto aspect-[420/514] xl:aspect-[504/614] object-contain rounded-2xl mx-auto"
                           />
                         </div>
                       ) : null,
@@ -986,7 +1004,7 @@ export default function PlaneaTuVisitaPage() {
                   setHoveredZoneId(MAP_ZONES.estacionamiento.id)
                 }
                 onMouseLeave={() => setHoveredZoneId(null)}
-                className="relative cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#FD710C]"
+                className={`relative cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#FD710C] ${hoveredZoneId === MAP_ZONES.estacionamiento.id ? "z-40" : "z-0"}`}
                 style={{
                   gridArea: "estacionamiento",
                   width: `${MAP_ZONES.estacionamiento.width}px`,
@@ -1043,6 +1061,7 @@ export default function PlaneaTuVisitaPage() {
                   {renderZoneTile(MAP_ZONES.segundaEntrada, "segundaEntrada", {
                   zIndex: 2,
                 })}
+                  {renderZonePreview(MAP_ZONES.estacionamiento)}
                 </div>
 
                 {/* Zona 1 de Palapas (parent grid containing Patio) */}
@@ -1061,7 +1080,7 @@ export default function PlaneaTuVisitaPage() {
                   setHoveredZoneId(MAP_ZONES.zona1Palapas.id)
                 }
                 onMouseLeave={() => setHoveredZoneId(null)}
-                className="relative cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#FD710C]"
+                className={`relative cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#FD710C] ${hoveredZoneId === MAP_ZONES.zona1Palapas.id ? "z-40" : "z-0"}`}
                 style={{
                   gridArea: "zona1Palapas",
                   width: `${MAP_ZONES.zona1Palapas.width}px`,
@@ -1108,6 +1127,7 @@ export default function PlaneaTuVisitaPage() {
                     </span>
                   </span>
                   {renderZoneTile(MAP_ZONES.patio, "patio", { zIndex: 2 })}
+                  {renderZonePreview(MAP_ZONES.zona1Palapas)}
                 </div>
               </div>
             </div>

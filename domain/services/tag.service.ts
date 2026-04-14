@@ -3,14 +3,14 @@ import {
   Tag,
   UpdateTagRequest,
 } from "@/domain/types";
-import { authFetcher } from "@/shared/utils/fetch";
+import { authFetcher, fetcher } from "@/shared/utils/fetch";
 
 export const tagService = {
   getAll: (lang?: string): Promise<Tag[]> =>
-    authFetcher<Tag[]>(`/tags${lang ? `?lang=${lang}` : ""}`),
+    fetcher<Tag[]>(`/tags${lang ? `?lang=${lang}` : ""}`),
 
   getById: (id: string, lang?: string): Promise<Tag> =>
-    authFetcher<Tag>(`/tags/${id}${lang ? `?lang=${lang}` : ""}`),
+    fetcher<Tag>(`/tags/${id}${lang ? `?lang=${lang}` : ""}`),
 
   create: (data: CreateTagRequest): Promise<Tag> =>
     authFetcher<Tag>("/tags", {

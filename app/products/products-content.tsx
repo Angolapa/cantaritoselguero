@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
@@ -9,26 +9,18 @@ import { Package } from "lucide-react";
 import { MlSearchBar } from "@/libs/cantaritos-ui";
 import { useProducts } from "@/domain/hooks/products";
 import { useTags } from "@/domain/hooks/tags";
-import { useAuthStore } from "@/domain/stores";
 import { Product, Tag } from "@/domain/types";
 
 export default function ProductsContent() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const { data: products = [], isLoading } = useProducts();
   const { data: tags = [] } = useTags();
   const [search, setSearch] = useState("");
   const [showAvailableOnly, setShowAvailableOnly] = useState(false);
 
   const selectedTagId = searchParams.get("tag");
-
-  useEffect(() => {
-    if (!isAuthenticated) {
-      router.replace("/login");
-    }
-  }, [isAuthenticated, router]);
 
   const handleSelectTag = (tagId: string | null) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -61,8 +53,6 @@ export default function ProductsContent() {
     }
     return result;
   }, [products, search, showAvailableOnly, selectedTagId]);
-
-  if (!isAuthenticated) return null;
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-6 space-y-6">
