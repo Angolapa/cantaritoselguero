@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Roboto, Roboto_Condensed } from "next/font/google";
+import { Barriecito, Roboto, Roboto_Condensed } from "next/font/google";
 import localFont from "next/font/local";
 
 import { Providers } from "./providers";
@@ -9,6 +9,13 @@ import "./globals.css";
 const barrio = localFont({
   src: "../public/fuente/Barrio-Regular.ttf",
   variable: "--font-barrio",
+  display: "swap",
+});
+
+const barriecito = Barriecito({
+  variable: "--font-barriecito",
+  weight: "400",
+  subsets: ["latin"],
   display: "swap",
 });
 
@@ -37,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${barrio.variable} ${roboto.variable} ${robotoCondensed.variable}`}>
+    <html lang="es" className={`${barrio.variable} ${barriecito.variable} ${roboto.variable} ${robotoCondensed.variable}`}>
       <body className="antialiased">
         <Providers>{children}</Providers>
       </body>

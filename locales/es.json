@@ -382,5 +382,15 @@
     "s11P3": "Si desea solicitar la remoción de alguna imagen publicada, envíe un correo a admin@cantaritoselguero.mx indicando el enlace (URL), la descripción de la publicación, la fecha y la red social correspondiente. Su solicitud será atendida en el menor tiempo posible y sin costo.",
     "s11P4": "Gracias por ayudarnos a conservar un ambiente alegre, respetuoso y seguro.",
     "s11P5": "Cantaritos El Güero #1 se reserva el derecho de actualizar este aviso para reflejar cambios legales o operativos. La versión vigente estará disponible en nuestro sitio web y/o aviso de privacidad."
+  },
+  "products": {
+    "categories": {
+      "anticipate": "ANTICIPA\nTU CONSUMO",
+      "reservations": "RESERVACIONES",
+      "route": "RUTA\nAL GÜERO",
+      "merch": "MERCH\nOFICIAL DEL\nGÜERO",
+      "event": "EL GÜERO EN TU EVENTO"
+    },
+    "viewMore": "Ver más"
   }
 }
