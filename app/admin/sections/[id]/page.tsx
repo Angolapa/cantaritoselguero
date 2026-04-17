@@ -137,8 +137,8 @@ export default function EditSectionPage({
         <div className="lg:col-span-2 space-y-6">
           <OgSectionForm
             defaultValues={{
-              nameEs: section.name,
-              nameEn: "",
+              nameEs: section.nameEs ?? section.name,
+              nameEn: section.nameEn ?? "",
               slug: section.slug,
               order: section.order.toString(),
             }}

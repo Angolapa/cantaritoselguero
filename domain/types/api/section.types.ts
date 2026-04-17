@@ -14,6 +14,8 @@ export interface SectionItem {
 export interface Section {
   id: string;
   name: string;
+  nameEs?: string;
+  nameEn?: string;
   slug: string;
   order: number;
   isActive: boolean;

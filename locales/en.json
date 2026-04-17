@@ -381,5 +381,46 @@
     "s11P3": "Your request will be handled promptly and free of charge.",
     "s11P4": "Thank you for helping us maintain a cheerful, respectful, and safe environment.",
     "s11P5": "Cantaritos El Güero #1 reserves the right to update this notice to reflect legal or operational changes. The current version will be available on our website and/or privacy notice."
+  },
+  "products": {
+    "categories": {
+      "anticipate": "ANTICIPA\nTU CONSUMO",
+      "reservations": "RESERVACIONES",
+      "route": "RUTA\nAL GÜERO",
+      "merch": "MERCH\nOFICIAL DEL\nGÜERO",
+      "event": "EL GÜERO EN TU EVENTO"
+    },
+    "viewMore": "View more",
+    "reservation": {
+      "title": "Reservation?",
+      "subtitleLine1": "Only if you're bringing",
+      "subtitleLine2": "the whole crew.",
+      "descLine1": "There's always room to",
+      "descLine2": "start the fiesta.",
+      "warningLine1": "Reservations for groups of 60+",
+      "warningLine2": "guests, minimum pre-paid consumption",
+      "warningLine3": "of $10,000 MXN required.",
+      "button": "Book here"
+    },
+    "route": {
+      "title": "Güero shuttle",
+      "subtitleLine1": "The plan starts the",
+      "subtitleLine2": "moment you hop on.",
+      "descLine1": "Ride with the Güero Shuttle and arrive",
+      "descLine2": "stress-free, no driving,",
+      "descLine3": "no hassle, just the fiesta.",
+      "button": "See schedule"
+    },
+    "event": {
+      "title": "El Güero at your event",
+      "subtitleDark1": "Can't make it to El ",
+      "subtitleLight1": "Güero?",
+      "subtitleDark2": "\nEl Güero comes ",
+      "subtitleLight2": "to you.",
+      "descLine1": "Bring the Giant Cantarito and the",
+      "descLine2": "full cantarito vibe to your party,",
+      "descLine3": "wedding, or corporate event.",
+      "button": "Book here"
+    }
   }
 }

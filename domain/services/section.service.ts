@@ -12,7 +12,7 @@ export const sectionService = {
     authFetcher<Section[]>(`/sections${lang ? `?lang=${lang}` : ""}`),
 
   getById: (id: string, lang?: string): Promise<Section> =>
-    authFetcher<Section>(`/sections/${id}${lang ? `?lang=${lang}` : ""}`),
+    authFetcher<Section>(`/sections/id/${id}${lang ? `?lang=${lang}` : ""}`),
 
   getBySlug: (slug: string, lang?: string): Promise<Section> =>
     authFetcher<Section>(`/sections/${slug}${lang ? `?lang=${lang}` : ""}`),

@@ -166,7 +166,7 @@ export default function ProductDetailPage() {
       unitPrice,
     });
 
-    router.push("/products");
+    router.push("/products-prueba");
   }
 
   if (isLoading) {
@@ -188,7 +188,7 @@ export default function ProductDetailPage() {
           <Package className="h-12 w-12 mx-auto mb-3 text-gray-300" />
           <p className="font-body">Producto no encontrado.</p>
           <button
-            onClick={() => router.push("/products")}
+            onClick={() => router.push("/products-prueba")}
             className="mt-4 text-primary font-body font-medium hover:underline"
           >
             Volver a productos
@@ -205,7 +205,7 @@ export default function ProductDetailPage() {
       <main className="mx-auto max-w-3xl px-4 py-6 space-y-6">
         {/* Back button */}
         <button
-          onClick={() => router.push("/products")}
+          onClick={() => router.push("/products-prueba")}
           className="flex items-center gap-1 text-gray-600 dark:text-gray-400 font-body text-sm hover:text-primary transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />

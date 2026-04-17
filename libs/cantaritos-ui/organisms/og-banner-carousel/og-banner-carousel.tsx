@@ -50,7 +50,12 @@ function BannerSlide({ banner }: { banner: BannerWithImage }) {
   return image;
 }
 
-export function OgBannerCarousel({ banners: rawBanners, isLoading = false }: OgBannerCarouselProps) {
+export function OgBannerCarousel({
+  banners: rawBanners,
+  isLoading = false,
+  showArrows = false,
+  className = "",
+}: OgBannerCarouselProps) {
   const banners = rawBanners.filter(
     (banner): banner is BannerWithImage => !!banner.imageUrl,
   );
@@ -77,6 +82,9 @@ export function OgBannerCarousel({ banners: rawBanners, isLoading = false }: OgB
     [emblaApi],
   );
 
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+
   if (isLoading) {
     return (
       <div className="w-full aspect-[1440/400] bg-gray-100 dark:bg-gray-800 animate-pulse" />
@@ -87,14 +95,17 @@ export function OgBannerCarousel({ banners: rawBanners, isLoading = false }: OgB
 
   if (banners.length === 1) {
     return (
-      <div style={{ backgroundColor: banners[0].backgroundColor ?? undefined }}>
+      <div
+        className={className}
+        style={{ backgroundColor: banners[0].backgroundColor ?? undefined }}
+      >
         <BannerSlide banner={banners[0]} />
       </div>
     );
   }
 
   return (
-    <div className="relative">
+    <div className={`relative ${className}`}>
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
           {banners.map((banner) => (
@@ -108,6 +119,27 @@ export function OgBannerCarousel({ banners: rawBanners, isLoading = false }: OgB
           ))}
         </div>
       </div>
+
+      {showArrows && (
+        <>
+          <button
+            type="button"
+            onClick={scrollPrev}
+            aria-label="Anterior"
+            className="absolute left-2 top-1/2 -translate-y-1/2"
+          >
+            <img src="/images/left.svg" alt="" />
+          </button>
+          <button
+            type="button"
+            onClick={scrollNext}
+            aria-label="Siguiente"
+            className="absolute right-2 top-1/2 -translate-y-1/2"
+          >
+            <img src="/images/rigth.svg" alt="" />
+          </button>
+        </>
+      )}
 
       {/* Dots */}
       <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 md:gap-2">
