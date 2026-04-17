@@ -10,6 +10,7 @@ export * from "./og-combo-table";
 export * from "./og-coupon-form";
 export * from "./og-coupon-table";
 export * from "./og-event-banner";
+export * from "./og-event-card";
 export * from "./og-footer";
 export * from "./og-modifier-groups-section";
 export * from "./og-mood-gallery-form";

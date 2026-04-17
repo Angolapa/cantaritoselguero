@@ -391,6 +391,37 @@
       "merch": "MERCH\nOFICIAL DEL\nGÜERO",
       "event": "EL GÜERO EN TU EVENTO"
     },
-    "viewMore": "Ver más"
+    "viewMore": "Ver más",
+    "reservation": {
+      "title": "¿reservación?",
+      "subtitleLine1": "Solo si vienes con",
+      "subtitleLine2": "todos tus reales.",
+      "descLine1": "Siempre hay espacio para",
+      "descLine2": "arrancar la fiesta.",
+      "warningLine1": "Reservaciones a partir de 60 compas y",
+      "warningLine2": "requiere pago de consumo anticipado",
+      "warningLine3": "mínimo de $10,000 mxn.",
+      "button": "Reserva aquí"
+    },
+    "route": {
+      "title": "Ruta al güero",
+      "subtitleLine1": "El plan empieza",
+      "subtitleLine2": "desde que te subes.",
+      "descLine1": "Súbete a La Ruta del Güero y llega",
+      "descLine2": "sin manejar, sin complicaciones",
+      "descLine3": "y con el plan armado.",
+      "button": "Ver horarios"
+    },
+    "event": {
+      "title": "El güero en tu evento",
+      "subtitleDark1": "Si no vienes al ",
+      "subtitleLight1": "Güero,",
+      "subtitleDark2": "\nEl Güero va ",
+      "subtitleLight2": "contigo.",
+      "descLine1": "Lleva el Cantarito Gigante y el",
+      "descLine2": "mood cantarístico a tu fiesta, boda",
+      "descLine3": "o evento empresarial.",
+      "button": "Reserva aquí"
+    }
   }
 }

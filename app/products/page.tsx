@@ -5,6 +5,7 @@ import {
   OgCategoryShortcuts,
   OgFooter,
   OgNavbar,
+  OgEventCard,
   OgReservationsBanner,
   OgRouteBanner,
   OgSectionDisplay,
@@ -76,6 +77,8 @@ export default function ProductsPage() {
             </div>
           ))}
         </div>
+
+        <OgEventCard />
       </main>
       <OgFooter />
     </div>

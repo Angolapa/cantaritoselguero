@@ -3,7 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { useTranslation } from "@/domain/stores";
+
 export function OgReservationsBanner() {
+  const { translate } = useTranslation();
+
   return (
     <section
       className="-mx-4 overflow-hidden"
@@ -22,7 +26,7 @@ export function OgReservationsBanner() {
               lineHeight: "100%",
             }}
           >
-            ¿reservación?
+            {translate("products.reservation.title")}
           </h3>
 
           <p
@@ -35,9 +39,9 @@ export function OgReservationsBanner() {
               lineHeight: "100%",
             }}
           >
-            Solo si vienes con
+            {translate("products.reservation.subtitleLine1")}
             <br />
-            todos tus reales.
+            {translate("products.reservation.subtitleLine2")}
           </p>
 
           <p
@@ -50,9 +54,9 @@ export function OgReservationsBanner() {
               lineHeight: "100%",
             }}
           >
-            Siempre hay espacio para
+            {translate("products.reservation.descLine1")}
             <br />
-            arrancar la fiesta.
+            {translate("products.reservation.descLine2")}
           </p>
         </div>
 
@@ -60,7 +64,7 @@ export function OgReservationsBanner() {
         <div className="shrink-0">
           <Image
             src="/images/product/Reservaciones-mobile.svg"
-            alt="Reservaciones"
+            alt={translate("products.reservation.title")}
             width={151}
             height={132}
           />
@@ -72,7 +76,7 @@ export function OgReservationsBanner() {
         <div className="flex items-start gap-2 flex-1">
           <Image
             src="/images/product/Advertencia.mobile.svg"
-            alt="Advertencia"
+            alt=""
             width={32}
             height={28}
             className="shrink-0"
@@ -87,11 +91,11 @@ export function OgReservationsBanner() {
               lineHeight: "117%",
             }}
           >
-            Reservaciones a partir de 60 compas y
+            {translate("products.reservation.warningLine1")}
             <br />
-            requiere pago de consumo anticipado
+            {translate("products.reservation.warningLine2")}
             <br />
-            mínimo de $10,000 mxn.
+            {translate("products.reservation.warningLine3")}
           </p>
         </div>
 
@@ -117,7 +121,7 @@ export function OgReservationsBanner() {
           }}
           className="shrink-0"
         >
-          Reserva aquí
+          {translate("products.reservation.button")}
         </Link>
       </div>
     </section>

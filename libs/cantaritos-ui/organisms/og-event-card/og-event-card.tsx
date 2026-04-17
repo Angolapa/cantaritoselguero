@@ -5,47 +5,56 @@ import Link from "next/link";
 
 import { useTranslation } from "@/domain/stores";
 
-export function OgRouteBanner() {
+export function OgEventCard() {
   const { translate } = useTranslation();
 
   return (
     <section
       className="mx-auto overflow-hidden relative"
-      style={{ backgroundColor: "#FFAB00", borderRadius: "12px", maxWidth: "322px" }}
+      style={{ backgroundColor: "#00CF70", borderRadius: "12px", maxWidth: "322px" }}
     >
       {/* Title */}
-      <div style={{ padding: "23px 24px 0 24px" }}>
+      <div style={{ padding: "23px 21px 0 21px" }}>
         <h3
           style={{
             color: "#14222F",
             fontFamily: "var(--font-barrio), Barrio, cursive",
-            fontSize: "32px",
+            fontSize: "24px",
             fontStyle: "normal",
             fontWeight: 400,
             lineHeight: "100%",
+            textTransform: "uppercase",
             whiteSpace: "nowrap",
           }}
         >
-          {translate("products.route.title")}
+          {translate("products.event.title")}
         </h3>
       </div>
 
       {/* Two columns: text left + image right */}
-      <div className="flex pr-0" style={{ marginTop: "10px", paddingLeft: "24px" }}>
+      <div className="flex pr-0" style={{ marginTop: "10px", paddingLeft: "21px" }}>
         <div className="flex-1 flex flex-col">
           <p
             style={{
-              color: "#14222F",
               fontFamily: "var(--font-barrio), Barrio, cursive",
-              fontSize: "15px",
+              fontSize: "16px",
               fontStyle: "normal",
               fontWeight: 400,
               lineHeight: "100%",
             }}
           >
-            {translate("products.route.subtitleLine1")}
-            <br />
-            {translate("products.route.subtitleLine2")}
+            <span style={{ color: "#14222F" }}>
+              {translate("products.event.subtitleDark1")}
+            </span>
+            <span style={{ color: "#FFF" }}>
+              {translate("products.event.subtitleLight1")}
+            </span>
+            <span style={{ color: "#14222F", whiteSpace: "pre-line" }}>
+              {translate("products.event.subtitleDark2")}
+            </span>
+            <span style={{ color: "#FFF" }}>
+              {translate("products.event.subtitleLight2")}
+            </span>
           </p>
 
           <p
@@ -59,16 +68,16 @@ export function OgRouteBanner() {
               lineHeight: "120%",
             }}
           >
-            {translate("products.route.descLine1")}
+            {translate("products.event.descLine1")}
             <br />
-            {translate("products.route.descLine2")}
+            {translate("products.event.descLine2")}
             <br />
-            {translate("products.route.descLine3")}
+            {translate("products.event.descLine3")}
           </p>
 
           <div style={{ marginTop: "17px" }}>
             <Link
-              href="/horarios"
+              href="/cotizar-evento"
               style={{
                 display: "flex",
                 width: "88px",
@@ -88,7 +97,7 @@ export function OgRouteBanner() {
                 lineHeight: "20px",
               }}
             >
-              {translate("products.route.button")}
+              {translate("products.event.button")}
             </Link>
           </div>
         </div>
@@ -96,16 +105,16 @@ export function OgRouteBanner() {
         {/* Right illustration */}
         <div className="shrink-0 self-start" style={{ marginTop: "0px", marginRight: "28px", marginLeft: "-65px" }}>
           <Image
-            src="/images/product/Ruta.svg"
-            alt={translate("products.route.title")}
-            width={144}
-            height={122}
+            src="/images/product/TuEvento.svg"
+            alt={translate("products.event.title")}
+            width={112}
+            height={121}
           />
         </div>
       </div>
 
       {/* Bottom spacing */}
-      <div style={{ height: "21px" }} />
+      <div style={{ height: "20px" }} />
     </section>
   );
 }
