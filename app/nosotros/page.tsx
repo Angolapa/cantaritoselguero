@@ -241,7 +241,7 @@ export default function NosotrosPage() {
 
           {/* Cantarito Gigante */}
           <Image
-            src="/images/cantarito-gigante.png"
+            src="/images/Nosotros/cantarito-gigante-mobile.svg"
             alt="Cantarito Gigante"
             width={322}
             height={391}
@@ -361,7 +361,7 @@ export default function NosotrosPage() {
             <div className="flex flex-col items-center">
               <div className="h-[167px] flex items-end justify-center mb-2">
                 <Image
-                  src="/images/cantarito-tradition.png"
+                  src="/images/Nosotros/cantarito-tradition-mobile.svg"
                   alt={translate("about.pillarTradition")}
                   width={135}
                   height={167}
@@ -375,7 +375,7 @@ export default function NosotrosPage() {
             <div className="flex flex-col items-center">
               <div className="h-[167px] flex items-end justify-center mb-2">
                 <Image
-                  src="/images/dancing-women.png"
+                  src="/images/Nosotros/dancing-women-mobile.svg"
                   alt={translate("about.pillarAmbience")}
                   width={99}
                   height={149}
@@ -403,7 +403,7 @@ export default function NosotrosPage() {
             <div className="flex flex-col items-center">
               <div className="h-[167px] flex items-end justify-center mb-2">
                 <Image
-                  src="/images/tuba-musician.png"
+                  src="/images/Nosotros/tuba-musician-mobile.svg"
                   alt={translate("about.pillarLiveMusic")}
                   width={127}
                   height={168}
@@ -513,7 +513,7 @@ export default function NosotrosPage() {
           {/* Banner verde */}
           <div className="relative inline-flex items-center justify-center mb-6">
             <Image
-              src="/images/green-banner.png"
+              src="/images/Nosotros/green-banner-mobile.svg"
               alt=""
               width={311}
               height={146}
@@ -584,7 +584,7 @@ export default function NosotrosPage() {
             {/* Corazón + Propósito */}
             <div className="flex items-center gap-2 mb-4">
               <Image
-                src="/images/heart.png"
+                src="/images/Nosotros/heart-mobile.svg"
                 alt=""
                 width={30}
                 height={26}
