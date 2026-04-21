@@ -23,6 +23,8 @@ interface MapZone {
   labelOffsetX?: number;
   /** Photo to show on hover and inside the modal. Empty until uploaded. */
   photoUrl?: string;
+  /** If set, clicking the tile opens this URL in a new tab instead of the modal. */
+  externalUrl?: string;
 }
 
 const MAP_ZONES: Record<string, MapZone> = {
@@ -256,6 +258,7 @@ const MAP_ZONES: Record<string, MapZone> = {
     src: "/images/Mapa/Entrada.svg",
     width: 153,
     height: 52,
+    photoUrl: "/images/Mapa/Fotos/Entrada Principal.jpg",
   },
   carretera: {
     id: "carretera",
@@ -271,6 +274,7 @@ const MAP_ZONES: Record<string, MapZone> = {
       "International Highway, Guadalajara–Tepic Rd. km 49 #4970, La Meza, 45380 Amatitán, Jalisco, Mexico",
     ],
     labelColor: "dark",
+    externalUrl: "https://maps.app.goo.gl/dmQjLBS2XF6cwsBD9",
   },
 };
 
@@ -333,6 +337,13 @@ export default function PlaneaTuVisitaPage() {
     const zoneName = locale === "en" && zone.nameEn ? zone.nameEn : zone.name;
     const zoneLabels =
       locale === "en" && zone.labelLinesEn ? zone.labelLinesEn : zone.labelLines;
+    const activateZone = () => {
+      if (zone.externalUrl) {
+        window.open(zone.externalUrl, "_blank", "noopener,noreferrer");
+        return;
+      }
+      setSelectedZone(zone);
+    };
     return (
       <div
         role="button"
@@ -340,12 +351,12 @@ export default function PlaneaTuVisitaPage() {
         aria-label={zoneName}
         onClick={(event) => {
           event.stopPropagation();
-          setSelectedZone(zone);
+          activateZone();
         }}
         onKeyDown={(event) => {
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
-            setSelectedZone(zone);
+            activateZone();
           }
         }}
         onMouseEnter={() => setHoveredZoneId(zone.id)}
@@ -444,11 +455,23 @@ export default function PlaneaTuVisitaPage() {
               fill="#00A19E"
             />
           </svg>
-          <div className="relative z-10 max-w-[1440px] mx-auto px-5 sm:px-6 md:px-10 lg:px-16 xl:px-24 pt-8 md:pt-12 xl:pt-16 pb-56 md:pb-72 xl:pb-96">
+          <div className="relative z-10 max-w-[1440px] mx-auto px-5 sm:px-6 md:px-10 lg:px-16 xl:px-24 pt-8 md:pt-12 xl:pt-16 pb-24 md:pb-72 xl:pb-96">
             {/* Title */}
             <div className="flex items-center justify-center gap-3 mb-6 md:mb-10 xl:mb-16">
-              <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[86px] leading-[100%] text-[#14222F] uppercase text-center">
-                {translate("planVisit.title")}
+              <h1 className="font-heading text-[48px] sm:text-5xl md:text-5xl lg:text-6xl xl:text-[86px] leading-[100%] text-[#14222F] uppercase text-center">
+                {(() => {
+                  const title = translate("planVisit.title");
+                  const spaceIdx = title.indexOf(" ");
+                  if (spaceIdx === -1) return title;
+                  return (
+                    <>
+                      {title.slice(0, spaceIdx)}
+                      <br className="md:hidden" />
+                      <span className="hidden md:inline"> </span>
+                      {title.slice(spaceIdx + 1)}
+                    </>
+                  );
+                })()}
               </h1>
             </div>
 
@@ -458,19 +481,19 @@ export default function PlaneaTuVisitaPage() {
               src="/images/dotted-arrow-curve.svg"
               alt=""
               aria-hidden
-              className="absolute right-[8%] md:right-[10%] lg:right-[12%] xl:right-[13%] top-[8%] md:top-[4%] xl:top-[5%] w-[80px] md:w-[140px] lg:w-[190px] xl:w-[258px] h-auto pointer-events-none"
+              className="absolute right-[4%] md:right-[10%] lg:right-[12%] xl:right-[13%] top-[5%] md:top-[4%] xl:top-[5%] w-[95px] h-[173px] md:w-[140px] md:h-auto lg:w-[190px] xl:w-[258px] pointer-events-none"
             />
 
             {/* Speech bubble row 1: cantarito with orange speech */}
-            <div className="relative flex justify-center mt-20 md:mt-16 lg:mt-20 xl:mt-28 mb-6 md:mb-10 xl:mb-12">
-              <div className="relative w-full max-w-[300px] sm:max-w-[380px] md:max-w-[460px] lg:max-w-[520px] xl:max-w-[568px]">
+            <div className="relative flex justify-start md:justify-center mt-6 md:mt-16 lg:mt-20 xl:mt-28 mb-0 md:mb-10 xl:mb-12">
+              <div className="relative w-full max-w-[244px] sm:max-w-[380px] md:max-w-[460px] lg:max-w-[520px] xl:max-w-[568px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/images/cantarito-speech-orange.svg"
                   alt=""
                   className="w-full h-auto"
                 />
-                <p className="absolute top-[16%] right-[5%] w-[42%] font-body text-[10px] sm:text-xs md:text-base lg:text-xl xl:text-2xl font-bold leading-[100%] text-[#14222F] text-left">
+                <p className="absolute top-[16%] right-[8%] md:right-[5%] w-[42%] font-body text-[12px] sm:text-xs md:text-base lg:text-xl xl:text-2xl font-bold leading-[100%] text-[#14222F] text-center md:text-left whitespace-nowrap md:whitespace-normal">
                   {translate("planVisit.speech1Line1")}
                   <br />
                   {translate("planVisit.speech1Line2")}
@@ -480,7 +503,7 @@ export default function PlaneaTuVisitaPage() {
 
             {/* Speech bubble row 2: cantarito with green speech */}
             <div className="relative flex justify-center mb-6 md:mb-10 xl:mb-12">
-              <div className="relative w-full max-w-[340px] sm:max-w-[440px] md:max-w-[520px] lg:max-w-[600px] xl:max-w-[655px]">
+              <div className="relative w-full max-w-[301px] sm:max-w-[440px] md:max-w-[520px] lg:max-w-[600px] xl:max-w-[655px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/images/cantarito-speech-green.svg"
@@ -496,12 +519,12 @@ export default function PlaneaTuVisitaPage() {
             </div>
 
             {/* OJO eyes warning */}
-            <div className="flex items-center justify-start md:justify-center lg:justify-start gap-3 mb-8 md:mb-12 xl:mb-16 -mt-20 md:-mt-12 lg:-mt-32 xl:-mt-32 -ml-3 md:ml-0 lg:pl-[10%] xl:pl-[18%]">
+            <div className="flex items-center justify-start md:justify-center lg:justify-start gap-3 mb-4 md:mb-12 xl:mb-16 -mt-18 md:-mt-12 lg:-mt-32 xl:-mt-32 -ml-3 md:ml-0 lg:pl-[10%] xl:pl-[18%]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/ojo-eyes-trail.svg"
                 alt=""
-                className="w-[140px] md:w-[200px] lg:w-[260px] xl:w-[360px] h-auto"
+                className="w-[167px] md:w-[200px] lg:w-[260px] xl:w-[360px] h-auto"
               />
               <span className="font-heading text-2xl md:text-3xl lg:text-4xl xl:text-[56px] leading-[100%] text-[#14222F] mt-16 md:mt-16 lg:mt-24 xl:mt-40 self-start">
                 {translate("planVisit.ojoLabel")}
@@ -517,10 +540,10 @@ export default function PlaneaTuVisitaPage() {
                     alt=""
                     width={109}
                     height={104}
-                    className="w-[50px] md:w-[80px] lg:w-[95px] xl:w-[109px] h-auto"
+                    className="w-[44.232px] h-[42.203px] md:w-[80px] md:h-auto lg:w-[95px] xl:w-[109px]"
                   />
                 </div>
-                <p className="font-body text-[10px] sm:text-xs md:text-sm lg:text-lg xl:text-2xl font-bold leading-[100%] text-white text-center">
+                <p className="font-body text-[12px] sm:text-xs md:text-sm lg:text-lg xl:text-2xl font-bold leading-[100%] text-white text-center">
                   {translate("planVisit.infoHoursLine1")}
                   <br />
                   {translate("planVisit.infoHoursLine2")}
@@ -536,10 +559,10 @@ export default function PlaneaTuVisitaPage() {
                     alt=""
                     width={210}
                     height={129}
-                    className="w-[70px] md:w-[110px] lg:w-[140px] xl:w-[160px] h-auto"
+                    className="w-[81.044px] h-[43.924px] md:w-[110px] md:h-auto lg:w-[140px] xl:w-[160px]"
                   />
                 </div>
-                <p className="font-body text-[10px] sm:text-xs md:text-sm lg:text-lg xl:text-2xl font-bold leading-[100%] text-white text-center">
+                <p className="font-body text-[12px] sm:text-xs md:text-sm lg:text-lg xl:text-2xl font-bold leading-[100%] text-white text-center">
                   {translate("planVisit.infoMusicLine1")}
                   <br />
                   {translate("planVisit.infoMusicLine2")}
@@ -555,10 +578,10 @@ export default function PlaneaTuVisitaPage() {
                     alt=""
                     width={104}
                     height={90}
-                    className="w-[45px] md:w-[70px] lg:w-[88px] xl:w-[100px] h-auto"
+                    className="w-[42px] h-[36px] md:w-[70px] md:h-auto lg:w-[88px] xl:w-[100px]"
                   />
                 </div>
-                <p className="font-body text-[10px] sm:text-xs md:text-sm lg:text-lg xl:text-2xl font-bold leading-[100%] text-white text-center">
+                <p className="font-body text-[12px] sm:text-xs md:text-sm lg:text-lg xl:text-2xl font-bold leading-[100%] text-white text-center">
                   {translate("planVisit.infoNoFranchiseLine1")}
                   <br />
                   {translate("planVisit.infoNoFranchiseLine2")}
@@ -602,7 +625,7 @@ export default function PlaneaTuVisitaPage() {
         {/* Section 3: Tips banner carousel */}
         <section className="bg-white pb-12 md:pb-20 xl:pb-28">
           <div className="max-w-[1440px] mx-auto px-5 sm:px-6 md:px-10 lg:px-16 xl:px-24">
-            <div className="relative">
+            <div className="relative md:max-w-[912px] xl:max-w-[1094px] md:mx-auto">
               {/* Left arrow — hidden on mobile */}
               <button
                 type="button"
@@ -620,7 +643,7 @@ export default function PlaneaTuVisitaPage() {
 
               {/* Embla viewport */}
               <div
-                className="overflow-hidden mx-0 md:mx-14 xl:mx-20"
+                className="overflow-hidden mx-0 md:mx-[28px] xl:mx-[35px]"
                 ref={tipsEmblaRef}
               >
                 {isLoadingTipsBanners ? (
@@ -632,12 +655,12 @@ export default function PlaneaTuVisitaPage() {
                     No hay tips disponibles.
                   </p>
                 ) : (
-                  <div className="flex gap-4 md:gap-6 xl:gap-8">
+                  <div className="flex gap-4">
                     {tipsBanners.map((banner) =>
                       banner.imageUrl ? (
                         <div
                           key={banner.id}
-                          className="shrink-0 basis-[85%] md:basis-1/2"
+                          className="shrink-0 basis-[85%] md:basis-[420px] xl:basis-[504px]"
                         >
                           {/* Mobile image (uses imageMobileUrl if available, fallback to imageUrl) */}
                           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -1135,15 +1158,22 @@ export default function PlaneaTuVisitaPage() {
 
           {/* Invite (bottom): "El lugar es grande..." — Mobile */}
           <div className="md:hidden max-w-[820px] mx-auto px-5 sm:px-6 mt-8">
-            <div className="flex items-center" style={{ gap: 0 }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/map-pin-clouds-icon.svg"
-                alt=""
-                aria-hidden
-                className="block shrink-0 w-[90px] h-auto"
+            <div className="flex items-center justify-center" style={{ gap: 0 }}>
+              <a
+                href="https://maps.app.goo.gl/dmQjLBS2XF6cwsBD9"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Cantaritos el Güero en Google Maps"
+                className="block shrink-0 cursor-pointer transition-transform duration-150 hover:scale-[1.04] focus:outline-none focus:ring-2 focus:ring-[#FD710C] rounded-md"
                 style={{ marginTop: "28px" }}
-              />
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/map-pin-clouds-icon.svg"
+                  alt="Cantaritos el Güero en Google Maps"
+                  className="block w-[90px] h-auto"
+                />
+              </a>
               <p
                 className="font-body text-[#14222F]"
                 style={{
@@ -1169,14 +1199,21 @@ export default function PlaneaTuVisitaPage() {
           {/* Invite (bottom): "El lugar es grande..." — Desktop */}
           <div className="hidden md:block max-w-[820px] mx-auto px-5 sm:px-6 md:px-10 mt-10 xl:mt-12">
             <div className="flex items-center" style={{ gap: 0 }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/map-pin-clouds-icon.svg"
-                alt=""
-                aria-hidden
-                className="block shrink-0 w-[160px] xl:w-[200px] h-auto"
+              <a
+                href="https://maps.app.goo.gl/dmQjLBS2XF6cwsBD9"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Cantaritos el Güero en Google Maps"
+                className="block shrink-0 cursor-pointer transition-transform duration-150 hover:scale-[1.04] focus:outline-none focus:ring-2 focus:ring-[#FD710C] rounded-md"
                 style={{ marginTop: "30px" }}
-              />
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/map-pin-clouds-icon.svg"
+                  alt="Cantaritos el Güero en Google Maps"
+                  className="block w-[160px] xl:w-[200px] h-auto"
+                />
+              </a>
               <p
                 className="font-body text-[#14222F]"
                 style={{
@@ -1223,13 +1260,13 @@ export default function PlaneaTuVisitaPage() {
                 <img
                   src="/images/Llegas.svg"
                   alt=""
-                  className="w-[180px] md:w-[320px] xl:w-[413px] h-auto"
+                  className="w-[238px] h-[119px] md:w-[320px] md:h-auto xl:w-[413px]"
                 />
                 <p
                   className="absolute pointer-events-none select-none"
                   style={{
-                    top: "18%",
-                    left: "14%",
+                    top: "28%",
+                    left: "22%",
                     width: "55%",
                     fontFamily:
                       "var(--font-roboto-condensed), \"Roboto Condensed\", Roboto, sans-serif",
@@ -1257,83 +1294,75 @@ export default function PlaneaTuVisitaPage() {
             </div>
 
             {/* Steps */}
-            <div className="flex flex-col gap-6 md:gap-10 max-w-[700px] mx-auto">
+            <div className="grid grid-cols-[80px_1fr] md:grid-cols-[140px_1fr] xl:grid-cols-[180px_1fr] items-center gap-x-4 md:gap-x-6 gap-y-6 md:gap-y-10 max-w-[700px] mx-auto">
               {/* Step 1 */}
-              <div className="flex items-center gap-4 md:gap-6">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/Elige.svg"
-                  alt=""
-                  className="w-[80px] md:w-[140px] xl:w-[180px] h-auto shrink-0"
-                />
-                <div>
-                  <p className="font-body text-[16px] md:text-[32px] font-bold leading-[100%] text-[#14222F]">
-                    {translate("planVisit.howToStep1Title")}
-                  </p>
-                  <p className="font-body text-[12px] md:text-[24px] font-medium leading-[100%] text-[#14222F] mt-2 md:mt-3">
-                    {translate("planVisit.howToStep1DescLine1")}
-                    <br />
-                    {translate("planVisit.howToStep1DescLine2")}
-                  </p>
-                </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/Elige.svg"
+                alt=""
+                className="w-full h-auto"
+              />
+              <div>
+                <p className="font-body text-[16px] md:text-[32px] font-bold leading-[100%] text-[#14222F]">
+                  {translate("planVisit.howToStep1Title")}
+                </p>
+                <p className="font-body text-[12px] md:text-[24px] font-medium leading-[100%] text-[#14222F] mt-4 md:mt-6">
+                  {translate("planVisit.howToStep1DescLine1")}
+                  <br />
+                  {translate("planVisit.howToStep1DescLine2")}
+                </p>
               </div>
 
               {/* Step 2 */}
-              <div className="flex items-center gap-4 md:gap-6">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/Caja.svg"
-                  alt=""
-                  className="w-[80px] md:w-[140px] xl:w-[180px] h-auto shrink-0"
-                />
-                <div>
-                  <p className="font-body text-[16px] md:text-[32px] font-bold leading-[100%] text-[#14222F]">
-                    {translate("planVisit.howToStep2Title")}
-                  </p>
-                  <p className="font-body text-[12px] md:text-[24px] font-medium leading-[100%] text-[#14222F] mt-2 md:mt-3">
-                    {translate("planVisit.howToStep2DescLine1")}
-                    <br />
-                    {translate("planVisit.howToStep2DescLine2")}
-                  </p>
-                </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/Caja.svg"
+                alt=""
+                className="w-full h-auto"
+              />
+              <div>
+                <p className="font-body text-[16px] md:text-[32px] font-bold leading-[100%] text-[#14222F]">
+                  {translate("planVisit.howToStep2Title")}
+                </p>
+                <p className="font-body text-[12px] md:text-[24px] font-medium leading-[100%] text-[#14222F] mt-4 md:mt-6">
+                  {translate("planVisit.howToStep2DescLine1")}
+                  <br />
+                  {translate("planVisit.howToStep2DescLine2")}
+                </p>
               </div>
 
               {/* Step 3 */}
-              <div className="flex items-center gap-4 md:gap-6">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/recoge.svg"
-                  alt=""
-                  className="w-[80px] md:w-[140px] xl:w-[180px] h-auto shrink-0"
-                />
-                <div>
-                  <p className="font-body text-[16px] md:text-[32px] font-bold leading-[100%] text-[#14222F]">
-                    {translate("planVisit.howToStep3Title")}
-                  </p>
-                  <p className="font-body text-[12px] md:text-[24px] font-medium leading-[100%] text-[#14222F] mt-2 md:mt-3">
-                    {translate("planVisit.howToStep3DescLine1")}
-                    <br />
-                    {translate("planVisit.howToStep3DescLine2")}
-                    <br />
-                    {translate("planVisit.howToStep3DescLine3")}
-                  </p>
-                </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/recoge.svg"
+                alt=""
+                className="w-full h-auto"
+              />
+              <div>
+                <p className="font-body text-[16px] md:text-[32px] font-bold leading-[100%] text-[#14222F]">
+                  {translate("planVisit.howToStep3Title")}
+                </p>
+                <p className="font-body text-[12px] md:text-[24px] font-medium leading-[100%] text-[#14222F] mt-4 md:mt-6">
+                  {translate("planVisit.howToStep3DescLine1")}
+                  <br />
+                  {translate("planVisit.howToStep3DescLine2")}
+                  <br />
+                  {translate("planVisit.howToStep3DescLine3")}
+                </p>
               </div>
 
               {/* Step 4 */}
-              <div className="flex items-center gap-4 md:gap-6">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/entrega.svg"
-                  alt=""
-                  className="w-[80px] md:w-[140px] xl:w-[180px] h-auto shrink-0"
-                />
-                <p className="font-body text-[16px] md:text-[32px] font-bold leading-[100%] text-[#14222F]">
-                  {translate("planVisit.howToStep4Line1")}
-                  <br />
-                  {translate("planVisit.howToStep4Line2")}
-                </p>
-              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/entrega.svg"
+                alt=""
+                className="w-full h-auto"
+              />
+              <p className="font-body text-[16px] md:text-[32px] font-bold leading-[100%] text-[#14222F]">
+                {translate("planVisit.howToStep4Line1")}
+                <br />
+                {translate("planVisit.howToStep4Line2")}
+              </p>
             </div>
 
             {/* Closing: "Así de simple. Así de cantarístico." */}
