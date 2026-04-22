@@ -422,5 +422,50 @@
       "descLine3": "wedding, or corporate event.",
       "button": "Book here"
     }
+  },
+  "directorio": {
+    "heroImageAlt": "Cantarístico Directory",
+    "tabs": {
+      "tours": "TOURS",
+      "hospedaje": "LODGING"
+    },
+    "tours": {
+      "iconAlt": "Tours checklist",
+      "titleMobileLine1": "TOURS AND TRANSPORT",
+      "titleMobileLine2": "TO REACH EL GÜERO",
+      "titleDesktopLine1": "TOURS AND TRANSPORT TO",
+      "titleDesktopLine2": "REACH EL GÜERO",
+      "p1MobileLine1": "If you're coming from Guadalajara or elsewhere, you can",
+      "p1MobileLine2": "organize your visit with agencies offering tours to",
+      "p1MobileLine3": "Amatitán and the Tequila Route.",
+      "p1DesktopLine1": "If you're coming from Guadalajara or elsewhere, you can organize your",
+      "p1DesktopLine2": "visit with agencies offering tours to Amatitán and the Tequila Route.",
+      "p2MobileLine1": "We share a directory of options so you can choose the",
+      "p2MobileLine2": "one that best fits your plan, schedule, and budget.",
+      "p2DesktopLine1": "We share a directory of options so you can choose the one that",
+      "p2DesktopLine2": "best fits your plan, schedule, and budget.",
+      "enjoyBannerAlt": "Enjoy the cantarito",
+      "enjoyLine1": "Your only concern should be",
+      "enjoyLine2": "enjoying the cantarito.",
+      "warningIconAlt": "Warning",
+      "warningTitle": "BEFORE BOOKING",
+      "warningP1MobileLine1": "The tour agencies listed in this directory are",
+      "warningP1MobileLine2": "external and independent services from Cantaritos El Güero #1.",
+      "warningP1DesktopLine1": "The tour agencies listed in this directory are external and independent",
+      "warningP1DesktopLine2": "services from Cantaritos El Güero #1.",
+      "warningP2MobileLine1": "We don't operate or manage these services, therefore we are not",
+      "warningP2MobileLine2": "responsible for their logistics, pricing, availability,",
+      "warningP2MobileLine3": "or service quality.",
+      "warningP2DesktopLine1": "We don't operate or manage these services, therefore we are not responsible",
+      "warningP2DesktopLine2": "for their logistics, pricing, availability, or service quality.",
+      "adviceBannerAlt": "We recommend confirming with each agency",
+      "adviceAgency": "Agency",
+      "adviceMobileLine1": "We recommend confirming",
+      "adviceMobileLine2Before": "directly with each ",
+      "adviceMobileLine3": "before booking.",
+      "adviceDesktopLine1": "We recommend confirming directly",
+      "adviceDesktopLine2Before": "with each ",
+      "adviceDesktopLine2After": " before booking."
+    }
   }
 }

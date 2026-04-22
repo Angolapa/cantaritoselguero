@@ -423,5 +423,50 @@
       "descLine3": "o evento empresarial.",
       "button": "Reserva aquí"
     }
+  },
+  "directorio": {
+    "heroImageAlt": "Directorio Cantarístico",
+    "tabs": {
+      "tours": "TOURS",
+      "hospedaje": "HOSPEDAJE"
+    },
+    "tours": {
+      "iconAlt": "Checklist de tours",
+      "titleMobileLine1": "TOURS Y TRANSPORTE",
+      "titleMobileLine2": "PARA LLEGAR AL GÜERO",
+      "titleDesktopLine1": "TOURS Y TRANSPORTE PARA",
+      "titleDesktopLine2": "LLEGAR AL GÜERO",
+      "p1MobileLine1": "Si vienes desde Guadalajara o de fuera, puedes organizar tu",
+      "p1MobileLine2": "visita con agencias que ofrecen tours hacia Amatitán y la",
+      "p1MobileLine3": "Ruta del Tequila.",
+      "p1DesktopLine1": "Si vienes desde Guadalajara o de fuera, puedes organizar tu visita con",
+      "p1DesktopLine2": "agencias que ofrecen tours hacia Amatitán y la Ruta del Tequila.",
+      "p2MobileLine1": "Te compartimos un directorio de opciones para que elijas la",
+      "p2MobileLine2": "que mejor se adapte a tu plan, tiempos y presupuesto.",
+      "p2DesktopLine1": "Te compartimos un directorio de opciones para que elijas la que mejor se",
+      "p2DesktopLine2": "adapte a tu plan, tiempos y presupuesto.",
+      "enjoyBannerAlt": "Disfruta el cantarito",
+      "enjoyLine1": "Que tu única preocupación",
+      "enjoyLine2": "sea disfrutar el cantarito.",
+      "warningIconAlt": "Advertencia",
+      "warningTitle": "ANTES DE RESERVAR",
+      "warningP1MobileLine1": "Las agencias de tours listadas en este directorio son",
+      "warningP1MobileLine2": "servicios externos e independientes a Cantaritos El Güero #1.",
+      "warningP1DesktopLine1": "Las agencias de tours listadas en este directorio son servicios externos e",
+      "warningP1DesktopLine2": "independientes a Cantaritos El Güero #1.",
+      "warningP2MobileLine1": "No operamos ni administramos estos servicios, por lo que no nos",
+      "warningP2MobileLine2": "hacemos responsables por su logística, tarifas,",
+      "warningP2MobileLine3": "disponibilidad o calidad del servicio.",
+      "warningP2DesktopLine1": "No operamos ni administramos estos servicios, por lo que no nos hacemos",
+      "warningP2DesktopLine2": "responsables por su logística, tarifas, disponibilidad o calidad del servicio.",
+      "adviceBannerAlt": "Te recomendamos confirmar con cada agencia",
+      "adviceAgency": "Agencia",
+      "adviceMobileLine1": "Te recomendamos confirmar",
+      "adviceMobileLine2Before": "directamente con cada ",
+      "adviceMobileLine3": "antes de contratar.",
+      "adviceDesktopLine1": "Te recomendamos confirmar directamente",
+      "adviceDesktopLine2Before": "con cada ",
+      "adviceDesktopLine2After": " antes de contratar."
+    }
   }
 }
