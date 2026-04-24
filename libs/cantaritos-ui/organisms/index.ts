@@ -10,6 +10,7 @@ export * from "./og-combo-table";
 export * from "./og-coupon-form";
 export * from "./og-coupon-table";
 export * from "./og-directorio-hero";
+export * from "./og-directorio-hospedaje-panel";
 export * from "./og-directorio-tabs";
 export * from "./og-directorio-tours-panel";
 export * from "./og-event-banner";

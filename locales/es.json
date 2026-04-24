@@ -426,6 +426,8 @@
   },
   "directorio": {
     "heroImageAlt": "Directorio Cantarístico",
+    "heroTitleLine1": "DIRECTORIO",
+    "heroTitleLine2": "CANTARÍSTICO",
     "tabs": {
       "tours": "TOURS",
       "hospedaje": "HOSPEDAJE"
@@ -467,6 +469,44 @@
       "adviceDesktopLine1": "Te recomendamos confirmar directamente",
       "adviceDesktopLine2Before": "con cada ",
       "adviceDesktopLine2After": " antes de contratar."
+    },
+    "hospedaje": {
+      "iconAlt": "Hospedaje cerca del Güero",
+      "titleLine1": "HOSPEDAJE CERCA",
+      "titleLine2": "DEL GÜERO",
+      "p1MobileLine1": "Si vienes desde fuera o prefieres disfrutar sin prisas, te",
+      "p1MobileLine2": "compartimos un directorio de hoteles y hospedajes en",
+      "p1MobileLine3": "Amatitán y Tequila.",
+      "p1DesktopLine1": "Si vienes desde fuera o prefieres disfrutar sin prisas, te compartimos un",
+      "p1DesktopLine2": "directorio de hoteles y hospedajes en Amatitán y Tequila.",
+      "p2MobileLine1": "Descansa, recarga energía y sigue celebrando al día",
+      "p2MobileLine2": "siguiente.",
+      "p2Desktop": "Descansa, recarga energía y sigue celebrando al día siguiente.",
+      "visitBannerAlt": "Haz que tu visita sea un plan completo",
+      "visitMobileLine1": "Haz que tu visita no sea solo una",
+      "visitMobileLine2": "parada, conviértela en plan completo.",
+      "visitDesktopLine1": "Haz que tu visita no sea",
+      "visitDesktopLine2": "solo una parada, conviértela",
+      "visitDesktopLine3": "en plan completo.",
+      "warningIconAlt": "Advertencia",
+      "warningTitle": "ANTES DE RESERVAR",
+      "warningP1MobileLine1": "Los hoteles y Airbnbs listados en este directorio son servicios",
+      "warningP1MobileLine2": "externos e independientes a Cantaritos El Güero #1.",
+      "warningP1DesktopLine1": "Los hoteles y Airbnbs listados en este directorio son servicios externos e",
+      "warningP1DesktopLine2": "independientes a Cantaritos El Güero #1.",
+      "warningP2MobileLine1": "No operamos ni administramos estos establecimientos, por",
+      "warningP2MobileLine2": "lo que no nos hacemos responsables por su disponibilidad,",
+      "warningP2MobileLine3": "tarifas o experiencia.",
+      "warningP2DesktopLine1": "No operamos ni administramos estos establecimientos, por lo que no nos",
+      "warningP2DesktopLine2": "hacemos responsables por su disponibilidad, tarifas o experiencia.",
+      "adviceBannerAlt": "Te recomendamos confirmar con cada hospedaje",
+      "adviceHospedaje": "Hospedaje",
+      "adviceMobileLine1": "Te recomendamos confirmar",
+      "adviceMobileLine2": "directamente con cada",
+      "adviceMobileLine3After": " antes de reservar.",
+      "adviceDesktopLine1": "Te recomendamos confirmar directamente",
+      "adviceDesktopLine2Before": "con cada ",
+      "adviceDesktopLine2After": " antes de reservar."
     }
   }
 }

@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import {
   OgDirectorioHero,
+  OgDirectorioHospedajePanel,
   OgDirectorioTabs,
   OgDirectorioToursPanel,
   OgFooter,
@@ -29,6 +30,7 @@ export default function DirectorioPage() {
           <OgDirectorioTabs activeTab={activeTab} onTabChange={setActiveTab} />
 
           {activeTab === "tours" && <OgDirectorioToursPanel />}
+          {activeTab === "hospedaje" && <OgDirectorioHospedajePanel />}
         </section>
       </main>
       <OgFooter />

@@ -11,7 +11,7 @@ export function OgDirectorioToursPanel() {
   const { translate } = useTranslation();
 
   return (
-    <div className="w-full max-w-[1000px] mx-auto px-4 pt-6 pb-10 lg:px-8 lg:pt-10 lg:pb-16">
+    <div className="w-full max-w-[940px] mx-auto px-4 pt-6 pb-10 lg:px-6 lg:pt-10 lg:pb-16">
       <div className="flex items-end lg:items-start gap-3 lg:gap-6">
         <h2
           className="font-heading uppercase leading-none text-[24px] lg:text-[48px] shrink-0"
