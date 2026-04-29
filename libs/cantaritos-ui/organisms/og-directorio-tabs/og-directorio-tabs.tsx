@@ -59,6 +59,8 @@ export function OgDirectorioTabs({ activeTab, onTabChange }: OgDirectorioTabsPro
             style={{
               width: `calc(50% + ${HALF_SLANT})`,
               marginLeft: isTours ? 0 : `-${SLANT}`,
+              paddingLeft: isTours ? undefined : SLANT,
+              paddingRight: isTours ? SLANT : undefined,
               backgroundColor: isActive ? tab.activeBg : INACTIVE_BG,
               color: TAB_TEXT,
               clipPath,
