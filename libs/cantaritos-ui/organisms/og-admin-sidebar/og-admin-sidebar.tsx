@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 
 import {
+  Building2,
   Image,
   Images,
   Layers,
@@ -56,6 +57,11 @@ const NAV_ITEMS = [
     href: "/admin/stands",
     label: "Stands",
     icon: <Store className="h-5 w-5" />,
+  },
+  {
+    href: "/admin/agency-cards",
+    label: "Agencias",
+    icon: <Building2 className="h-5 w-5" />,
   },
   {
     href: "/admin/coupons",

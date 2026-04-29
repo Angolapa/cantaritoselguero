@@ -1,3 +1,4 @@
+export * from "./agency-card.types";
 export * from "./auth.types";
 export * from "./banner.types";
 export * from "./cart.types";

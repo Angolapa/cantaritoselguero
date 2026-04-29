@@ -1,3 +1,4 @@
+export { agencyCardService } from "./agency-card.service";
 export { authService } from "./auth.service";
 export { bannerService } from "./banner.service";
 export { comboService } from "./combo.service";
