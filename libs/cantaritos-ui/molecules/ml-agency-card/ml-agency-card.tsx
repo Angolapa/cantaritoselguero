@@ -130,13 +130,13 @@ export function MlAgencyCard({ card, className = "" }: MlAgencyCardProps) {
           </div>
           <div className="flex shrink-0 items-center gap-2">
             {card.facebookUrl && (
-              <AtSocialIcon network="facebook" href={card.facebookUrl} size={22} />
+              <AtSocialIcon network="facebook" href={card.facebookUrl} />
             )}
             {card.instagramUrl && (
-              <AtSocialIcon network="instagram" href={card.instagramUrl} size={22} />
+              <AtSocialIcon network="instagram" href={card.instagramUrl} />
             )}
             {card.tiktokUrl && (
-              <AtSocialIcon network="tiktok" href={card.tiktokUrl} size={22} />
+              <AtSocialIcon network="tiktok" href={card.tiktokUrl} />
             )}
           </div>
         </div>

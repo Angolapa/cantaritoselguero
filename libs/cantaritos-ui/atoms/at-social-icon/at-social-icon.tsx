@@ -16,14 +16,23 @@ const NETWORK_ICON: Record<SocialNetwork, string> = {
   tiktok: "/images/Direct/tiktok.svg",
 };
 
+const NETWORK_DIMENSIONS: Record<
+  SocialNetwork,
+  { width: number; height: number }
+> = {
+  facebook: { width: 24, height: 24 },
+  instagram: { width: 24, height: 24 },
+  tiktok: { width: 20, height: 24 },
+};
+
 export function AtSocialIcon({
   network,
   href,
-  size = 24,
   className = "",
   ariaLabel,
 }: AtSocialIconProps) {
   const label = ariaLabel || NETWORK_LABEL[network];
+  const { width, height } = NETWORK_DIMENSIONS[network];
 
   return (
     <a
@@ -36,8 +45,8 @@ export function AtSocialIcon({
       <Image
         src={NETWORK_ICON[network]}
         alt=""
-        width={size}
-        height={size}
+        width={width}
+        height={height}
         aria-hidden="true"
       />
     </a>
