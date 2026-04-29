@@ -18,7 +18,7 @@ export function OgDirectorioHero() {
       <div className="flex items-center justify-center px-4 pt-10 pb-12 lg:pt-20 lg:pb-24">
         <div className="relative w-[298px] h-auto lg:hidden">
           <Image
-            src="/images/Direct/mobile.svg"
+            src="/images/Direct/directorio-hero-frame-mobile.svg"
             alt=""
             width={298}
             height={201}
@@ -44,7 +44,7 @@ export function OgDirectorioHero() {
 
         <div className="relative w-[643px] max-w-full h-auto hidden lg:block">
           <Image
-            src="/images/Direct/desktop.svg"
+            src="/images/Direct/directorio-hero-frame-desktop.svg"
             alt=""
             width={643}
             height={434}
