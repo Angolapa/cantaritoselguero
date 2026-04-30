@@ -45,33 +45,35 @@ export function OgDirectorioToursPanel() {
         />
       </div>
 
-      <p className="font-body font-medium text-[12px] lg:text-[24px] leading-none text-white mt-6 lg:mt-10">
-        <span className="lg:hidden">
-          {translate("directorio.tours.p1MobileLine1")}
-          <br />
-          {translate("directorio.tours.p1MobileLine2")}
-          <br />
-          {translate("directorio.tours.p1MobileLine3")}
-        </span>
-        <span className="hidden lg:inline">
-          {translate("directorio.tours.p1DesktopLine1")}
-          <br />
-          {translate("directorio.tours.p1DesktopLine2")}
-        </span>
-      </p>
+      <div className="w-fit mx-auto lg:mx-0 lg:w-auto">
+        <p className="font-body font-medium text-[12px] lg:text-[24px] leading-none text-white mt-6 lg:mt-10">
+          <span className="lg:hidden">
+            {translate("directorio.tours.p1MobileLine1")}
+            <br />
+            {translate("directorio.tours.p1MobileLine2")}
+            <br />
+            {translate("directorio.tours.p1MobileLine3")}
+          </span>
+          <span className="hidden lg:inline">
+            {translate("directorio.tours.p1DesktopLine1")}
+            <br />
+            {translate("directorio.tours.p1DesktopLine2")}
+          </span>
+        </p>
 
-      <p className="font-body font-medium text-[12px] lg:text-[24px] leading-none text-white mt-4 lg:mt-8">
-        <span className="lg:hidden">
-          {translate("directorio.tours.p2MobileLine1")}
-          <br />
-          {translate("directorio.tours.p2MobileLine2")}
-        </span>
-        <span className="hidden lg:inline">
-          {translate("directorio.tours.p2DesktopLine1")}
-          <br />
-          {translate("directorio.tours.p2DesktopLine2")}
-        </span>
-      </p>
+        <p className="font-body font-medium text-[12px] lg:text-[24px] leading-none text-white mt-4 lg:mt-8">
+          <span className="lg:hidden">
+            {translate("directorio.tours.p2MobileLine1")}
+            <br />
+            {translate("directorio.tours.p2MobileLine2")}
+          </span>
+          <span className="hidden lg:inline">
+            {translate("directorio.tours.p2DesktopLine1")}
+            <br />
+            {translate("directorio.tours.p2DesktopLine2")}
+          </span>
+        </p>
+      </div>
 
       <div className="relative mt-8 lg:mt-12 mx-auto w-[335px] lg:w-[610px] max-w-full">
         <Image
@@ -124,33 +126,35 @@ export function OgDirectorioToursPanel() {
           </h3>
         </div>
 
-        <p className="font-body font-medium text-[12px] lg:text-[24px] leading-none text-white mt-4 lg:mt-8">
-          <span className="lg:hidden">
-            {translate("directorio.tours.warningP1MobileLine1")}
-            <br />
-            {translate("directorio.tours.warningP1MobileLine2")}
-          </span>
-          <span className="hidden lg:inline">
-            {translate("directorio.tours.warningP1DesktopLine1")}
-            <br />
-            {translate("directorio.tours.warningP1DesktopLine2")}
-          </span>
-        </p>
+        <div className="w-fit mx-auto lg:mx-0 lg:w-auto">
+          <p className="font-body font-medium text-[12px] lg:text-[24px] leading-none text-white mt-4 lg:mt-8">
+            <span className="lg:hidden">
+              {translate("directorio.tours.warningP1MobileLine1")}
+              <br />
+              {translate("directorio.tours.warningP1MobileLine2")}
+            </span>
+            <span className="hidden lg:inline">
+              {translate("directorio.tours.warningP1DesktopLine1")}
+              <br />
+              {translate("directorio.tours.warningP1DesktopLine2")}
+            </span>
+          </p>
 
-        <p className="font-body font-medium text-[12px] lg:text-[24px] leading-none text-white mt-4 lg:mt-8">
-          <span className="lg:hidden">
-            {translate("directorio.tours.warningP2MobileLine1")}
-            <br />
-            {translate("directorio.tours.warningP2MobileLine2")}
-            <br />
-            {translate("directorio.tours.warningP2MobileLine3")}
-          </span>
-          <span className="hidden lg:inline">
-            {translate("directorio.tours.warningP2DesktopLine1")}
-            <br />
-            {translate("directorio.tours.warningP2DesktopLine2")}
-          </span>
-        </p>
+          <p className="font-body font-medium text-[12px] lg:text-[24px] leading-none text-white mt-4 lg:mt-8">
+            <span className="lg:hidden">
+              {translate("directorio.tours.warningP2MobileLine1")}
+              <br />
+              {translate("directorio.tours.warningP2MobileLine2")}
+              <br />
+              {translate("directorio.tours.warningP2MobileLine3")}
+            </span>
+            <span className="hidden lg:inline">
+              {translate("directorio.tours.warningP2DesktopLine1")}
+              <br />
+              {translate("directorio.tours.warningP2DesktopLine2")}
+            </span>
+          </p>
+        </div>
       </div>
 
       <div className="relative mt-10 lg:mt-16 mx-auto w-[278px] lg:w-[651px] max-w-full">

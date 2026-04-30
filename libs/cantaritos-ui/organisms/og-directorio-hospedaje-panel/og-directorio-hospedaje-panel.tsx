@@ -38,31 +38,33 @@ export function OgDirectorioHospedajePanel() {
         />
       </div>
 
-      <p className="font-body font-medium text-[12px] lg:text-[24px] leading-none text-white mt-6 lg:mt-10">
-        <span className="lg:hidden">
-          {translate("directorio.hospedaje.p1MobileLine1")}
-          <br />
-          {translate("directorio.hospedaje.p1MobileLine2")}
-          <br />
-          {translate("directorio.hospedaje.p1MobileLine3")}
-        </span>
-        <span className="hidden lg:inline">
-          {translate("directorio.hospedaje.p1DesktopLine1")}
-          <br />
-          {translate("directorio.hospedaje.p1DesktopLine2")}
-        </span>
-      </p>
+      <div className="w-fit mx-auto lg:mx-0 lg:w-auto">
+        <p className="font-body font-medium text-[12px] lg:text-[24px] leading-none text-white mt-6 lg:mt-10">
+          <span className="lg:hidden">
+            {translate("directorio.hospedaje.p1MobileLine1")}
+            <br />
+            {translate("directorio.hospedaje.p1MobileLine2")}
+            <br />
+            {translate("directorio.hospedaje.p1MobileLine3")}
+          </span>
+          <span className="hidden lg:inline">
+            {translate("directorio.hospedaje.p1DesktopLine1")}
+            <br />
+            {translate("directorio.hospedaje.p1DesktopLine2")}
+          </span>
+        </p>
 
-      <p className="font-body font-medium text-[12px] lg:text-[24px] leading-none text-white mt-4 lg:mt-8">
-        <span className="lg:hidden">
-          {translate("directorio.hospedaje.p2MobileLine1")}
-          <br />
-          {translate("directorio.hospedaje.p2MobileLine2")}
-        </span>
-        <span className="hidden lg:inline">
-          {translate("directorio.hospedaje.p2Desktop")}
-        </span>
-      </p>
+        <p className="font-body font-medium text-[12px] lg:text-[24px] leading-none text-white mt-4 lg:mt-8">
+          <span className="lg:hidden">
+            {translate("directorio.hospedaje.p2MobileLine1")}
+            <br />
+            {translate("directorio.hospedaje.p2MobileLine2")}
+          </span>
+          <span className="hidden lg:inline">
+            {translate("directorio.hospedaje.p2Desktop")}
+          </span>
+        </p>
+      </div>
 
       <div className="relative mt-8 lg:mt-12 mx-auto lg:mx-0 w-[344px] lg:w-[556px] max-w-full">
         <Image
@@ -121,33 +123,35 @@ export function OgDirectorioHospedajePanel() {
           </h3>
         </div>
 
-        <p className="font-body font-medium text-[12px] lg:text-[24px] leading-none text-white mt-4 lg:mt-8">
-          <span className="lg:hidden">
-            {translate("directorio.hospedaje.warningP1MobileLine1")}
-            <br />
-            {translate("directorio.hospedaje.warningP1MobileLine2")}
-          </span>
-          <span className="hidden lg:inline">
-            {translate("directorio.hospedaje.warningP1DesktopLine1")}
-            <br />
-            {translate("directorio.hospedaje.warningP1DesktopLine2")}
-          </span>
-        </p>
+        <div className="w-fit mx-auto lg:mx-0 lg:w-auto">
+          <p className="font-body font-medium text-[12px] lg:text-[24px] leading-none text-white mt-4 lg:mt-8">
+            <span className="lg:hidden">
+              {translate("directorio.hospedaje.warningP1MobileLine1")}
+              <br />
+              {translate("directorio.hospedaje.warningP1MobileLine2")}
+            </span>
+            <span className="hidden lg:inline">
+              {translate("directorio.hospedaje.warningP1DesktopLine1")}
+              <br />
+              {translate("directorio.hospedaje.warningP1DesktopLine2")}
+            </span>
+          </p>
 
-        <p className="font-body font-medium text-[12px] lg:text-[24px] leading-none text-white mt-4 lg:mt-8">
-          <span className="lg:hidden">
-            {translate("directorio.hospedaje.warningP2MobileLine1")}
-            <br />
-            {translate("directorio.hospedaje.warningP2MobileLine2")}
-            <br />
-            {translate("directorio.hospedaje.warningP2MobileLine3")}
-          </span>
-          <span className="hidden lg:inline">
-            {translate("directorio.hospedaje.warningP2DesktopLine1")}
-            <br />
-            {translate("directorio.hospedaje.warningP2DesktopLine2")}
-          </span>
-        </p>
+          <p className="font-body font-medium text-[12px] lg:text-[24px] leading-none text-white mt-4 lg:mt-8">
+            <span className="lg:hidden">
+              {translate("directorio.hospedaje.warningP2MobileLine1")}
+              <br />
+              {translate("directorio.hospedaje.warningP2MobileLine2")}
+              <br />
+              {translate("directorio.hospedaje.warningP2MobileLine3")}
+            </span>
+            <span className="hidden lg:inline">
+              {translate("directorio.hospedaje.warningP2DesktopLine1")}
+              <br />
+              {translate("directorio.hospedaje.warningP2DesktopLine2")}
+            </span>
+          </p>
+        </div>
       </div>
 
       <div className="relative mt-10 lg:mt-16 mx-auto w-[278px] lg:w-[651px] max-w-full">
