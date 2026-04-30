@@ -12,7 +12,7 @@ export function OgDirectorioToursPanel() {
 
   return (
     <div className="w-full max-w-[940px] mx-auto px-4 pt-6 pb-10 lg:px-6 lg:pt-10 lg:pb-16">
-      <div className="flex items-end lg:items-start gap-3 lg:gap-6">
+      <div className="flex items-end lg:items-start justify-center lg:justify-start gap-3 lg:gap-6">
         <h2
           className="font-heading uppercase leading-none text-[24px] lg:text-[48px] shrink-0"
           style={{ color: TITLE_COLOR }}
@@ -101,7 +101,7 @@ export function OgDirectorioToursPanel() {
       </div>
 
       <div className="mt-10 lg:mt-16">
-        <div className="flex items-center gap-2 lg:gap-4">
+        <div className="flex items-center justify-center lg:justify-start gap-2 lg:gap-4">
           <Image
             src="/images/Direct/tours-warning-mobile.svg"
             alt={translate("directorio.tours.warningIconAlt")}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { Search, SlidersHorizontal } from "lucide-react";
 
@@ -11,6 +11,12 @@ import { OgAgencyCardsGridProps } from "./og-agency-cards-grid.types";
 
 const BACKGROUND_COLOR = "#FFAF32";
 const FILTER_BUTTON_COLOR = "#0E7C7B";
+const LOAD_MORE_BG = "#14222F";
+const MOBILE_BREAKPOINT = 1024;
+const MOBILE_INITIAL_COUNT = 3;
+const DESKTOP_INITIAL_COUNT = 9;
+const MOBILE_LOAD_STEP = 3;
+const DESKTOP_LOAD_STEP = 9;
 
 export function OgAgencyCardsGrid({
   cards,
@@ -18,6 +24,25 @@ export function OgAgencyCardsGrid({
   searchPlaceholder = "Buscar agencia",
 }: OgAgencyCardsGridProps) {
   const [searchTerm, setSearchTerm] = useState("");
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(DESKTOP_INITIAL_COUNT);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const mediaQuery = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
+
+    const updateViewport = (matches: boolean) => {
+      setIsMobileViewport(matches);
+      setVisibleCount(matches ? MOBILE_INITIAL_COUNT : DESKTOP_INITIAL_COUNT);
+    };
+
+    updateViewport(mediaQuery.matches);
+
+    const handleChange = (event: MediaQueryListEvent) => updateViewport(event.matches);
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
 
   const filteredCards = useMemo(() => {
     const trimmedTerm = searchTerm.trim().toLowerCase();
@@ -35,6 +60,18 @@ export function OgAgencyCardsGrid({
       return haystack.includes(trimmedTerm);
     });
   }, [cards, searchTerm]);
+
+  useEffect(() => {
+    setVisibleCount(isMobileViewport ? MOBILE_INITIAL_COUNT : DESKTOP_INITIAL_COUNT);
+  }, [isMobileViewport, searchTerm]);
+
+  const visibleCards = filteredCards.slice(0, visibleCount);
+  const hasMoreCards = visibleCount < filteredCards.length;
+
+  const handleLoadMore = () => {
+    const step = isMobileViewport ? MOBILE_LOAD_STEP : DESKTOP_LOAD_STEP;
+    setVisibleCount((prev) => prev + step);
+  };
 
   return (
     <section
@@ -74,11 +111,25 @@ export function OgAgencyCardsGrid({
             No se encontraron agencias.
           </p>
         ) : (
-          <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredCards.map((card) => (
-              <MlAgencyCard key={card.id} card={card} />
-            ))}
-          </div>
+          <>
+            <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {visibleCards.map((card) => (
+                <MlAgencyCard key={card.id} card={card} />
+              ))}
+            </div>
+            {hasMoreCards && (
+              <div className="mt-8 flex justify-center lg:mt-10">
+                <button
+                  type="button"
+                  onClick={handleLoadMore}
+                  className="font-heading inline-flex items-center justify-center gap-2 rounded-full text-white px-3 py-4 text-[12px] font-bold leading-none lg:px-6 lg:text-[24px] lg:leading-[24px]"
+                  style={{ backgroundColor: LOAD_MORE_BG, fontFamily: "Roboto, sans-serif" }}
+                >
+                  Cargar más
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
     </section>

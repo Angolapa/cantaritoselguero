@@ -12,7 +12,7 @@ export function OgDirectorioHospedajePanel() {
 
   return (
     <div className="w-full max-w-[940px] mx-auto px-4 pt-6 pb-10 lg:px-6 lg:pt-10 lg:pb-16">
-      <div className="flex items-end lg:items-start gap-3 lg:gap-28">
+      <div className="flex items-end lg:items-start justify-center lg:justify-start gap-3 lg:gap-28">
         <h2
           className="font-heading uppercase leading-none text-[24px] lg:text-[48px] shrink-0 lg:mt-6"
           style={{ color: TITLE_COLOR }}
@@ -64,7 +64,7 @@ export function OgDirectorioHospedajePanel() {
         </span>
       </p>
 
-      <div className="relative mt-8 lg:mt-12 w-[344px] lg:w-[556px] max-w-full">
+      <div className="relative mt-8 lg:mt-12 mx-auto lg:mx-0 w-[344px] lg:w-[556px] max-w-full">
         <Image
           src="/images/Direct/hospedaje-visit-banner-mobile.svg"
           alt={translate("directorio.hospedaje.visitBannerAlt")}
@@ -98,7 +98,7 @@ export function OgDirectorioHospedajePanel() {
       </div>
 
       <div className="mt-10 lg:mt-16">
-        <div className="flex items-center gap-2 lg:gap-4">
+        <div className="flex items-center justify-center lg:justify-start gap-2 lg:gap-4">
           <Image
             src="/images/Direct/tours-warning-mobile.svg"
             alt={translate("directorio.hospedaje.warningIconAlt")}
