@@ -26,7 +26,7 @@ export function MlAgencyCard({ card, className = "" }: MlAgencyCardProps) {
           <img
             src={card.imageUrl}
             alt={card.title}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain"
           />
         ) : (
           <ImageIcon className="h-12 w-12 text-white/80" strokeWidth={1.5} />
